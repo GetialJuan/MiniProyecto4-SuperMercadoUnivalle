@@ -6,6 +6,7 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import modelo.SuperMercado;
 import vista.VentanaCliente;
 import vista.VentanaMenu;
 
@@ -14,10 +15,18 @@ import vista.VentanaMenu;
  * @author Juan
  */
 public class SuperMercadoController {
+    
+    //modelos
+    private SuperMercado superMercado;
+    
+    //ventanas
     VentanaMenu ventanaMenu;
     VentanaCliente ventanaCliente;
 
     public SuperMercadoController() {
+        
+        superMercado = new SuperMercado();
+        
         ventanaMenu = new VentanaMenu();
         ventanaMenu.AgregarListenersBtns(new ManejadorDeEventosMenu());
     }

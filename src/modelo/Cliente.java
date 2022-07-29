@@ -4,13 +4,43 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  *
  * @author Juan
  */
 public class Cliente {
+    
+    private String nombre;
+    private String iD;
+    private ArrayList<HashMap<String,String>> carrito;
 
-    public Cliente() {
+    public Cliente(String nombre, String iD) {
+        this.nombre = nombre;
+        this.iD = iD;
+        carrito = new ArrayList<>();
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getiD() {
+        return iD;
+    }
+
+    public ArrayList<HashMap<String, String>> getCarrito() {
+        return carrito;
+    }
+    
+    public void agregarProductoAlCarrito(String cualProducto, String cantidad){
+        HashMap<String,String> producto = new HashMap<>();
+        producto.put("nombre", cualProducto);
+        producto.put("cantidad", cantidad);
+        
+        carrito.add(producto);
     }
     
 }
