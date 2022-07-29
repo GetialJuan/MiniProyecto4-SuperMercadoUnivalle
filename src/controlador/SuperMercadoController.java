@@ -7,6 +7,7 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import modelo.SuperMercado;
+import vista.VentanaCarritoCliente;
 import vista.VentanaCliente;
 import vista.VentanaMenu;
 
@@ -22,6 +23,7 @@ public class SuperMercadoController {
     //ventanas
     VentanaMenu ventanaMenu;
     VentanaCliente ventanaCliente;
+    VentanaCarritoCliente ventanaCarritoCliente;
 
     public SuperMercadoController() {
         
@@ -31,6 +33,7 @@ public class SuperMercadoController {
         ventanaMenu.AgregarListenersBtns(new ManejadorDeEventosMenu());
     }
     
+    //ventanaMenu
     class ManejadorDeEventosMenu implements ActionListener {
 
         @Override
@@ -60,12 +63,20 @@ public class SuperMercadoController {
     class ManejadorDeEventosCliente implements ActionListener {
 
         @Override
+        @SuppressWarnings("deprecation")
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("siguiente")){
                 superMercado.
                         agregarCliente(ventanaCliente.getTxtNombre(), 
                                 ventanaCliente.getTxtID());
-                System.out.println("btn siguinete");
+                
+                if(ventanaCarritoCliente != null){
+                    ventanaCarritoCliente.show();
+                }
+                else{
+                    ventanaCarritoCliente = new VentanaCarritoCliente();
+                }
+                ventanaCliente.dispose();
             }
         }
         
