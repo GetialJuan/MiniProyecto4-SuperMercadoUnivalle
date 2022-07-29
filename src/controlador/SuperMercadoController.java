@@ -6,6 +6,8 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import modelo.SuperMercado;
 import vista.VentanaCarritoCliente;
 import vista.VentanaCliente;
@@ -92,7 +94,31 @@ public class SuperMercadoController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("+")){
-                System.out.println("btn agregar al carrito");
+                int indiceProducto = ventanaCarritoCliente.getFilaProductos();
+                if(indiceProducto == -1){
+                    JOptionPane.showMessageDialog(null, "Seleccione un producto");
+                }
+                else
+                {
+                    
+                    superMercado.getProductos().get(indiceProducto).
+                            reducirUnaUnidad();
+                    
+                    //se agrega el producto al carrito del cliente
+                    superMercado.getClientes().get(0).
+                            agregarProductoAlCarrito(
+                                    superMercado.getProductos().
+                                            get(indiceProducto).getNombre(), 
+                                    superMercado.getProductos().
+                                            get(indiceProducto).getPrecio());
+                    
+                    //Se actulizan las tablas
+                    ventanaCarritoCliente.limpiarTablas();
+                    ventanaCarritoCliente.setTablaCarrito(superMercado.
+                            getClientes().get(0).getCarrito());
+                    ventanaCarritoCliente.setTablaProductos(superMercado.
+                            getProductos());
+                }
             }
             else if(e.getActionCommand().equalsIgnoreCase("-")){
                 System.out.println("btn remover del carrito");

@@ -35,12 +35,30 @@ public class Cliente {
         return carrito;
     }
     
-    public void agregarProductoAlCarrito(String cualProducto, String cantidad){
+    public void agregarProductoAlCarrito(String cualProducto, int presio){
         HashMap<String,String> producto = new HashMap<>();
-        producto.put("nombre", cualProducto);
-        producto.put("cantidad", cantidad);
+        int cantidad = 1;
+        int indice = 0;
+        boolean encontrado = false;
+        for(HashMap<String, String> p : carrito){
+            if(p.get("nombre").equals(cualProducto)){
+                encontrado = true;
+                cantidad = Integer.parseInt(p.get("cantidad")) + 1;
+                break;
+            }
+            indice++;
+        }
         
-        carrito.add(producto);
+        producto.put("nombre", cualProducto);
+        producto.put("presio", Integer.toString(presio));
+        producto.put("cantidad", Integer.toString(cantidad));
+        
+        if(encontrado){
+            carrito.set(indice, producto);
+        }
+        else{
+            carrito.add(producto);
+        }
     }
     
 }

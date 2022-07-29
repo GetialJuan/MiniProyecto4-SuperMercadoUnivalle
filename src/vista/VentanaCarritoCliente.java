@@ -7,6 +7,7 @@ package vista;
 import java.awt.Container;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -100,5 +101,30 @@ public class VentanaCarritoCliente extends JFrame{
             Object[] fila = {p.getNombre(), p.getPrecio(), p.getCantidad()};
             mdTProductos.addRow(fila);
         }
+    }
+    
+    public void limpiarTablas(){
+        int filas = tblProductos.getRowCount();
+        for(int i = filas -1; i >= 0; i--){
+            mdTProductos.removeRow(i);
+        }
+        
+        filas = tblCarrito.getRowCount();
+        for(int i = filas -1; i >= 0; i--){
+            mdTCarrito.removeRow(i);
+        }
+    }
+    
+    public void setTablaCarrito(ArrayList<HashMap<String,String>> carrito){
+        for(HashMap<String,String> p : carrito){
+            Object[] fila = {p.get("nombre"), p.get("presio"), 
+                p.get("cantidad")};
+            
+            mdTCarrito.addRow(fila);
+        }
+    }
+    
+    public int getFilaProductos(){
+        return tblProductos.getSelectedRow();
     }
 }

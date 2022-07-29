@@ -20,6 +20,12 @@ public class SuperMercado {
         clientes = new ArrayList<>();
         proveedores = new ArrayList<>();
         productos = new ArrayList<>();
+        
+        //productos momentaneos para pruebas (Se debe borrar luego)
+        productos.add(new Producto("lechuga", 10, 1000));
+        productos.add(new Producto("leche", 5, 2000));
+        productos.add(new Producto("Doritos", 20, 1500));
+        productos.add(new Producto("Cebolla", 3, 500));
     }
     
     public void agregarCliente(String nombre, String iD){
@@ -29,5 +35,11 @@ public class SuperMercado {
     public ArrayList<Producto> getProductos() {
         return productos;
     }
+
+    public ArrayList<Cliente> getClientes() {
+        return clientes;
+    }
+    
+    
     
 }
