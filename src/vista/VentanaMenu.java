@@ -23,7 +23,7 @@ public class VentanaMenu extends JFrame{
         setSize(300, 300);
         setVisible(true);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Menu");
         setResizable(false);
         iniciarComponenentes();

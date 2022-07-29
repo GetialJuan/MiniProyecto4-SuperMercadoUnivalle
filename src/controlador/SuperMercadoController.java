@@ -6,6 +6,7 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import vista.VentanaCliente;
 import vista.VentanaMenu;
 
 /**
@@ -14,6 +15,7 @@ import vista.VentanaMenu;
  */
 public class SuperMercadoController {
     VentanaMenu ventanaMenu;
+    VentanaCliente ventanaCliente;
 
     public SuperMercadoController() {
         ventanaMenu = new VentanaMenu();
@@ -25,13 +27,31 @@ public class SuperMercadoController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("cliente")){
-                System.out.println("btn cliente");
+                try {
+                    ventanaCliente.show();
+                }
+                catch (NullPointerException npe){
+                    ventanaCliente = new VentanaCliente();
+                    ventanaCliente.
+                            setListenerBtnSiguiente(new ManejadorDeEventosCliente());
+                }
             }
             else if(e.getActionCommand().equalsIgnoreCase("productos")){
                 System.out.println("btn porducto");
             }
             else if(e.getActionCommand().equalsIgnoreCase("proveedor")){
                 System.out.println("btn proveedor");
+            }
+        }
+        
+    }
+    
+    class ManejadorDeEventosCliente implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getActionCommand().equalsIgnoreCase("siguiente")){
+                System.out.println("btn siguinete");
             }
         }
         
