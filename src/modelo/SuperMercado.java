@@ -17,6 +17,12 @@ public class SuperMercado {
     private ArrayList<Producto> productos; 
     
     public SuperMercado(){
-        
+        clientes = new ArrayList<>();
+        proveedores = new ArrayList<>();
+        productos = new ArrayList<>();
+    }
+    
+    public void agregarCliente(String nombre, String iD){
+        clientes.add(new Cliente(nombre, iD));
     }
 }

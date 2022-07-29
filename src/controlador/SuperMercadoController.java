@@ -34,6 +34,7 @@ public class SuperMercadoController {
     class ManejadorDeEventosMenu implements ActionListener {
 
         @Override
+        @SuppressWarnings("deprecation")
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("cliente")){
                 try {
@@ -55,11 +56,15 @@ public class SuperMercadoController {
         
     }
     
+    //ventanaCliente
     class ManejadorDeEventosCliente implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("siguiente")){
+                superMercado.
+                        agregarCliente(ventanaCliente.getTxtNombre(), 
+                                ventanaCliente.getTxtID());
                 System.out.println("btn siguinete");
             }
         }
