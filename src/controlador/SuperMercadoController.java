@@ -75,8 +75,30 @@ public class SuperMercadoController {
                 }
                 else{
                     ventanaCarritoCliente = new VentanaCarritoCliente();
+                    ventanaCarritoCliente.
+                            agregarListenersBtns(new ManejadorDeEventosCarritoCliente());
                 }
+                ventanaCarritoCliente.setTablaProductos(superMercado.
+                        getProductos());
                 ventanaCliente.dispose();
+            }
+        }
+        
+    }
+    
+    //ventanaCarritoCliente
+    class ManejadorDeEventosCarritoCliente implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getActionCommand().equalsIgnoreCase("+")){
+                System.out.println("btn agregar al carrito");
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("-")){
+                System.out.println("btn remover del carrito");
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("efectuar compra")){
+                System.out.println("btn efectuar compra");
             }
         }
         

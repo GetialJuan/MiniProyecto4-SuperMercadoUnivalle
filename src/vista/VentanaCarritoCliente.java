@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import modelo.Producto;
 
 /**
  *
@@ -91,6 +92,13 @@ public class VentanaCarritoCliente extends JFrame{
     public void agregarListenersBtns(ActionListener aL){
         for(JButton btn : botones){
             btn.addActionListener(aL);
+        }
+    }
+    
+    public void setTablaProductos(ArrayList<Producto> productos){
+        for(Producto p : productos){
+            Object[] fila = {p.getNombre(), p.getPrecio(), p.getCantidad()};
+            mdTProductos.addRow(fila);
         }
     }
 }

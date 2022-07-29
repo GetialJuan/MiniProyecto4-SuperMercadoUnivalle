@@ -25,4 +25,9 @@ public class SuperMercado {
     public void agregarCliente(String nombre, String iD){
         clientes.add(new Cliente(nombre, iD));
     }
+
+    public ArrayList<Producto> getProductos() {
+        return productos;
+    }
+    
 }
