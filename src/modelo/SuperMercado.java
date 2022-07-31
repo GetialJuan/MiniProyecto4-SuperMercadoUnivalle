@@ -14,18 +14,25 @@ public class SuperMercado {
     
     private ArrayList<Cliente> clientes;
     private ArrayList<Proveedor> proveedores;
-    private ArrayList<Producto> productos; 
+    private ArrayList<Producto> productos;
+    private int clienteSeleccionado;
     
     public SuperMercado(){
         clientes = new ArrayList<>();
         proveedores = new ArrayList<>();
         productos = new ArrayList<>();
+        clienteSeleccionado = 0;
         
         //productos momentaneos para pruebas (Se debe borrar luego)
         productos.add(new Producto("lechuga", 10, 1000));
         productos.add(new Producto("leche", 5, 2000));
         productos.add(new Producto("Doritos", 20, 1500));
         productos.add(new Producto("Cebolla", 3, 500));
+        
+        //clientes momentaneos para pruebas (Se debe borrar luego)
+        clientes.add(new Cliente("juan", "123456"));
+        clientes.add(new Cliente("nauj", "654321"));
+        clientes.add(new Cliente("anju", "111222"));
     }
     
     public void agregarCliente(String nombre, String iD){
@@ -40,6 +47,26 @@ public class SuperMercado {
         return clientes;
     }
     
+    public int getClienteSeleccionado(){
+        return clienteSeleccionado;
+    }
     
+    public void setClienteSeleccionadoNuevo(){
+        clienteSeleccionado = 0;
+    }
+    
+    public boolean buscarCliente(String iD){
+        boolean encontrado = false;
+        int indice = 0;
+        for(Cliente c : clientes){
+            if(c.getiD().equals(iD)){
+                encontrado = true;
+                break;
+            }
+            indice++;
+        }
+        clienteSeleccionado = indice;
+        return encontrado;
+    }
     
 }

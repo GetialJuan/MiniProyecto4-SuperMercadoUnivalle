@@ -6,13 +6,9 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.SuperMercado;
-import vista.VentanaCarritoCliente;
-import vista.VentanaCliente;
 import vista.VentanaInicio;
-import vista.VentanaMenu;
 import vista.VentanaNuevoCliente;
 import vista.VentanaValidacionCliente;
 import vista.VentanaVenta;
@@ -73,17 +69,25 @@ public class SuperMercadoController {
         @SuppressWarnings("deprecation")
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("iniciar venta")){
-                if(ventanaVenta != null){
-                    ventanaVenta.show();
+                if(!superMercado.
+                        buscarCliente(ventanaValidacionCliente.getTxtCedula())){
+                    JOptionPane.showMessageDialog(null, 
+                            "No se encontro el cliente");
                 }
                 else{
-                    ventanaVenta = new VentanaVenta();
-                    ventanaVenta.
-                            agregarListenersBtns(new ManejadorDeEventosVenta());
+                   if(ventanaVenta != null){
+                    ventanaVenta.show();
+                    }
+                    else{
+                        ventanaVenta = new VentanaVenta();
+                        ventanaVenta.
+                                agregarListenersBtns(new ManejadorDeEventosVenta());
+                    }
+                    ventanaVenta.setCboxProductos(superMercado.
+                            getProductos());
+                    ventanaValidacionCliente.dispose(); 
                 }
-                ventanaVenta.setCboxProductos(superMercado.
-                        getProductos());
-                ventanaValidacionCliente.dispose();
+                
             }
             else if(e.getActionCommand().equalsIgnoreCase("nuevo cliente")){
                 if(ventanaNuevoCliente != null){
@@ -109,6 +113,7 @@ public class SuperMercadoController {
                 superMercado.
                         agregarCliente(ventanaNuevoCliente.getTxtNombre(), 
                                 ventanaNuevoCliente.getTxtCedula());
+                superMercado.setClienteSeleccionadoNuevo();
                 if(ventanaVenta != null){
                     ventanaVenta.show();
                 }
@@ -142,7 +147,9 @@ public class SuperMercadoController {
                             reducirUnaUnidad();
                     
                     //se agrega el producto al carrito del cliente
-                    superMercado.getClientes().get(0).
+                    int cliente = superMercado.getClienteSeleccionado();
+                    
+                    superMercado.getClientes().get(cliente).
                             agregarProductoAlCarrito(
                                     superMercado.getProductos().
                                             get(indiceProducto).getNombre(), 
@@ -152,7 +159,7 @@ public class SuperMercadoController {
                     //Se actulizan las tablas
                     ventanaVenta.limpiarTablaCarrito();
                     ventanaVenta.setTablaCarrito(superMercado.
-                            getClientes().get(0).getCarrito());
+                            getClientes().get(cliente).getCarrito());
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("-")){
