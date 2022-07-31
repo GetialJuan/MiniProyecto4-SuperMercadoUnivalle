@@ -37,7 +37,7 @@ public class SuperMercadoController {
         ventanaInicio.AgregarListenersBtns(new ManejadorDeEventosMenu());
     }
     
-    //ventanaIncio
+    ////////////////////ventanaInicio/////////////////////
     class ManejadorDeEventosMenu implements ActionListener {
 
         @Override
@@ -59,6 +59,7 @@ public class SuperMercadoController {
             else if(e.getActionCommand().equalsIgnoreCase("proveedor")){
                 System.out.println("btn proveedor");
             }
+            ventanaInicio.dispose();
         }
         
     }
@@ -185,6 +186,7 @@ public class SuperMercadoController {
                 superMercado.cancelarVenta(ventanaVenta.getProductosInfo());
                 ventanaVenta.limpiarTablaCarrito();
                 ventanaVenta.dispose();
+                ventanaInicio.show();
             }
             else if(e.getActionCommand().equalsIgnoreCase("eliminar item seleccionado")){
                 int itemSeleccionado = ventanaVenta.getFilaTblCarrito();
