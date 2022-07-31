@@ -100,9 +100,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Regresar"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegresarActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnIniciarVenta">
           <Properties>
@@ -111,9 +108,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Iniciar Venta"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIniciarVentaActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnNuevoCliente">
           <Properties>
@@ -122,9 +116,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Nuevo Cliente"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevoClienteActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>

@@ -11,7 +11,11 @@ import javax.swing.JOptionPane;
 import modelo.SuperMercado;
 import vista.VentanaCarritoCliente;
 import vista.VentanaCliente;
+import vista.VentanaInicio;
 import vista.VentanaMenu;
+import vista.VentanaNuevoCliente;
+import vista.VentanaValidacionCliente;
+import vista.VentanaVenta;
 
 /**
  *
@@ -23,32 +27,33 @@ public class SuperMercadoController {
     private SuperMercado superMercado;
     
     //ventanas
-    VentanaMenu ventanaMenu;
-    VentanaCliente ventanaCliente;
-    VentanaCarritoCliente ventanaCarritoCliente;
+    VentanaInicio ventanaInicio;
+    VentanaValidacionCliente ventanaValidacionCliente;
+    VentanaVenta ventanaVenta;
+    VentanaNuevoCliente ventanaNuevoCliente;
 
     public SuperMercadoController() {
         
         superMercado = new SuperMercado();
         
-        ventanaMenu = new VentanaMenu();
-        ventanaMenu.AgregarListenersBtns(new ManejadorDeEventosMenu());
+        ventanaInicio = new VentanaInicio();
+        ventanaInicio.AgregarListenersBtns(new ManejadorDeEventosMenu());
     }
     
-    //ventanaMenu
+    //ventanaIncio
     class ManejadorDeEventosMenu implements ActionListener {
 
         @Override
         @SuppressWarnings("deprecation")
         public void actionPerformed(ActionEvent e) {
-            if(e.getActionCommand().equalsIgnoreCase("cliente")){
+            if(e.getActionCommand().equalsIgnoreCase("clientes")){
                 try {
-                    ventanaCliente.show();
+                    ventanaValidacionCliente.show();
                 }
                 catch (NullPointerException npe){
-                    ventanaCliente = new VentanaCliente();
-                    ventanaCliente.
-                            setListenerBtnSiguiente(new ManejadorDeEventosCliente());
+                    ventanaValidacionCliente = new VentanaValidacionCliente();
+                    ventanaValidacionCliente.
+                            agregarListenersBtns(new ManejadorDeEventosCliente());
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("productos")){
@@ -61,40 +66,72 @@ public class SuperMercadoController {
         
     }
     
-    //ventanaCliente
+    //ventanaValidacionCliente
     class ManejadorDeEventosCliente implements ActionListener {
 
         @Override
         @SuppressWarnings("deprecation")
         public void actionPerformed(ActionEvent e) {
-            if(e.getActionCommand().equalsIgnoreCase("siguiente")){
-                superMercado.
-                        agregarCliente(ventanaCliente.getTxtNombre(), 
-                                ventanaCliente.getTxtID());
-                
-                if(ventanaCarritoCliente != null){
-                    ventanaCarritoCliente.show();
+            if(e.getActionCommand().equalsIgnoreCase("iniciar venta")){
+                if(ventanaVenta != null){
+                    ventanaVenta.show();
                 }
                 else{
-                    ventanaCarritoCliente = new VentanaCarritoCliente();
-                    ventanaCarritoCliente.
-                            agregarListenersBtns(new ManejadorDeEventosCarritoCliente());
+                    ventanaVenta = new VentanaVenta();
+                    ventanaVenta.
+                            agregarListenersBtns(new ManejadorDeEventosVenta());
                 }
-                ventanaCarritoCliente.setTablaProductos(superMercado.
+                ventanaVenta.setCboxProductos(superMercado.
                         getProductos());
-                ventanaCliente.dispose();
+                ventanaValidacionCliente.dispose();
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("nuevo cliente")){
+                if(ventanaNuevoCliente != null){
+                    ventanaNuevoCliente.show();
+                }
+                else{
+                    ventanaNuevoCliente = new VentanaNuevoCliente();
+                    ventanaNuevoCliente.
+                            agregarListenersBtns(new ManejadorDeEventosNuevoCliente());
+                }
+            }
+        }
+        
+        
+    }
+    
+    //ventanaNuevoCliente
+    class ManejadorDeEventosNuevoCliente implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getActionCommand().equalsIgnoreCase("agregar")){
+                superMercado.
+                        agregarCliente(ventanaNuevoCliente.getTxtNombre(), 
+                                ventanaNuevoCliente.getTxtCedula());
+                if(ventanaVenta != null){
+                    ventanaVenta.show();
+                }
+                else{
+                    ventanaVenta = new VentanaVenta();
+                    ventanaVenta.
+                            agregarListenersBtns(new ManejadorDeEventosVenta());
+                }
+                ventanaVenta.setCboxProductos(superMercado.
+                        getProductos());
+                ventanaValidacionCliente.dispose();
             }
         }
         
     }
     
-    //ventanaCarritoCliente
-    class ManejadorDeEventosCarritoCliente implements ActionListener {
+    //ventanaVenta
+    class ManejadorDeEventosVenta implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getActionCommand().equalsIgnoreCase("+")){
-                int indiceProducto = ventanaCarritoCliente.getFilaProductos();
+            if(e.getActionCommand().equalsIgnoreCase("agregar a venta")){
+                int indiceProducto = ventanaVenta.getProductoSeleccionado();
                 if(indiceProducto == -1){
                     JOptionPane.showMessageDialog(null, "Seleccione un producto");
                 }
@@ -113,11 +150,9 @@ public class SuperMercadoController {
                                             get(indiceProducto).getPrecio());
                     
                     //Se actulizan las tablas
-                    ventanaCarritoCliente.limpiarTablas();
-                    ventanaCarritoCliente.setTablaCarrito(superMercado.
+                    ventanaVenta.limpiarTablaCarrito();
+                    ventanaVenta.setTablaCarrito(superMercado.
                             getClientes().get(0).getCarrito());
-                    ventanaCarritoCliente.setTablaProductos(superMercado.
-                            getProductos());
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("-")){
