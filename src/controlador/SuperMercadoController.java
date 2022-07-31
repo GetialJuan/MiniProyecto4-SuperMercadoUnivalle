@@ -6,6 +6,7 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.SuperMercado;
 import vista.VentanaInicio;
@@ -161,24 +162,28 @@ public class SuperMercadoController {
                 }
                 else
                 {
+                    if(superMercado.getProductos().get(indiceProducto).
+                            reducirUnaUnidad()){
+                        //se agrega el producto al carrito del cliente
+                        int cliente = superMercado.getClienteSeleccionado();
+
+                        superMercado.getClientes().get(cliente).
+                                agregarProductoAlCarrito(
+                                        superMercado.getProductos().
+                                                get(indiceProducto).getNombre(), 
+                                        superMercado.getProductos().
+                                                get(indiceProducto).getPrecio());
+
+                        //Se actulizan las tablas
+                        ventanaVenta.limpiarTablaCarrito();
+                        ventanaVenta.setTablaCarrito(superMercado.
+                                getClientes().get(cliente).getCarrito());
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Producto agotado");
+                    }
                     
-                    superMercado.getProductos().get(indiceProducto).
-                            reducirUnaUnidad();
                     
-                    //se agrega el producto al carrito del cliente
-                    int cliente = superMercado.getClienteSeleccionado();
-                    
-                    superMercado.getClientes().get(cliente).
-                            agregarProductoAlCarrito(
-                                    superMercado.getProductos().
-                                            get(indiceProducto).getNombre(), 
-                                    superMercado.getProductos().
-                                            get(indiceProducto).getPrecio());
-                    
-                    //Se actulizan las tablas
-                    ventanaVenta.limpiarTablaCarrito();
-                    ventanaVenta.setTablaCarrito(superMercado.
-                            getClientes().get(cliente).getCarrito());
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("cancelar venta")){
@@ -192,11 +197,12 @@ public class SuperMercadoController {
                 }
                 else{
                     int cliente = superMercado.getClienteSeleccionado();
-                    String producto = superMercado.getClientes().get(cliente).
-                            getCarrito().get(itemSeleccionado).get("nombre");
+                    ArrayList<String> producto = ventanaVenta.
+                            getProductoInfo(itemSeleccionado);
                     //se elimina el prodeucto del carrito
                     superMercado.getClientes().get(cliente).eliminarProducto(itemSeleccionado);
                     
+                    //se reestablce 3el prducto
                     superMercado.restablecerProducto(producto);
                     
                     //Se actulizan las tablas

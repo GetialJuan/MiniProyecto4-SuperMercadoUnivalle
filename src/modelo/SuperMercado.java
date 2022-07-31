@@ -5,6 +5,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  *
@@ -24,6 +25,8 @@ public class SuperMercado {
         proveedores = new ArrayList<>();
         productos = new ArrayList<>();
         clienteSeleccionado = 0;
+        copiaClientes = new ArrayList<>();
+        copiaProductos = new ArrayList<>();
         
         //productos momentaneos para pruebas (Se debe borrar luego)
         productos.add(new Producto("lechuga", 10, 1000));
@@ -54,35 +57,25 @@ public class SuperMercado {
     }
     
     public void setCopias(){
-        copiaClientes = clientes;
-        copiaProductos = productos;
+        ///falta
     }
     
     public void restablecerDatos() {
-        clientes = copiaClientes;
-        productos = copiaProductos;
+        //falta
+        
     }
     
-    public void restablecerProducto(String producto){
-        Producto pr = null;
-        for(Producto p : copiaProductos){
-            if(p.getNombre().equalsIgnoreCase(producto)){
-                pr = p;
-                break;
-            }
-        }
-        int indice = 0;
+    public void restablecerProducto(ArrayList<String> producto){
+        String nombre = producto.get(0);
+        int cantidad = Integer.parseInt(producto.get(1));
+        
         for(Producto p : productos){
-            if(p.getNombre().equalsIgnoreCase(producto)){
+            if(p.getNombre().equals(nombre)){
+                int cantidadP = p.getCantidad();
+                p.setCantidad(cantidad + cantidadP);
                 break;
             }
-            else{
-                indice++;
-            }
-            
         }
-        System.out.println(indice);
-        productos.set(indice, pr);
     }
     
     public void setClienteSeleccionadoNuevo(){

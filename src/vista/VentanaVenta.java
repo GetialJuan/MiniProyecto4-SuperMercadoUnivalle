@@ -7,6 +7,7 @@ package vista;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 import modelo.Producto;
 
@@ -246,6 +247,16 @@ public class VentanaVenta extends javax.swing.JFrame {
     
     public int getFilaTblCarrito(){
         return jTable1.getSelectedRow();
+    }
+    
+    public ArrayList<String> getProductoInfo(int cualProducto){
+        String nombre = (String) modeloTabla.getValueAt(cualProducto, 0);
+        String cantidad = modeloTabla.getValueAt(cualProducto, 2).toString();
+        
+        ArrayList<String> info = new ArrayList<>();
+        info.add(nombre);
+        info.add(cantidad);
+        return info;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

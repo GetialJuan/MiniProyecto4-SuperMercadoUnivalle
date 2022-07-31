@@ -32,10 +32,17 @@ public class Producto {
         return precio;
     }
 
-    public void reducirUnaUnidad(){
+    public boolean reducirUnaUnidad(){
         if(cantidad>0){
             cantidad--;
+            return true;
+        }
+        else{
+            return false;
         }
     }
     
+    public void setCantidad(int cantidad){
+        this.cantidad = cantidad;
+    }
 }
