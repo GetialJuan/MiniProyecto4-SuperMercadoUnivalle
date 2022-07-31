@@ -13,8 +13,10 @@ import java.util.ArrayList;
 public class SuperMercado {
     
     private ArrayList<Cliente> clientes;
+    private ArrayList<Cliente> copiaClientes;
     private ArrayList<Proveedor> proveedores;
     private ArrayList<Producto> productos;
+    private ArrayList<Producto> copiaProductos;
     private int clienteSeleccionado;
     
     public SuperMercado(){
@@ -49,6 +51,16 @@ public class SuperMercado {
     
     public int getClienteSeleccionado(){
         return clienteSeleccionado;
+    }
+    
+    public void setCopias(){
+        copiaClientes = clientes;
+        copiaProductos = productos;
+    }
+    
+    public void restablecerDatos() {
+        clientes = copiaClientes;
+        productos = copiaProductos;
     }
     
     public void setClienteSeleccionadoNuevo(){

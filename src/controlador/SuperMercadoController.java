@@ -75,7 +75,11 @@ public class SuperMercadoController {
                             "No se encontro el cliente");
                 }
                 else{
-                   if(ventanaVenta != null){
+                    //se guarda una copia del estado actual de los datos
+                    superMercado.setCopias();
+                    
+                    //se abre ventanVenta
+                    if(ventanaVenta != null){
                     ventanaVenta.show();
                     }
                     else{
@@ -99,6 +103,9 @@ public class SuperMercadoController {
                             agregarListenersBtns(new ManejadorDeEventosNuevoCliente());
                 }
             }
+            else if(e.getActionCommand().equalsIgnoreCase("regresar")){
+                ventanaValidacionCliente.dispose();
+            }
         }
         
         
@@ -110,10 +117,18 @@ public class SuperMercadoController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("agregar")){
+                
+                //se agrega al cliente
                 superMercado.
                         agregarCliente(ventanaNuevoCliente.getTxtNombre(), 
                                 ventanaNuevoCliente.getTxtCedula());
+                
+                //se guarda una copia del estado actual de los datos
+                superMercado.setCopias();
+                
                 superMercado.setClienteSeleccionadoNuevo();
+                
+                //se abre la ventanaVenta
                 if(ventanaVenta != null){
                     ventanaVenta.show();
                 }
@@ -122,9 +137,13 @@ public class SuperMercadoController {
                     ventanaVenta.
                             agregarListenersBtns(new ManejadorDeEventosVenta());
                 }
+                //se establcen los producto en la ventanVenta
                 ventanaVenta.setCboxProductos(superMercado.
                         getProductos());
                 ventanaValidacionCliente.dispose();
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("cancelar")){
+                ventanaNuevoCliente.dispose();
             }
         }
         
@@ -162,11 +181,15 @@ public class SuperMercadoController {
                             getClientes().get(cliente).getCarrito());
                 }
             }
-            else if(e.getActionCommand().equalsIgnoreCase("-")){
-                System.out.println("btn remover del carrito");
+            else if(e.getActionCommand().equalsIgnoreCase("cancelar venta")){
+                superMercado.restablecerDatos();
+                ventanaVenta.dispose();
             }
-            else if(e.getActionCommand().equalsIgnoreCase("efectuar compra")){
-                System.out.println("btn efectuar compra");
+            else if(e.getActionCommand().equalsIgnoreCase("eliminar item seleccionado")){
+                System.out.println("btn eliminar item seleccionado");
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("finalizar")){
+                System.out.println("btn finalizar");
             }
         }
         

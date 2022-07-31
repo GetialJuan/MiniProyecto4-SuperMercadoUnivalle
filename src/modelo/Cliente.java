@@ -61,4 +61,8 @@ public class Cliente {
         }
     }
     
+    public void limpiarCarrito(){
+        carrito.clear();
+    }
+    
 }
