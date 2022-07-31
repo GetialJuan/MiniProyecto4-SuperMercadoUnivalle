@@ -63,6 +63,28 @@ public class SuperMercado {
         productos = copiaProductos;
     }
     
+    public void restablecerProducto(String producto){
+        Producto pr = null;
+        for(Producto p : copiaProductos){
+            if(p.getNombre().equalsIgnoreCase(producto)){
+                pr = p;
+                break;
+            }
+        }
+        int indice = 0;
+        for(Producto p : productos){
+            if(p.getNombre().equalsIgnoreCase(producto)){
+                break;
+            }
+            else{
+                indice++;
+            }
+            
+        }
+        System.out.println(indice);
+        productos.set(indice, pr);
+    }
+    
     public void setClienteSeleccionadoNuevo(){
         clienteSeleccionado = 0;
     }

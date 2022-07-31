@@ -243,6 +243,10 @@ public class VentanaVenta extends javax.swing.JFrame {
             modeloTabla.removeRow(i);
         }
     }
+    
+    public int getFilaTblCarrito(){
+        return jTable1.getSelectedRow();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarAVenta;

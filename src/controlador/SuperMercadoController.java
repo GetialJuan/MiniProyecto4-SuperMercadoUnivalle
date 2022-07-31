@@ -186,7 +186,24 @@ public class SuperMercadoController {
                 ventanaVenta.dispose();
             }
             else if(e.getActionCommand().equalsIgnoreCase("eliminar item seleccionado")){
-                System.out.println("btn eliminar item seleccionado");
+                int itemSeleccionado = ventanaVenta.getFilaTblCarrito();
+                if(itemSeleccionado == -1){
+                    JOptionPane.showMessageDialog(null, "Seleccione un item");
+                }
+                else{
+                    int cliente = superMercado.getClienteSeleccionado();
+                    String producto = superMercado.getClientes().get(cliente).
+                            getCarrito().get(itemSeleccionado).get("nombre");
+                    //se elimina el prodeucto del carrito
+                    superMercado.getClientes().get(cliente).eliminarProducto(itemSeleccionado);
+                    
+                    superMercado.restablecerProducto(producto);
+                    
+                    //Se actulizan las tablas
+                    ventanaVenta.limpiarTablaCarrito();
+                    ventanaVenta.setTablaCarrito(superMercado.
+                            getClientes().get(cliente).getCarrito());
+                }
             }
             else if(e.getActionCommand().equalsIgnoreCase("finalizar")){
                 System.out.println("btn finalizar");

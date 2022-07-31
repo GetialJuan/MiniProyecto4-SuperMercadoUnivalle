@@ -61,6 +61,10 @@ public class Cliente {
         }
     }
     
+    public void eliminarProducto(int cualProducto){
+        carrito.remove(cualProducto);
+    }
+    
     public void limpiarCarrito(){
         carrito.clear();
     }
