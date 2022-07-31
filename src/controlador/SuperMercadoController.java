@@ -170,10 +170,12 @@ public class SuperMercadoController {
                                         superMercado.getProductos().
                                                 get(indiceProducto).getPrecio());
 
-                        //Se actulizan las tablas
+                        //Se actulizan las tablas y datos de la ventana
                         ventanaVenta.limpiarTablaCarrito();
                         ventanaVenta.setTablaCarrito(superMercado.
                                 getClientes().get(cliente).getCarrito());
+                        ventanaVenta.setTotal(superMercado.
+                                getTotalCarritoCliente());
                     }
                     else{
                         JOptionPane.showMessageDialog(null, "Producto agotado");
@@ -184,6 +186,7 @@ public class SuperMercadoController {
             }
             else if(e.getActionCommand().equalsIgnoreCase("cancelar venta")){
                 superMercado.cancelarVenta(ventanaVenta.getProductosInfo());
+                ventanaVenta.setTotal(0);
                 ventanaVenta.limpiarTablaCarrito();
                 ventanaVenta.dispose();
                 ventanaInicio.show();
@@ -203,10 +206,12 @@ public class SuperMercadoController {
                     //se reestablce 3el prducto
                     superMercado.restablecerProducto(producto);
                     
-                    //Se actulizan las tablas
+                    //Se actulizan las tablas y datos de la ventana
                     ventanaVenta.limpiarTablaCarrito();
                     ventanaVenta.setTablaCarrito(superMercado.
                             getClientes().get(cliente).getCarrito());
+                    ventanaVenta.setTotal(superMercado.
+                                getTotalCarritoCliente());
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("finalizar")){

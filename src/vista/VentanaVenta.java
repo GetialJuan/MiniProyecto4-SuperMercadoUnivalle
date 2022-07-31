@@ -268,6 +268,10 @@ public class VentanaVenta extends javax.swing.JFrame {
         
         return productos;
     }
+    
+    public void setTotal(int total){
+        jLabel4.setText("Total: "+ total);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarAVenta;

@@ -5,6 +5,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Vector;
 
 /**
@@ -14,10 +15,8 @@ import java.util.Vector;
 public class SuperMercado {
     
     private ArrayList<Cliente> clientes;
-    private ArrayList<Cliente> copiaClientes;
     private ArrayList<Proveedor> proveedores;
     private ArrayList<Producto> productos;
-    private ArrayList<Producto> copiaProductos;
     private int clienteSeleccionado;
     
     public SuperMercado(){
@@ -25,8 +24,6 @@ public class SuperMercado {
         proveedores = new ArrayList<>();
         productos = new ArrayList<>();
         clienteSeleccionado = 0;
-        copiaClientes = new ArrayList<>();
-        copiaProductos = new ArrayList<>();
         
         //productos momentaneos para pruebas (Se debe borrar luego)
         productos.add(new Producto("lechuga", 10, 1000));
@@ -94,4 +91,18 @@ public class SuperMercado {
         return encontrado;
     }
     
+    public int getTotalCarritoCliente(){
+        int total = 0;
+        
+        ArrayList<HashMap<String,String>> carrito = 
+                clientes.get(clienteSeleccionado).getCarrito();
+        for(HashMap<String,String> producto : carrito){
+            int presio = Integer.parseInt(producto.get("presio"));
+            int cantidad = Integer.parseInt(producto.get("cantidad"));
+            
+            total += (presio * cantidad);
+        }
+        
+        return total;
+    }
 }
