@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import modelo.Cliente;
+import modelo.FacturaVenta;
 import modelo.SuperMercado;
 import vista.VentanaInicio;
 import vista.VentanaNuevoCliente;
@@ -215,7 +217,22 @@ public class SuperMercadoController {
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("finalizar")){
-                System.out.println("btn finalizar");
+                JOptionPane.showMessageDialog(null, "Se registro la venta");
+                
+                Cliente cliente = superMercado.getClientes().
+                        get(superMercado.getClienteSeleccionado());
+                
+                //se agrega la venta
+                superMercado.agregarVenta(new FacturaVenta(
+                        cliente.getNombre(), cliente.getiD(), 
+                        cliente.getCarrito(), 
+                        superMercado.getTotalCarritoCliente()));
+                
+                //Se cierrra la ventana
+                ventanaVenta.setTotal(0);
+                ventanaVenta.limpiarTablaCarrito();
+                ventanaVenta.dispose();
+                ventanaInicio.show();
             }
         }
         

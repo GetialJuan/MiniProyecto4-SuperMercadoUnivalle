@@ -17,12 +17,14 @@ public class SuperMercado {
     private ArrayList<Cliente> clientes;
     private ArrayList<Proveedor> proveedores;
     private ArrayList<Producto> productos;
+    private ArrayList<FacturaVenta> ventas;
     private int clienteSeleccionado;
     
     public SuperMercado(){
         clientes = new ArrayList<>();
         proveedores = new ArrayList<>();
         productos = new ArrayList<>();
+        ventas = new ArrayList<>();
         clienteSeleccionado = 0;
         
         //productos momentaneos para pruebas (Se debe borrar luego)
@@ -104,5 +106,9 @@ public class SuperMercado {
         }
         
         return total;
+    }
+    
+    public void agregarVenta(FacturaVenta fv){
+        ventas.add(fv);
     }
 }
