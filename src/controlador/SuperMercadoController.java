@@ -76,8 +76,6 @@ public class SuperMercadoController {
                             "No se encontro el cliente");
                 }
                 else{
-                    //se guarda una copia del estado actual de los datos
-                    superMercado.setCopias();
                     
                     //se abre ventanVenta
                     if(ventanaVenta != null){
@@ -123,9 +121,6 @@ public class SuperMercadoController {
                 superMercado.
                         agregarCliente(ventanaNuevoCliente.getTxtNombre(), 
                                 ventanaNuevoCliente.getTxtCedula());
-                
-                //se guarda una copia del estado actual de los datos
-                superMercado.setCopias();
                 
                 superMercado.setClienteSeleccionadoNuevo();
                 
@@ -187,7 +182,8 @@ public class SuperMercadoController {
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("cancelar venta")){
-                superMercado.restablecerDatos();
+                superMercado.cancelarVenta(ventanaVenta.getProductosInfo());
+                ventanaVenta.limpiarTablaCarrito();
                 ventanaVenta.dispose();
             }
             else if(e.getActionCommand().equalsIgnoreCase("eliminar item seleccionado")){
