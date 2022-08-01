@@ -33,6 +33,7 @@ public class SuperMercadoController {
     VentanaProveedores ventanaProveedores;
     VentanaNuevoProveedor ventanaNuevoProveedor;
 
+
     public SuperMercadoController() {
         
         superMercado = new SuperMercado();
@@ -91,7 +92,7 @@ public class SuperMercadoController {
                 else{
                     //se guarda una copia del estado actual de los datos
                     superMercado.setCopias();
-                    
+                
                     //se abre ventanVenta
                     if(ventanaVenta != null){
                     ventanaVenta.show();
@@ -202,6 +203,10 @@ public class SuperMercadoController {
             else if(e.getActionCommand().equalsIgnoreCase("cancelar venta")){
                 superMercado.restablecerDatos();
                 ventanaVenta.dispose();
+                superMercado.cancelarVenta(ventanaVenta.getProductosInfo());
+                ventanaVenta.limpiarTablaCarrito();
+                ventanaVenta.dispose();
+                ventanaInicio.show();
             }
             else if(e.getActionCommand().equalsIgnoreCase("eliminar item seleccionado")){
                 int itemSeleccionado = ventanaVenta.getFilaTblCarrito();
@@ -230,7 +235,6 @@ public class SuperMercadoController {
         }
         
     }
-    
     //ventanaProveedor
     class ManejadorDeEventosProveedores implements ActionListener{
 

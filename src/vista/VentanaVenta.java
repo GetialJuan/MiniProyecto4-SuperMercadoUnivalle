@@ -258,6 +258,16 @@ public class VentanaVenta extends javax.swing.JFrame {
         info.add(cantidad);
         return info;
     }
+    
+    public ArrayList<ArrayList<String>> getProductosInfo(){
+        ArrayList<ArrayList<String>> productos = new ArrayList<>();
+        
+        for(int i = 0; i<jTable1.getRowCount(); i++){
+            productos.add(getProductoInfo(i));
+        }
+        
+        return productos;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarAVenta;

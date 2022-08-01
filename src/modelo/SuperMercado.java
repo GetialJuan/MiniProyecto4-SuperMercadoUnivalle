@@ -62,7 +62,13 @@ public class SuperMercado {
     
     public void restablecerDatos() {
         //falta
+    }    
         
+    public void cancelarVenta(ArrayList< ArrayList<String>> productos){
+        for(ArrayList<String> p : productos){
+            restablecerProducto(p);
+        }
+        clientes.get(clienteSeleccionado).limpiarCarrito();
     }
     
     public void restablecerProducto(ArrayList<String> producto){
