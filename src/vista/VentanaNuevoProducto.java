@@ -4,6 +4,8 @@
  */
 package vista;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Santiago
@@ -70,11 +72,6 @@ public class VentanaNuevoProducto extends javax.swing.JFrame {
 
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
 
         cbCategoria.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         cbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Despensa", "Lácteos", "Enlatados", "Cárnicos", "Frutas y verduras", "Delicatessen", "Licores", "Bebidas", "Snacks", "Limpieza", "Cuidado Personal", "Panadería" }));
@@ -143,11 +140,6 @@ public class VentanaNuevoProducto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        VentanaProductos ventanaProductos = new VentanaProductos();
-        this.dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -181,6 +173,19 @@ public class VentanaNuevoProducto extends javax.swing.JFrame {
                 new VentanaNuevoProducto().setVisible(true);
             }
         });
+    }
+    
+    public void agregarListenersBtns(ActionListener aL){
+        btnAgregar.addActionListener(aL);
+        btnCancelar.addActionListener(aL);
+    }
+    
+    public String getTxtNombre(){
+        return txtNombre.getText();
+    }
+    
+    public String getTxtPresio(){
+        return txtPrecio.getText();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

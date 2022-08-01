@@ -10,9 +10,11 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.Cliente;
 import modelo.FacturaVenta;
+import modelo.Producto;
 import modelo.SuperMercado;
 import vista.VentanaInicio;
 import vista.VentanaNuevoCliente;
+import vista.VentanaNuevoProducto;
 import vista.VentanaNuevoProveedor;
 import vista.VentanaProductos;
 import vista.VentanaProveedores;
@@ -35,6 +37,8 @@ public class SuperMercadoController {
     VentanaNuevoCliente ventanaNuevoCliente;
     
     VentanaProductos ventanaProductos;
+    VentanaNuevoProducto ventanaNuevoProducto;
+    
     VentanaProveedores ventanaProveedores;
     VentanaNuevoProveedor ventanaNuevoProveedor;
 
@@ -293,9 +297,47 @@ public class SuperMercadoController {
                             getProductos());
                 }
             }
+            else if(e.getActionCommand().equalsIgnoreCase("nuevo producto")){
+                if(ventanaNuevoProducto != null){
+                    ventanaNuevoProducto.show();
+                }
+                else{
+                    ventanaNuevoProducto = new VentanaNuevoProducto();
+                    ventanaNuevoProducto.
+                            agregarListenersBtns(
+                                    new ManejadorDeEventosNuevoProducto());
+                }
+                ventanaProductos.dispose();
+            }
         }
         
     }
+    
+    //////////////////////////////VentanaNuevoProducto///////////////
+    class ManejadorDeEventosNuevoProducto implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getActionCommand().equalsIgnoreCase("agregar")){
+                //se añade el producto nuevo
+                superMercado.getProductos().add(new Producto(
+                        ventanaNuevoProducto.getTxtNombre(), 0,
+                Integer.parseInt(ventanaNuevoProducto.getTxtPresio())));
+                
+                //se cierra y abre ventanas
+                ventanaNuevoProducto.dispose();
+                ventanaProductos.limpiarTablaProductos();
+                ventanaProductos.setTablaProductos(
+                superMercado.getProductos());
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("cancelar")){
+                ventanaNuevoProducto.dispose();
+            }
+            ventanaProductos.show();
+        }
+        
+    }
+    
     //ventanaProveedor
     class ManejadorDeEventosProveedores implements ActionListener{
 
