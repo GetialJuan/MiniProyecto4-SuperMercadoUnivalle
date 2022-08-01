@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -59,8 +60,12 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
         btnAdicionar = new javax.swing.JButton();
         btnEliminarProducto = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblProductos = new javax.swing.JTable();
-        btnAgregar = new javax.swing.JButton();
+        tblProductos = new javax.swing.JTable(){
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         lblTitulo = new javax.swing.JLabel();
 
@@ -105,7 +110,6 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
 
         btnAdicionar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAdicionar.setText("Adicionar");
-        btnAdicionar.setActionCommand("Adicionar");
 
         btnEliminarProducto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnEliminarProducto.setText("Eliminar");
@@ -156,8 +160,8 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnAgregar.setText("Agregar");
+        btnAceptar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnAceptar.setText("Aceptar");
 
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnCancelar.setText("Cancelar");
@@ -192,7 +196,7 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAgregar)
+                .addComponent(btnAceptar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCancelar)
                 .addGap(59, 59, 59))
@@ -214,7 +218,7 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgregar)
+                    .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
                 .addContainerGap())
         );
@@ -230,8 +234,7 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
             .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,29 +284,49 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
     }
     
     public void agregarListenersBtns(ActionListener aL){
-        btnAgregar.addActionListener(aL);
+        btnAceptar.addActionListener(aL);
         btnCancelar.addActionListener(aL);
         btnAdicionar.addActionListener(aL);
         btnEliminarProducto.addActionListener(aL);
     }
     
-    public String getNombreProducto(){
+    public void setTitulo(String titulo){
+        lblTitulo.setText(titulo);
+    }
+
+    public void setTxtNombre(String nombre) {
+        txtNombre.setText(nombre);
+    }
+
+    public void setTxtTelefono(String telefono) {
+        txtTelefono.setText(telefono);
+    }
+    
+    public void setCbCategoria(String categoria){
+        cbCategoria.setSelectedItem(categoria);
+    }
+    
+    public String getLblTitulo(){
+        return lblTitulo.getText();
+    }
+    
+    public String getTxtNombreProducto(){
         return txtNombreP.getText();
     }
     
-    public String getPrecio(){
+    public String getTxtPrecio(){
         return txtPrecio.getText();
     }
     
-    public String getNombre(){
+    public String getTxtNombre(){
         return txtNombre.getText();
     }
     
-    public String getTelefono(){
+    public String getTxtTelefono(){
         return txtTelefono.getText();
     }
     
-    public String getCategoria(){
+    public String getCbCategoria(){
         return (String)cbCategoria.getSelectedItem();
     }
     
@@ -314,6 +337,11 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
         txtNombreP.setText("");
         txtPrecio.setText("");
         limpiarTablaProductos();
+    }
+    
+    public void limpiarCamposProducto(){
+        txtNombreP.setText("");
+        txtPrecio.setText("");
     }
     
     public void limpiarTablaProductos(){
@@ -378,6 +406,10 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
             JOptionPane.showMessageDialog
                 (rootPane, "Se ha añadido el nuevo proveedor");
         }
+        else if(identificador.equals("Modificado")){
+            JOptionPane.showMessageDialog
+                (rootPane, "Se ha modificado el proveedor");
+        }
         else if(identificador.equals("NumTelefono")){
             JOptionPane.showMessageDialog
                 (rootPane, "Introduzca un número en Teléfono");
@@ -386,8 +418,8 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnAdicionar;
-    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEliminarProducto;
     private javax.swing.JComboBox<String> cbCategoria;

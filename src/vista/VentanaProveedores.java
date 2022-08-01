@@ -44,7 +44,11 @@ public class VentanaProveedores extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblProveedores = new javax.swing.JTable();
+        tblProveedores = new javax.swing.JTable(){
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         btnComprarProducto = new javax.swing.JButton();
         btnNuevoProveedor = new javax.swing.JButton();
         btnEliminarProveedor = new javax.swing.JButton();

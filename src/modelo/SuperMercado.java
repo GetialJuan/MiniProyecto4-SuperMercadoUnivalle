@@ -52,6 +52,8 @@ public class SuperMercado {
         productos.add(auxMap);
         proveedores.add(new Proveedor("Mauro", "123456", "Cárnicos",productos));
         
+        productos = new ArrayList<>();
+        auxMap = new HashMap();
         auxMap.put("Nombre","Tomates");
         auxMap.put("Precio", "3000");
         auxMap.put("Categoria", "Frutas y Verduras");
@@ -61,8 +63,10 @@ public class SuperMercado {
         auxMap.put("Precio", "2000");
         auxMap.put("Categoria", "Frutas y Verduras");
         productos.add(auxMap);
-        proveedores.add(new Proveedor("Juanito", "78910", "Frutas y Verduras", productos));
+        proveedores.add(new Proveedor("Juanito", "78910", "Frutas y verduras", productos));
         
+        productos = new ArrayList<>();
+        auxMap = new HashMap();
         auxMap.put("Nombre","Ron");
         auxMap.put("Precio", "150000");
         auxMap.put("Categoria", "Licores");
@@ -166,5 +170,18 @@ public class SuperMercado {
     
     public void eliminarProveedor(int indice){
         proveedores.remove(indice);
+    }
+    
+    public Proveedor getProveedor(int indice){
+        return proveedores.get(indice);
+    }
+    
+    public void modificarProveedor(int indice, Proveedor proveedor){
+        proveedores.remove(indice);
+        if(indice >= proveedores.size()){
+            proveedores.add(proveedor);
+        }else{
+            proveedores.add(indice, proveedor);
+        }
     }
 }

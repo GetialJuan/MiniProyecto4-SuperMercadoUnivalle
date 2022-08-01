@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import static java.util.Map.entry;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
@@ -352,6 +354,7 @@ public class SuperMercadoController {
             }
             else if(e.getActionCommand().equalsIgnoreCase("Nuevo Proveedor")){
                 try {
+                    ventanaNuevoProveedor.setTitulo("Nuevo Proveedor");
                     ventanaNuevoProveedor.show();
                     ventanaProveedores.dispose();
                 }
@@ -365,7 +368,36 @@ public class SuperMercadoController {
             else if(e.getActionCommand().equalsIgnoreCase("Modificar Proveedor")){
                 int fila = ventanaProveedores.getFilaTabla();
                 if(fila != -1){
-                    
+                    Proveedor p;
+                    ventanaProveedores.dispose();
+                     if(ventanaNuevoProveedor != null){
+                        ventanaNuevoProveedor.show();
+                    }
+                    else{
+                        ventanaNuevoProveedor = new VentanaNuevoProveedor();
+                        ventanaNuevoProveedor.
+                            agregarListenersBtns(new ManejadorDeEventosNuevoProveedor());
+                    }
+                    p = superMercado.getProveedor(fila);
+                    ventanaNuevoProveedor.limpiarCampos();
+                    ventanaNuevoProveedor.setTxtNombre(p.getNombre());
+                    ventanaNuevoProveedor.setTxtTelefono(p.getTelefono());
+                    ventanaNuevoProveedor.setCbCategoria(p.getCategoria());
+                    for(HashMap<String,String> map : p.getProductos()){
+                        String nombre = "";
+                        String precio = "";
+                        for(Map.Entry<String, String> entry : map.entrySet()){
+                            if(entry.getKey().equalsIgnoreCase("Nombre")){
+                                nombre = entry.getValue();
+                            }
+                            else if(entry.getKey().equalsIgnoreCase("Precio")){
+                                precio = entry.getValue();
+                            }                                              
+                        }
+                        ventanaNuevoProveedor.aNadirTablaProductos(nombre, precio);
+                    }
+                    ventanaNuevoProveedor.setTitulo("Modificar Proveedor");
+                    ventanaNuevoProveedor.show();
                 }else{
                     ventanaProveedores.mensajesEmergentes("SelecModificar");
                 }
@@ -403,8 +435,8 @@ public class SuperMercadoController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("Adicionar")){
-                String nombre = ventanaNuevoProveedor.getNombreProducto();
-                String precio = ventanaNuevoProveedor.getPrecio();
+                String nombre = ventanaNuevoProveedor.getTxtNombreProducto();
+                String precio = ventanaNuevoProveedor.getTxtPrecio();
                 if(nombre.equals("")){
                     ventanaNuevoProveedor.mensajesEmergentes("NombreP");
                 }else if(precio.equals("")){
@@ -435,6 +467,7 @@ public class SuperMercadoController {
                             ventanaNuevoProveedor.mensajesEmergentes("Repetido");
                         }else{
                             ventanaNuevoProveedor.aNadirTablaProductos(nombre, precio);
+                            ventanaNuevoProveedor.limpiarCamposProducto();
                         }
                     }catch(NumberFormatException ne){
                         ventanaNuevoProveedor.mensajesEmergentes("NumPrecio");
@@ -450,10 +483,11 @@ public class SuperMercadoController {
                     ventanaNuevoProveedor.eliminarProducto(fila);
                 }
             }
-            else if(e.getActionCommand().equalsIgnoreCase("Agregar")){
-                String nombre = ventanaNuevoProveedor.getNombre();
-                String telefono = ventanaNuevoProveedor.getTelefono();
-                String categoria = ventanaNuevoProveedor.getCategoria();
+            else if(e.getActionCommand().equalsIgnoreCase("Aceptar")){
+                int fila = ventanaProveedores.getFilaTabla();
+                String nombre = ventanaNuevoProveedor.getTxtNombre();
+                String telefono = ventanaNuevoProveedor.getTxtTelefono();
+                String categoria = ventanaNuevoProveedor.getCbCategoria();
                 if(nombre.equals("")){
                     ventanaNuevoProveedor.mensajesEmergentes("Nombre"); 
                 }
@@ -479,8 +513,16 @@ public class SuperMercadoController {
                             productos.add(auxMap);
                         }
                         Proveedor proveedor = new Proveedor(nombre,telefono,categoria,productos);
-                        superMercado.agregarProveedor(proveedor);
-                        ventanaNuevoProveedor.mensajesEmergentes("Nuevo"); 
+                        if(ventanaNuevoProveedor.getLblTitulo().equalsIgnoreCase("Nuevo Proveedor")){
+                            System.out.println("entra n");
+                            superMercado.agregarProveedor(proveedor);
+                            ventanaNuevoProveedor.mensajesEmergentes("Nuevo"); 
+                        }
+                        else if(ventanaNuevoProveedor.getLblTitulo().equalsIgnoreCase("Modificar Proveedor")){
+                            System.out.println("entra m");
+                            superMercado.modificarProveedor(fila,proveedor);
+                            ventanaNuevoProveedor.mensajesEmergentes("Modificado"); 
+                        }                      
                         ventanaNuevoProveedor.dispose();
                         ventanaProveedores.setTablaProveedores(superMercado.
                             getProveedores());
@@ -494,6 +536,7 @@ public class SuperMercadoController {
             else if(e.getActionCommand().equalsIgnoreCase("Cancelar")){
                 ventanaNuevoProveedor.dispose();
                 ventanaNuevoProveedor.limpiarCampos();
+                ventanaNuevoProveedor.limpiarTablaProductos();
                 ventanaProveedores.setTablaProveedores(superMercado.
                         getProveedores());
                 ventanaProveedores.show();
