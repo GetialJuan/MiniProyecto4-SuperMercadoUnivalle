@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Vector;
+import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 import modelo.Producto;
 
@@ -265,63 +266,15 @@ public class VentanaCompra extends javax.swing.JFrame {
         btnFinalizar.addActionListener(aL);
     }
     
-    public void setCboxProductos(ArrayList<Producto> productos){
-        for(Producto p : productos){
-            cboxProductos.addItem(p.getNombre());
+    public void mostrarProveedor(String nombre, String categoria, ArrayList<String> productos){
+        txtNombre.setText(nombre);
+        txtCategoria.setText(categoria);
+        cboxProductos.removeAllItems();
+        for(String p : productos){
+            cboxProductos.addItem(p);
         }
     }
     
-    public int getProductoSeleccionado(){
-        return cboxProductos.getSelectedIndex();
-    }
-    
-    public void setTablaCarrito(ArrayList<HashMap<String,String>> carrito){
-        for(HashMap<String,String> p : carrito){
-            int cantidad = Integer.parseInt(p.get("cantidad"));
-            int presio = Integer.parseInt(p.get("presio"));
-            int subTotal = cantidad * presio;
-            Object[] fila = {p.get("nombre"), presio, 
-                cantidad, subTotal};
-            
-            modeloTabla.addRow(fila);
-        }
-    }
-    
-    public void limpiarTablaCarrito(){
-        int filas = tblCarritoCompra.getRowCount();
-        for(int i = filas -1; i >= 0; i--){
-            modeloTabla.removeRow(i);
-        }
-    }
-    
-    public int getFilaTblCarrito(){
-        return tblCarritoCompra.getSelectedRow();
-    }
-    
-    public ArrayList<String> getProductoInfo(int cualProducto){
-        String nombre = (String) modeloTabla.getValueAt(cualProducto, 0);
-        String cantidad = modeloTabla.getValueAt(cualProducto, 2).toString();
-        
-        ArrayList<String> info = new ArrayList<>();
-        info.add(nombre);
-        info.add(cantidad);
-        return info;
-    }
-    
-    public ArrayList<ArrayList<String>> getProductosInfo(){
-        ArrayList<ArrayList<String>> productos = new ArrayList<>();
-        
-        for(int i = 0; i<tblCarritoCompra.getRowCount(); i++){
-            productos.add(getProductoInfo(i));
-        }
-        
-        return productos;
-    }
-    
-    public void setTotal(int total){
-        lblTotal.setText("Total: "+ total);
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarACompra;
     private javax.swing.JButton btnCancelarVenta;

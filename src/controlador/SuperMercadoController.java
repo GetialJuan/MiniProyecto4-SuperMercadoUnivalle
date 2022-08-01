@@ -363,6 +363,21 @@ public class SuperMercadoController {
                                 agregarListenersBtns(
                                         new ManejadorDeEventosCompra());
                     }
+                    Proveedor p = superMercado.getProveedor(fila);
+                    String nombre = p.getNombre();
+                    String categoria = p.getCategoria();
+                    ArrayList<String> productos = new ArrayList<>();
+                    for(HashMap<String,String> map : p.getProductos()){
+                        for(Map.Entry<String, String> entry : map.entrySet()){
+                            String nombreP = "";
+                            if(entry.getKey().equalsIgnoreCase("Nombre")){
+                                nombreP = entry.getValue();
+                                System.out.println(nombreP);
+                                productos.add(nombreP);
+                            }
+                        }    
+                    }
+                    ventanaCompra.mostrarProveedor(nombre, categoria, productos);
                     ventanaProveedores.dispose();
                 }else{
                     ventanaProveedores.mensajesEmergentes("Comprar");
