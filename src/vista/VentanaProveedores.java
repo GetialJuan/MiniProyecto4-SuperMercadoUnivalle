@@ -212,9 +212,13 @@ public class VentanaProveedores extends javax.swing.JFrame {
             JOptionPane.showMessageDialog
                 (rootPane, "Seleccione un proveedor para eliminarlo");
         }
-        if(identificador.equals("SelecModificar")){
+        else if(identificador.equals("SelecModificar")){
             JOptionPane.showMessageDialog
                 (rootPane, "Seleccione un proveedor para modificarlo");
+        }
+        else if(identificador.equals("Comprar")){
+            JOptionPane.showMessageDialog
+                (rootPane, "Seleccione un proveedor para realizar la compra");
         }
     }
     

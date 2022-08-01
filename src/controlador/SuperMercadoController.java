@@ -17,6 +17,7 @@ import modelo.FacturaVenta;
 import modelo.Producto;
 import modelo.Proveedor;
 import modelo.SuperMercado;
+import vista.VentanaCompra;
 import vista.VentanaInicio;
 import vista.VentanaNuevoCliente;
 import vista.VentanaNuevoProducto;
@@ -46,6 +47,7 @@ public class SuperMercadoController {
     
     VentanaProveedores ventanaProveedores;
     VentanaDatosProveedor ventanaDProveedor;
+    VentanaCompra ventanaCompra;
 
     public SuperMercadoController() {
         
@@ -319,7 +321,7 @@ public class SuperMercadoController {
         
     }
     
-    //////////////////////////////VentanaNuevoProducto///////////////
+    //////////////////////////////VentanaDProducto///////////////
     class ManejadorDeEventosNuevoProducto implements ActionListener {
 
         @Override
@@ -350,7 +352,21 @@ public class SuperMercadoController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("Comprar Producto")){
-                System.out.println("Btn ComprarProducto");
+                int fila = ventanaProveedores.getFilaTabla();
+                if(fila != -1){
+                    if(ventanaCompra != null){
+                        ventanaCompra.show();
+                    }
+                    else{
+                        ventanaCompra = new VentanaCompra();
+                        ventanaCompra.
+                                agregarListenersBtns(
+                                        new ManejadorDeEventosCompra());
+                    }
+                    ventanaProveedores.dispose();
+                }else{
+                    ventanaProveedores.mensajesEmergentes("Comprar");
+                }
             }
             else if(e.getActionCommand().equalsIgnoreCase("Nuevo Proveedor")){
                 try {
@@ -589,7 +605,13 @@ public class SuperMercadoController {
                 ventanaProveedores.show();
             }
             
-        }
-        
+        }   
+    }
+    
+    class ManejadorDeEventosCompra implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            
+        }      
     }
 }
