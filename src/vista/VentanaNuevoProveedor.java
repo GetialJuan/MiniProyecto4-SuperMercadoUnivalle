@@ -5,20 +5,29 @@
 package vista;
 
 import java.awt.event.ActionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Santiago
  */
 public class VentanaNuevoProveedor extends javax.swing.JFrame {
-
+    
+    DefaultTableModel modeloTabla = new DefaultTableModel();
+    
     /**
      * Creates new form VentanaNuevoProveedor
      */
     public VentanaNuevoProveedor() {
+        cargarModeloTabla();
         initComponents();
         setVisible(true);
         setLocationRelativeTo(null);
+    }
+    
+    public void cargarModeloTabla() {
+        modeloTabla.addColumn("Nombre");
+        modeloTabla.addColumn("Precio (COP$)");
     }
 
     /**
@@ -44,7 +53,7 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
         lblPrecio = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JTextField();
         lblProductos = new javax.swing.JLabel();
-        btnAgregarProducto = new javax.swing.JButton();
+        btnAdicionar = new javax.swing.JButton();
         btnEliminarProducto = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProductos = new javax.swing.JTable();
@@ -91,20 +100,14 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
         lblProductos.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         lblProductos.setText("Productos");
 
-        btnAgregarProducto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnAgregarProducto.setText("Agregar");
+        btnAdicionar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAdicionar.setText("Adicionar");
+        btnAdicionar.setActionCommand("Adicionar");
 
         btnEliminarProducto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnEliminarProducto.setText("Eliminar");
 
-        tblProductos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Nombre", "Precio",
-            }
-        ));
+        tblProductos.setModel(modeloTabla);
         jScrollPane1.setViewportView(tblProductos);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -123,7 +126,7 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
-                        .addComponent(btnAgregarProducto)
+                        .addComponent(btnAdicionar)
                         .addGap(18, 18, 18)
                         .addComponent(btnEliminarProducto))
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -143,7 +146,7 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
                     .addComponent(txtNombreP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPrecio)
                     .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregarProducto)
+                    .addComponent(btnAdicionar)
                     .addComponent(btnEliminarProducto))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
@@ -225,7 +228,7 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,13 +280,33 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
     public void agregarListenersBtns(ActionListener aL){
         btnAgregar.addActionListener(aL);
         btnCancelar.addActionListener(aL);
-        btnAgregarProducto.addActionListener(aL);
+        btnAdicionar.addActionListener(aL);
         btnEliminarProducto.addActionListener(aL);
+    }
+    
+    public String getNombreProducto(){
+        return txtNombreP.getText();
+    }
+    
+    public String getPrecio(){
+        return txtPrecio.getText();
+    }
+    
+    public void limpiarTablaProductos(){
+        int filas = tblProductos.getRowCount();
+        for(int i = filas -1; i >= 0; i--){
+            modeloTabla.removeRow(i);
+        }
+    }
+    
+    public void aNadirTablaProductos(String nombre, String precio){
+        Object[] fila = {nombre, precio};
+        modeloTabla.addRow(fila);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnAgregarProducto;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEliminarProducto;
     private javax.swing.JComboBox<String> jComboBox1;

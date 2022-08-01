@@ -381,13 +381,33 @@ public class SuperMercadoController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getActionCommand().equalsIgnoreCase("Agregar")){
+            if(e.getActionCommand().equalsIgnoreCase("Adicionar")){
+                String nombre = ventanaNuevoProveedor.getNombreProducto();
+                String precio = ventanaNuevoProveedor.getPrecio();
+                if(nombre.equals("")){
+                    JOptionPane.showMessageDialog
+                            (ventanaNuevoProveedor, "Introduzca un nombre");
+                }else if(precio.equals("")){
+                    JOptionPane.showMessageDialog
+                            (ventanaNuevoProveedor, "Introduzca un precio");
+                }else{
+                    try{
+                        Integer.parseInt(precio);
+                        ventanaNuevoProveedor.aNadirTablaProductos(nombre, precio);
+                    }catch(NumberFormatException ne){
+                        JOptionPane.showMessageDialog
+                            (ventanaNuevoProveedor, "Introduzca un número en precio");
+                    }
+                }
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("Agregar")){
                 System.out.println("Btn Agregar");
             }
             else if(e.getActionCommand().equalsIgnoreCase("Cancelar")){
                 ventanaNuevoProveedor.dispose();
                 ventanaProveedores.show();
             }
+            
         }
         
     }
