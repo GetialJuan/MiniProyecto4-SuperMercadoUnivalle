@@ -37,6 +37,42 @@ public class SuperMercado {
         clientes.add(new Cliente("juan", "123456"));
         clientes.add(new Cliente("nauj", "654321"));
         clientes.add(new Cliente("anju", "111222"));
+        
+        //proveedores momentaneos para pruebas (Se debe borrar luego)
+        ArrayList <HashMap<String,String>> productos = new ArrayList<>();
+        HashMap<String,String> auxMap = new HashMap(); 
+        auxMap.put("Nombre","Pollo");
+        auxMap.put("Precio", "16000");
+        auxMap.put("Categoria", "Cárnicos");
+        productos.add(auxMap);
+        auxMap = new HashMap();
+        auxMap.put("Nombre","Res");
+        auxMap.put("Precio", "25000");
+        auxMap.put("Categoria", "Cárnicos");
+        productos.add(auxMap);
+        proveedores.add(new Proveedor("Mauro", "123456", "Cárnicos",productos));
+        
+        auxMap.put("Nombre","Tomates");
+        auxMap.put("Precio", "3000");
+        auxMap.put("Categoria", "Frutas y Verduras");
+        productos.add(auxMap);
+        auxMap = new HashMap();
+        auxMap.put("Nombre","Papas");
+        auxMap.put("Precio", "2000");
+        auxMap.put("Categoria", "Frutas y Verduras");
+        productos.add(auxMap);
+        proveedores.add(new Proveedor("Juanito", "78910", "Frutas y Verduras", productos));
+        
+        auxMap.put("Nombre","Ron");
+        auxMap.put("Precio", "150000");
+        auxMap.put("Categoria", "Licores");
+        productos.add(auxMap);
+        auxMap = new HashMap();
+        auxMap.put("Nombre","Vodka");
+        auxMap.put("Precio", "60000");
+        auxMap.put("Categoria", "Licores");
+        productos.add(auxMap);
+        proveedores.add(new Proveedor("Carlos", "11121314", "Licores", productos));
     }
     
     public void agregarCliente(String nombre, String iD){

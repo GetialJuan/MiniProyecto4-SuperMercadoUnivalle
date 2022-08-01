@@ -49,6 +49,7 @@ public class VentanaProveedores extends javax.swing.JFrame {
         btnNuevoProveedor = new javax.swing.JButton();
         btnEliminarProveedor = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
+        btnModificarProveedor = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,17 +61,20 @@ public class VentanaProveedores extends javax.swing.JFrame {
         tblProveedores.setModel(modeloTabla);
         jScrollPane1.setViewportView(tblProveedores);
 
-        btnComprarProducto.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnComprarProducto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnComprarProducto.setText("Comprar Producto");
 
-        btnNuevoProveedor.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnNuevoProveedor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNuevoProveedor.setText("Nuevo Proveedor");
 
-        btnEliminarProveedor.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnEliminarProveedor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnEliminarProveedor.setText("Eliminar Proveedor");
 
         btnRegresar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnRegresar.setText("Regresar");
+
+        btnModificarProveedor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnModificarProveedor.setText("Modificar Proveedor");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -82,16 +86,18 @@ public class VentanaProveedores extends javax.swing.JFrame {
                 .addComponent(btnRegresar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 49, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(0, 50, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnComprarProducto)
-                        .addGap(18, 18, 18)
+                        .addComponent(btnComprarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnNuevoProveedor)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnModificarProveedor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnEliminarProveedor))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,8 +111,9 @@ public class VentanaProveedores extends javax.swing.JFrame {
                     .addComponent(btnEliminarProveedor)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnNuevoProveedor)
-                        .addComponent(btnComprarProducto)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addComponent(btnComprarProducto)
+                        .addComponent(btnModificarProveedor)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(btnRegresar)
                 .addGap(17, 17, 17))
         );
@@ -165,6 +172,7 @@ public class VentanaProveedores extends javax.swing.JFrame {
         btnComprarProducto.addActionListener(aL);
         btnEliminarProveedor.addActionListener(aL);
         btnNuevoProveedor.addActionListener(aL);
+        btnModificarProveedor.addActionListener(aL);
         btnRegresar.addActionListener(aL);
     }
     
@@ -195,6 +203,17 @@ public class VentanaProveedores extends javax.swing.JFrame {
         return i;
     }
     
+    public void mensajesEmergentes(String identificador){
+        if(identificador.equals("SelecEliminar")){
+            JOptionPane.showMessageDialog
+                (rootPane, "Seleccione un proveedor para eliminarlo");
+        }
+        if(identificador.equals("SelecModificar")){
+            JOptionPane.showMessageDialog
+                (rootPane, "Seleccione un proveedor para modificarlo");
+        }
+    }
+    
     public void eliminarProveedor(int fila){
         modeloTabla.removeRow(fila);
     }
@@ -202,10 +221,11 @@ public class VentanaProveedores extends javax.swing.JFrame {
     public int getFilaTabla(){
         return tblProveedores.getSelectedRow();
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnComprarProducto;
     private javax.swing.JButton btnEliminarProveedor;
+    private javax.swing.JButton btnModificarProveedor;
     private javax.swing.JButton btnNuevoProveedor;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;

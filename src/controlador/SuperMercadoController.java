@@ -362,6 +362,14 @@ public class SuperMercadoController {
                             agregarListenersBtns(new ManejadorDeEventosNuevoProveedor());
                 }
             }
+            else if(e.getActionCommand().equalsIgnoreCase("Modificar Proveedor")){
+                int fila = ventanaProveedores.getFilaTabla();
+                if(fila != -1){
+                    
+                }else{
+                    ventanaProveedores.mensajesEmergentes("SelecModificar");
+                }
+            }
             else if(e.getActionCommand().equalsIgnoreCase("Eliminar Proveedor")){
                 int fila = ventanaProveedores.getFilaTabla();
                 if(fila != -1){
