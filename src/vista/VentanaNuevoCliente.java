@@ -4,6 +4,8 @@
  */
 package vista;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Santiago
@@ -45,19 +47,9 @@ public class VentanaNuevoCliente extends javax.swing.JFrame {
 
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
 
         btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -129,16 +121,6 @@ public class VentanaNuevoCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        VentanaValidacionCliente ventanaValidacionCliente = new VentanaValidacionCliente();
-        this.dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        VentanaVenta ventanaVenta = new VentanaVenta();
-        this.dispose();
-    }//GEN-LAST:event_btnAgregarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -172,6 +154,19 @@ public class VentanaNuevoCliente extends javax.swing.JFrame {
                 new VentanaNuevoCliente().setVisible(true);
             }
         });
+    }
+    
+    public void agregarListenersBtns(ActionListener aL){
+        btnAgregar.addActionListener(aL);
+        btnCancelar.addActionListener(aL);
+    }
+    
+    public String getTxtCedula(){
+        return txtCedula.getText();
+    }
+    
+    public String getTxtNombre(){
+        return txtNombre.getText();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

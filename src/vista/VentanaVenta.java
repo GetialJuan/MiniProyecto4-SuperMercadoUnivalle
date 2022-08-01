@@ -4,7 +4,12 @@
  */
 package vista;
 
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
+import modelo.Producto;
 
 /**
  *
@@ -49,7 +54,7 @@ public class VentanaVenta extends javax.swing.JFrame {
         btnFinalizar = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cboxProductos = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         btnSeleccionar = new javax.swing.JButton();
 
@@ -64,23 +69,12 @@ public class VentanaVenta extends javax.swing.JFrame {
 
         btnCancelarVenta.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnCancelarVenta.setText("Cancelar Venta");
-        btnCancelarVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarVentaActionPerformed(evt);
-            }
-        });
 
         btnAgregarAVenta.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnAgregarAVenta.setText("Agregar a Venta");
-        btnAgregarAVenta.setEnabled(false);
 
         btnEliminarItem.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnEliminarItem.setText("Eliminar Item Seleccionado");
-        btnEliminarItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarItemActionPerformed(evt);
-            }
-        });
 
         jTable1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jTable1.setModel(modeloTabla);
@@ -88,11 +82,6 @@ public class VentanaVenta extends javax.swing.JFrame {
 
         btnFinalizar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnFinalizar.setText("Finalizar");
-        btnFinalizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFinalizarActionPerformed(evt);
-            }
-        });
 
         jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Despensa", "Lácteos", "Enlatados", "Cárnicos", "Frutas y verduras", "Delicatessen", "Licores", "Bebidas", "Snacks", "Limpieza", "Cuidado Personal", "Panadería" }));
@@ -100,8 +89,7 @@ public class VentanaVenta extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel3.setText("Producto");
 
-        jComboBox2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jComboBox2.setEnabled(false);
+        cboxProductos.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -123,12 +111,13 @@ public class VentanaVenta extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAgregarAVenta)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSeleccionar))))
+                            .addComponent(btnSeleccionar)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(cboxProductos, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnAgregarAVenta, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,7 +144,7 @@ public class VentanaVenta extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cboxProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAgregarAVenta))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -183,19 +172,6 @@ public class VentanaVenta extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnCancelarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarVentaActionPerformed
-        VentanaValidacionCliente ventanaValidacionCliente = new VentanaValidacionCliente();
-        this.dispose();
-    }//GEN-LAST:event_btnCancelarVentaActionPerformed
-
-    private void btnEliminarItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarItemActionPerformed
-        
-    }//GEN-LAST:event_btnEliminarItemActionPerformed
-
-    private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnFinalizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,6 +207,57 @@ public class VentanaVenta extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void agregarListenersBtns(ActionListener aL){
+        btnAgregarAVenta.addActionListener(aL);
+        btnCancelarVenta.addActionListener(aL);
+        btnEliminarItem.addActionListener(aL);
+        btnFinalizar.addActionListener(aL);
+        btnSeleccionar.addActionListener(aL);
+    }
+    
+    public void setCboxProductos(ArrayList<Producto> productos){
+        for(Producto p : productos){
+            cboxProductos.addItem(p.getNombre());
+        }
+    }
+    
+    public int getProductoSeleccionado(){
+        return cboxProductos.getSelectedIndex();
+    }
+    
+    public void setTablaCarrito(ArrayList<HashMap<String,String>> carrito){
+        for(HashMap<String,String> p : carrito){
+            int cantidad = Integer.parseInt(p.get("cantidad"));
+            int presio = Integer.parseInt(p.get("presio"));
+            int subTotal = cantidad * presio;
+            Object[] fila = {p.get("nombre"), presio, 
+                cantidad, subTotal};
+            
+            modeloTabla.addRow(fila);
+        }
+    }
+    
+    public void limpiarTablaCarrito(){
+        int filas = jTable1.getRowCount();
+        for(int i = filas -1; i >= 0; i--){
+            modeloTabla.removeRow(i);
+        }
+    }
+    
+    public int getFilaTblCarrito(){
+        return jTable1.getSelectedRow();
+    }
+    
+    public ArrayList<String> getProductoInfo(int cualProducto){
+        String nombre = (String) modeloTabla.getValueAt(cualProducto, 0);
+        String cantidad = modeloTabla.getValueAt(cualProducto, 2).toString();
+        
+        ArrayList<String> info = new ArrayList<>();
+        info.add(nombre);
+        info.add(cantidad);
+        return info;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarAVenta;
@@ -238,8 +265,8 @@ public class VentanaVenta extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminarItem;
     private javax.swing.JButton btnFinalizar;
     private javax.swing.JButton btnSeleccionar;
+    private javax.swing.JComboBox<String> cboxProductos;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

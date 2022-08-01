@@ -4,6 +4,8 @@
  */
 package vista;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Santiago
@@ -45,27 +47,12 @@ public class VentanaValidacionCliente extends javax.swing.JFrame {
 
         btnRegresar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnRegresar.setText("Regresar");
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
-            }
-        });
 
         btnIniciarVenta.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnIniciarVenta.setText("Iniciar Venta");
-        btnIniciarVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIniciarVentaActionPerformed(evt);
-            }
-        });
 
         btnNuevoCliente.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnNuevoCliente.setText("Nuevo Cliente");
-        btnNuevoCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoClienteActionPerformed(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel2.setText("N° de Identificación de Cliente Regular");
@@ -129,21 +116,6 @@ public class VentanaValidacionCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        VentanaInicio ventanaInicio = new VentanaInicio();
-        this.dispose();
-    }//GEN-LAST:event_btnRegresarActionPerformed
-
-    private void btnNuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoClienteActionPerformed
-        VentanaNuevoCliente ventanaNuevoCliente = new VentanaNuevoCliente();
-        this.dispose();
-    }//GEN-LAST:event_btnNuevoClienteActionPerformed
-
-    private void btnIniciarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarVentaActionPerformed
-        VentanaVenta ventanaVenta = new VentanaVenta();
-        this.dispose();
-    }//GEN-LAST:event_btnIniciarVentaActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -177,6 +149,16 @@ public class VentanaValidacionCliente extends javax.swing.JFrame {
                 new VentanaValidacionCliente().setVisible(true);
             }
         });
+    }
+    
+    public void agregarListenersBtns(ActionListener aL){
+        btnIniciarVenta.addActionListener(aL);
+        btnNuevoCliente.addActionListener(aL);
+        btnRegresar.addActionListener(aL);
+    }
+    
+    public String getTxtCedula(){
+        return txtCedula.getText();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

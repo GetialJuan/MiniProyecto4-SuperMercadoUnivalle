@@ -4,6 +4,7 @@
  */
 package vista;
 
+import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -58,30 +59,15 @@ public class VentanaProveedores extends javax.swing.JFrame {
 
         btnComprarProducto.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnComprarProducto.setText("Comprar Producto");
-        btnComprarProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnComprarProductoActionPerformed(evt);
-            }
-        });
 
         btnNuevoProveedor.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnNuevoProveedor.setText("Nuevo Proveedor");
-        btnNuevoProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoProveedorActionPerformed(evt);
-            }
-        });
 
         btnEliminarProveedor.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnEliminarProveedor.setText("Eliminar Proveedor");
 
         btnRegresar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnRegresar.setText("Regresar");
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -136,21 +122,6 @@ public class VentanaProveedores extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        VentanaInicio ventanaInicio = new VentanaInicio();
-        this.dispose();
-    }//GEN-LAST:event_btnRegresarActionPerformed
-
-    private void btnComprarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarProductoActionPerformed
-        VentanaCompra ventanaCompra = new VentanaCompra();
-        this.dispose();
-    }//GEN-LAST:event_btnComprarProductoActionPerformed
-
-    private void btnNuevoProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoProveedorActionPerformed
-        VentanaNuevoProveedor ventanaNuevoProveedor = new VentanaNuevoProveedor();
-        this.dispose();
-    }//GEN-LAST:event_btnNuevoProveedorActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -185,6 +156,13 @@ public class VentanaProveedores extends javax.swing.JFrame {
                 new VentanaProveedores().setVisible(true);
             }
         });
+    }
+    
+    public void agregarListenersBtns(ActionListener aL){
+        btnComprarProducto.addActionListener(aL);
+        btnEliminarProveedor.addActionListener(aL);
+        btnNuevoProveedor.addActionListener(aL);
+        btnRegresar.addActionListener(aL);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

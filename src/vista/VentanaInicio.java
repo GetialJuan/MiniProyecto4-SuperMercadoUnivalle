@@ -4,6 +4,8 @@
  */
 package vista;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Santiago
@@ -52,27 +54,12 @@ public class VentanaInicio extends javax.swing.JFrame {
 
         btnProductos.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnProductos.setText("Productos");
-        btnProductos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProductosActionPerformed(evt);
-            }
-        });
 
         btnClientes.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnClientes.setText("Clientes");
-        btnClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClientesActionPerformed(evt);
-            }
-        });
 
         btnProveedores.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnProveedores.setText("Proveedores");
-        btnProveedores.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnProveedoresActionPerformed(evt);
-            }
-        });
 
         menuRegistros.setText("Registros");
         menuRegistros.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -126,21 +113,12 @@ public class VentanaInicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
-        VentanaProductos ventanaProductos = new VentanaProductos();
-        this.dispose();
-    }//GEN-LAST:event_btnProductosActionPerformed
-
-    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
-        VentanaValidacionCliente ventanaValidacionCliente = new VentanaValidacionCliente();
-        this.dispose();
-    }//GEN-LAST:event_btnClientesActionPerformed
-
-    private void btnProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedoresActionPerformed
-        VentanaProveedores ventanaProveedores = new VentanaProveedores();
-        this.dispose();
-    }//GEN-LAST:event_btnProveedoresActionPerformed
-
+    public void agregarListenersBtns(ActionListener aL){
+        btnClientes.addActionListener(aL);
+        btnProductos.addActionListener(aL);
+        btnProveedores.addActionListener(aL);
+    }
+    
     /**
      * @param args the command line arguments
      */

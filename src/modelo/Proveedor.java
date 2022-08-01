@@ -6,8 +6,11 @@ package modelo;
 
 /**
  *
- * @author storr
+ * @author Juan
  */
 public class Proveedor {
+
+    public Proveedor() {
+    }
     
 }

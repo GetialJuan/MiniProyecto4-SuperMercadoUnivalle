@@ -6,8 +6,43 @@ package modelo;
 
 /**
  *
- * @author storr
+ * @author Juan
  */
 public class Producto {
     
+    private String nombre;
+    private int cantidad;
+    private int precio;
+
+    public Producto(String nombre, int cantidad, int precio) {
+        this.nombre = nombre;
+        this.cantidad = cantidad;
+        this.precio = precio;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public boolean reducirUnaUnidad(){
+        if(cantidad>0){
+            cantidad--;
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    public void setCantidad(int cantidad){
+        this.cantidad = cantidad;
+    }
 }
