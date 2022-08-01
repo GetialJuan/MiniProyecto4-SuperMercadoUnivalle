@@ -13,7 +13,9 @@ import modelo.FacturaVenta;
 import modelo.SuperMercado;
 import vista.VentanaInicio;
 import vista.VentanaNuevoCliente;
+import vista.VentanaNuevoProveedor;
 import vista.VentanaProductos;
+import vista.VentanaProveedores;
 import vista.VentanaValidacionCliente;
 import vista.VentanaVenta;
 
@@ -33,16 +35,18 @@ public class SuperMercadoController {
     VentanaNuevoCliente ventanaNuevoCliente;
     
     VentanaProductos ventanaProductos;
+    VentanaProveedores ventanaProveedores;
+    VentanaNuevoProveedor ventanaNuevoProveedor;
 
     public SuperMercadoController() {
         
         superMercado = new SuperMercado();
         
         ventanaInicio = new VentanaInicio();
-        ventanaInicio.AgregarListenersBtns(new ManejadorDeEventosMenu());
+        ventanaInicio.agregarListenersBtns(new ManejadorDeEventosMenu());
     }
     
-    ////////////////////ventanaInicio/////////////////////
+    //ventanaIncio
     class ManejadorDeEventosMenu implements ActionListener {
 
         @Override
@@ -70,10 +74,18 @@ public class SuperMercadoController {
                 ventanaProductos.setTablaProductos(superMercado.
                             getProductos());
             }
-            else if(e.getActionCommand().equalsIgnoreCase("proveedor")){
-                System.out.println("btn proveedor");
+            else if(e.getActionCommand().equalsIgnoreCase("proveedores")){
+                try {
+                    ventanaProveedores.show();
+                    ventanaInicio.dispose();
+                }
+                catch (NullPointerException npe){
+                    ventanaInicio.dispose();
+                    ventanaProveedores = new VentanaProveedores();
+                    ventanaProveedores.
+                            agregarListenersBtns(new ManejadorDeEventosProveedores());
+                }
             }
-            ventanaInicio.dispose();
         }
         
     }
@@ -91,7 +103,9 @@ public class SuperMercadoController {
                             "No se encontro el cliente");
                 }
                 else{
-                    
+                    //se guarda una copia del estado actual de los datos
+                    superMercado.setCopias();
+                
                     //se abre ventanVenta
                     if(ventanaVenta != null){
                     ventanaVenta.show();
@@ -136,6 +150,9 @@ public class SuperMercadoController {
                 superMercado.
                         agregarCliente(ventanaNuevoCliente.getTxtNombre(), 
                                 ventanaNuevoCliente.getTxtCedula());
+                
+                //se guarda una copia del estado actual de los datos
+                superMercado.setCopias();
                 
                 superMercado.setClienteSeleccionadoNuevo();
                 
@@ -199,6 +216,8 @@ public class SuperMercadoController {
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("cancelar venta")){
+                superMercado.restablecerDatos();
+                ventanaVenta.dispose();
                 superMercado.cancelarVenta(ventanaVenta.getProductosInfo());
                 ventanaVenta.setTotal(0);
                 ventanaVenta.limpiarTablaCarrito();
@@ -273,6 +292,59 @@ public class SuperMercadoController {
                     ventanaProductos.setTablaProductos(superMercado.
                             getProductos());
                 }
+            }
+        }
+        
+    }
+    //ventanaProveedor
+    class ManejadorDeEventosProveedores implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getActionCommand().equalsIgnoreCase("Comprar Producto")){
+                System.out.println("Btn ComprarProducto");
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("Nuevo Proveedor")){
+                try {
+                    ventanaNuevoProveedor.show();
+                    ventanaProveedores.dispose();
+                }
+                catch (NullPointerException npe){
+                    ventanaProveedores.dispose();
+                    ventanaNuevoProveedor = new VentanaNuevoProveedor();
+                    ventanaNuevoProveedor.
+                            agregarListenersBtns(new ManejadorDeEventosNuevoProveedor());
+                }
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("Eliminar Proveedor")){
+                System.out.println("Btn EliminarProveedor");
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("Regresar")){
+                try {
+                    ventanaProveedores.dispose();
+                    ventanaInicio.show();
+                }
+                catch (NullPointerException npe){
+                    ventanaProveedores.dispose();
+                    ventanaInicio = new VentanaInicio();
+                    ventanaInicio.
+                            agregarListenersBtns(new ManejadorDeEventosProveedores());
+                }
+            }
+        }
+        
+    }
+    
+    class ManejadorDeEventosNuevoProveedor implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getActionCommand().equalsIgnoreCase("Agregar")){
+                System.out.println("Btn Agregar");
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("Cancelar")){
+                ventanaNuevoProveedor.dispose();
+                ventanaProveedores.show();
             }
         }
         

@@ -4,6 +4,8 @@
  */
 package vista;
 
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author Santiago
@@ -62,11 +64,6 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
 
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
 
         txtTelefono.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
@@ -141,11 +138,6 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        VentanaProveedores ventanaProveedores = new VentanaProveedores();
-        this.dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -179,6 +171,11 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
                 new VentanaNuevoProveedor().setVisible(true);
             }
         });
+    }
+    
+    public void agregarListenersBtns(ActionListener aL){
+        btnAgregar.addActionListener(aL);
+        btnCancelar.addActionListener(aL);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

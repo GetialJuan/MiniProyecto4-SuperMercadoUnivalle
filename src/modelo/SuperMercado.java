@@ -55,7 +55,15 @@ public class SuperMercado {
         return clienteSeleccionado;
     }
     
-    public void cancelarVenta(ArrayList<ArrayList<String>> productos) {
+    public void setCopias(){
+        ///falta
+    }
+    
+    public void restablecerDatos() {
+        //falta
+    }    
+        
+    public void cancelarVenta(ArrayList< ArrayList<String>> productos){
         for(ArrayList<String> p : productos){
             restablecerProducto(p);
         }

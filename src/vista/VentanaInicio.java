@@ -113,7 +113,8 @@ public class VentanaInicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void AgregarListenersBtns(ActionListener aL){
+
+    public void agregarListenersBtns(ActionListener aL){
         btnClientes.addActionListener(aL);
         btnProductos.addActionListener(aL);
         btnProveedores.addActionListener(aL);
