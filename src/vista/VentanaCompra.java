@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Vector;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Producto;
 
@@ -266,6 +267,10 @@ public class VentanaCompra extends javax.swing.JFrame {
         btnFinalizar.addActionListener(aL);
     }
     
+    public String getCboxProductos(){
+        return (String)cboxProductos.getSelectedItem();
+    }
+    
     public void mostrarProveedor(String nombre, String categoria, ArrayList<String> productos){
         txtNombre.setText(nombre);
         txtCategoria.setText(categoria);
@@ -273,6 +278,42 @@ public class VentanaCompra extends javax.swing.JFrame {
         for(String p : productos){
             cboxProductos.addItem(p);
         }
+    }
+    
+    public void limpiarTablaProductos(){
+        int filas = tblCarritoCompra.getRowCount();
+        for(int i = filas -1; i >= 0; i--){
+            modeloTabla.removeRow(i);
+        }
+    }
+    
+    public void setTablaCarrito(ArrayList<HashMap<String,String>> carrito){
+        limpiarTablaProductos();
+        for(HashMap<String,String> p : carrito){
+            int cantidad = Integer.parseInt(p.get("Cantidad"));
+            int precio = Integer.parseInt(p.get("Precio"));
+            int subTotal = cantidad * precio;
+            Object[] fila = {p.get("Nombre"), precio, 
+                cantidad, subTotal};
+            
+            modeloTabla.addRow(fila);
+        }
+    }
+    
+    public int getFilaTabla(){
+        return tblCarritoCompra.getSelectedRow();
+    }
+    
+    public int mensajeCancelarCompra(){
+        String[] opciones = {"Si","No"};
+        int i = JOptionPane.showOptionDialog(rootPane, 
+                        "Esta seguro que desea cancelar la compra?",
+                        "Eliminar Proveedor",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE,
+                        null,
+                        opciones, 0);
+        return i;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -17,6 +17,7 @@ public class SuperMercado {
     private ArrayList<Cliente> clientes;
     private ArrayList<Proveedor> proveedores;
     private ArrayList<Producto> productos;
+    private ArrayList<HashMap<String,String>> carritoSuper;
     private ArrayList<FacturaVenta> ventas;
     private int clienteSeleccionado;
     
@@ -24,6 +25,7 @@ public class SuperMercado {
         clientes = new ArrayList<>();
         proveedores = new ArrayList<>();
         productos = new ArrayList<>();
+        carritoSuper = new ArrayList<>();
         ventas = new ArrayList<>();
         clienteSeleccionado = 0;
         
@@ -93,6 +95,10 @@ public class SuperMercado {
     
     public ArrayList<Proveedor> getProveedores(){
         return proveedores;
+    }
+    
+    public ArrayList<HashMap<String,String>> getCarritoSuper(){
+        return carritoSuper;
     }
     
     public int getClienteSeleccionado(){
@@ -182,6 +188,36 @@ public class SuperMercado {
             proveedores.add(proveedor);
         }else{
             proveedores.add(indice, proveedor);
+        }
+    }
+    
+    public HashMap<String,String> generarMap(String nombre, String precio){
+        HashMap<String,String> map = new HashMap();
+        map.put("Nombre", nombre);
+        map.put("Precio", precio);
+        map.put("Cantidad", "1");
+        return map;
+    }
+    
+    public void aNadirProductoCarrito(HashMap<String,String> map){
+        boolean nuevo = false;
+        for(HashMap<String,String> mapCarrito : carritoSuper){
+            if(mapCarrito.get("Nombre").equals(map.get("Nombre"))){
+                nuevo = true;
+                int cantidadActual = Integer.parseInt(mapCarrito.get("Cantidad"));
+                int nuevaCantidad = cantidadActual + 1;
+                mapCarrito.put("Cantidad", Integer.toString(nuevaCantidad));
+                break;
+            }
+        }
+        if(!nuevo){
+            carritoSuper.add(map);
+        }
+    }
+    
+    public void limpiarCarritoSuper(){
+        for(int i = 0; i < carritoSuper.size(); i = 0){
+            carritoSuper.remove(i);
         }
     }
 }

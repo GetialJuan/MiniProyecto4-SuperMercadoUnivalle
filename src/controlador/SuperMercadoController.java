@@ -372,7 +372,6 @@ public class SuperMercadoController {
                             String nombreP = "";
                             if(entry.getKey().equalsIgnoreCase("Nombre")){
                                 nombreP = entry.getValue();
-                                System.out.println(nombreP);
                                 productos.add(nombreP);
                             }
                         }    
@@ -583,14 +582,12 @@ public class SuperMercadoController {
                         Proveedor proveedor = new Proveedor(nombre,telefono,categoria,productos);
                         if(ventanaDProveedor
                                 .getLblTitulo().equalsIgnoreCase("Nuevo Proveedor")){
-                            System.out.println("entra n");
                             superMercado.agregarProveedor(proveedor);
                             ventanaDProveedor
                                     .mensajesEmergentes("Nuevo"); 
                         }
                         else if(ventanaDProveedor
                                 .getLblTitulo().equalsIgnoreCase("Modificar Proveedor")){
-                            System.out.println("entra m");
                             superMercado.modificarProveedor(fila,proveedor);
                             ventanaDProveedor
                                     .mensajesEmergentes("Modificado"); 
@@ -627,11 +624,26 @@ public class SuperMercadoController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("Agregar a Compra")){
-                System.out.println("btn Agregar");
+                int numP = ventanaProveedores.getFilaTabla();
+                String producto = ventanaCompra.getCboxProductos();
+                Proveedor p = superMercado.getProveedor(numP);
+                for(HashMap<String,String> map : p.getProductos()){
+                    if(map.get("Nombre").equals(producto)){
+                        HashMap<String,String> mapProducto;
+                        mapProducto = superMercado.generarMap(map.get("Nombre"), map.get("Precio"));
+                        superMercado.aNadirProductoCarrito(mapProducto);
+                    }
+                }
+                ventanaCompra.setTablaCarrito(superMercado.getCarritoSuper());
             }
             else if(e.getActionCommand().equalsIgnoreCase("Cancelar Compra")){
-                ventanaCompra.dispose();
-                ventanaProveedores.show();
+                if(ventanaCompra.mensajeCancelarCompra() == 0){
+                    ventanaCompra.dispose();
+                    superMercado.limpiarCarritoSuper();
+                    ventanaCompra.limpiarTablaProductos();
+                    ventanaProveedores.show();
+                }
+                
             }
             else if(e.getActionCommand().equalsIgnoreCase("Eliminar item seleccionado")){
                 System.out.println("Btn Eliminar");
