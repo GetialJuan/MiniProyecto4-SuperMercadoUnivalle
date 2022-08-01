@@ -181,6 +181,10 @@ public class VentanaProductos extends javax.swing.JFrame {
             modeloTabla.removeRow(i);
         }
     }
+    
+    public int getProductoSeleccionado(){
+        return tablaProductos.getSelectedRow();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminarProducto;

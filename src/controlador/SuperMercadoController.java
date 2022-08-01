@@ -260,6 +260,20 @@ public class SuperMercadoController {
                 ventanaProductos.dispose();
                 ventanaInicio.show();
             }
+            else if(e.getActionCommand().equalsIgnoreCase("eliminar producto")){
+                int productoSeleccionado = ventanaProductos.
+                        getProductoSeleccionado();
+                if(productoSeleccionado == -1){
+                    JOptionPane.showMessageDialog(null, "Seleccione un "
+                            + "producto");
+                }
+                else{
+                    superMercado.getProductos().remove(productoSeleccionado);
+                    ventanaProductos.limpiarTablaProductos();
+                    ventanaProductos.setTablaProductos(superMercado.
+                            getProductos());
+                }
+            }
         }
         
     }
