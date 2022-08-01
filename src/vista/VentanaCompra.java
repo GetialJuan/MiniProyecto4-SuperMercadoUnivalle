@@ -78,7 +78,7 @@ public class VentanaCompra extends javax.swing.JFrame {
         lblCategoria.setText("Categoría");
 
         btnCancelarVenta.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnCancelarVenta.setText("Cancelar Venta");
+        btnCancelarVenta.setText("Cancelar Compra");
 
         btnAgregarACompra.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnAgregarACompra.setText("Agregar a Compra");
@@ -104,11 +104,13 @@ public class VentanaCompra extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
+        txtCategoria.setEditable(false);
         txtCategoria.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
         lblNombre.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblNombre.setText("Nombre del proveedor");
 
+        txtNombre.setEditable(false);
         txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

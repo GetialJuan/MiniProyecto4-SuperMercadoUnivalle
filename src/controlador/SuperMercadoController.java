@@ -611,7 +611,19 @@ public class SuperMercadoController {
     class ManejadorDeEventosCompra implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            
+            if(e.getActionCommand().equalsIgnoreCase("Agregar a Compra")){
+                System.out.println("btn Agregar");
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("Cancelar Compra")){
+                ventanaCompra.dispose();
+                ventanaProveedores.show();
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("Eliminar item seleccionado")){
+                System.out.println("Btn Eliminar");
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("Finalizar")){
+                System.out.println("Btn Finalizar");
+            }
         }      
     }
 }
