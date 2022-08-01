@@ -400,11 +400,23 @@ public class SuperMercadoController {
                     }
                 }
             }
+            else if(e.getActionCommand().equalsIgnoreCase("Eliminar")){
+                if(ventanaNuevoProveedor.getFilaTabla() == -1){
+                    JOptionPane.showMessageDialog
+                            (ventanaNuevoProveedor, "Seleccione una fila");
+                }
+                else{
+                    int fila = ventanaNuevoProveedor.getFilaTabla();
+                    ventanaNuevoProveedor.eliminarProducto(fila);
+                }
+            }
             else if(e.getActionCommand().equalsIgnoreCase("Agregar")){
                 System.out.println("Btn Agregar");
+                ventanaNuevoProveedor.limpiarCampos();
             }
             else if(e.getActionCommand().equalsIgnoreCase("Cancelar")){
                 ventanaNuevoProveedor.dispose();
+                ventanaNuevoProveedor.limpiarCampos();
                 ventanaProveedores.show();
             }
             

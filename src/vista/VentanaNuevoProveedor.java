@@ -43,9 +43,9 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
         lblNombre = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         lblTelefono = new javax.swing.JLabel();
-        txtProducto = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
         lblCategoria = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbCategoria = new javax.swing.JComboBox<>();
         lblInfoProveedor = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         lblNombreP = new javax.swing.JLabel();
@@ -73,14 +73,14 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
         lblTelefono.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblTelefono.setText("Telefono");
 
-        txtProducto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtTelefono.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lblCategoria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCategoria.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblCategoria.setText("Categoría");
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Despensa", "Lácteos", "Enlatados", "Cárnicos", "Frutas y verduras", "Delicatessen", "Licores", "Bebidas", "Snacks", "Limpieza", "Cuidado Personal", "Panadería" }));
+        cbCategoria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Despensa", "Lácteos", "Enlatados", "Cárnicos", "Frutas y verduras", "Delicatessen", "Licores", "Bebidas", "Snacks", "Limpieza", "Cuidado Personal", "Panadería" }));
 
         lblInfoProveedor.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         lblInfoProveedor.setText("Información del proveedor.");
@@ -178,11 +178,11 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(lblInfoProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(82, 82, 82)))
-                        .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cbCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 6, Short.MAX_VALUE)))
@@ -204,9 +204,9 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
                     .addComponent(lblNombre)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTelefono)
-                    .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCategoria)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -292,6 +292,15 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
         return txtPrecio.getText();
     }
     
+    public void limpiarCampos(){
+        txtNombre.setText("");
+        txtTelefono.setText("");
+        cbCategoria.setSelectedIndex(0);
+        txtNombreP.setText("");
+        txtPrecio.setText("");
+        limpiarTablaProductos();
+    }
+    
     public void limpiarTablaProductos(){
         int filas = tblProductos.getRowCount();
         for(int i = filas -1; i >= 0; i--){
@@ -299,9 +308,17 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
         }
     }
     
+    public int getFilaTabla(){
+        return tblProductos.getSelectedRow();
+    }
+    
     public void aNadirTablaProductos(String nombre, String precio){
         Object[] fila = {nombre, precio};
         modeloTabla.addRow(fila);
+    }
+    
+    public void eliminarProducto(int fila){
+        modeloTabla.removeRow(fila);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -309,7 +326,7 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEliminarProducto;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbCategoria;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -325,6 +342,6 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNombreP;
     private javax.swing.JTextField txtPrecio;
-    private javax.swing.JTextField txtProducto;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }
