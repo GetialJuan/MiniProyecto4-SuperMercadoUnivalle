@@ -25,8 +25,8 @@ public class VentanaProveedores extends javax.swing.JFrame {
     
     public void cargarModeloTabla() {
         modeloTabla.addColumn("Nombre");
-        modeloTabla.addColumn("Producto");
         modeloTabla.addColumn("Teléfono");
+        modeloTabla.addColumn("Categoría");
     }
     
     /**
