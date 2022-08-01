@@ -15,14 +15,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Santiago
  */
-public class VentanaNuevoProveedor extends javax.swing.JFrame {
+public class VentanaDatosProveedor extends javax.swing.JFrame {
     
     DefaultTableModel modeloTabla = new DefaultTableModel();
     
     /**
      * Creates new form VentanaNuevoProveedor
      */
-    public VentanaNuevoProveedor() {
+    public VentanaDatosProveedor() {
         cargarModeloTabla();
         initComponents();
         setVisible(true);
@@ -265,20 +265,21 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaDatosProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaDatosProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaDatosProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaDatosProveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaNuevoProveedor().setVisible(true);
+                new VentanaDatosProveedor().setVisible(true);
             }
         });
     }
