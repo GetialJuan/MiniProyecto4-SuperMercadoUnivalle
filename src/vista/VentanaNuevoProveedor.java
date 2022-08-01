@@ -7,6 +7,7 @@ package vista;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -335,52 +336,55 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
         modeloTabla.removeRow(fila);
     }
     
-    public boolean verificarRepetido(String nombre, String precio){
-        boolean repetido = false;
-        boolean n = false;
-        boolean p = false;
-        int filas = modeloTabla.getRowCount();
-        for(int i = 0; i < filas; i++){
-            if(nombre.equals(modeloTabla.getValueAt(i, 0))){
-                n = true;
-            }
-            if(precio.equals(modeloTabla.getValueAt(i, 1))){
-                p = true;
-            }
-            if(n && p){
-                repetido = true;
-                return repetido;
-            }else{
-                n = false;
-                p = false;
-            }
-        }
-        return repetido;
-    }
-
-    public boolean tablaVacia(){
-        int filas = modeloTabla.getRowCount();
-        if(filas != 0){
-            return false;
-        }else{
-            return true;
-        }
+    public DefaultTableModel getModeloTabla(){
+        return modeloTabla;
     }
     
-    public ArrayList<HashMap<String,String>> getProductosTabla(){
-        ArrayList<HashMap<String,String>> productos = new ArrayList<>();
-        String categoria = (String)cbCategoria.getSelectedItem();
-        int filas = modeloTabla.getRowCount();
-        for(int i = 0; i < filas; i++){
-            HashMap <String,String> auxMap = new HashMap();
-            auxMap.put("nombre", (String)modeloTabla.getValueAt(i, 0));
-            auxMap.put("precio", (String)modeloTabla.getValueAt(i, 1));
-            auxMap.put("categoria", categoria);
-            productos.add(auxMap);
+    public void mensajesEmergentes(String identificador){
+        if(identificador.equals("NombreP")){
+            JOptionPane.showMessageDialog(rootPane, "Introduzca un nombre");
         }
-        return productos;
+        else if(identificador.equals("Precio")){
+            JOptionPane.showMessageDialog(rootPane, "Introduzca un precio");
+        }
+        else if(identificador.equals("Repetido")){
+            JOptionPane.showMessageDialog
+                (rootPane, "Ya existe un producto con ese precio y nombre");
+        }
+        else if(identificador.equals("NumPrecio")){
+            JOptionPane.showMessageDialog
+                (rootPane, "Introduzca un número en precio");
+        }
+         else if(identificador.equals("Fila")){
+            JOptionPane.showMessageDialog(rootPane, "Seleccione una fila");
+        }
+        else if(identificador.equals("Nombre")){
+            JOptionPane.showMessageDialog
+                (rootPane, "Digite un nombre al proveedor");
+        }
+        else if(identificador.equals("Telefono")){
+            JOptionPane.showMessageDialog
+                (rootPane, "Digite un teléfono al proveedor");
+        }
+         else if(identificador.equals("Categoria")){
+            JOptionPane.showMessageDialog
+                (rootPane, "Seleccione una categoría para el proveedor");
+        }
+        else if(identificador.equals("SinProducto")){
+            JOptionPane.showMessageDialog
+                (rootPane, "Introduzca al menos un producto");
+        }
+        else if(identificador.equals("Nuevo")){
+            JOptionPane.showMessageDialog
+                (rootPane, "Se ha añadido el nuevo proveedor");
+        }
+        else if(identificador.equals("NumTelefono")){
+            JOptionPane.showMessageDialog
+                (rootPane, "Introduzca un número en Teléfono");
+        }
+        
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnAgregar;

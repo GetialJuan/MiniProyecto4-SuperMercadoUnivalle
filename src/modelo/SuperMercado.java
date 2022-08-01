@@ -127,4 +127,8 @@ public class SuperMercado {
     public void agregarProveedor(Proveedor proveedor){
         proveedores.add(proveedor);
     }
+    
+    public void eliminarProveedor(int indice){
+        proveedores.remove(indice);
+    }
 }

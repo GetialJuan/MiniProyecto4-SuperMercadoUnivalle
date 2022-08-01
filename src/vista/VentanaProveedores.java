@@ -6,6 +6,7 @@ package vista;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Proveedor;
 
@@ -180,6 +181,26 @@ public class VentanaProveedores extends javax.swing.JFrame {
             Object[] fila = {p.getNombre(), p.getTelefono(), p.getCategoria()};
             modeloTabla.addRow(fila);
         }
+    }
+    
+    public int mensajeEliminarProveedor(){
+        String[] opciones = {"Si","No"};
+        int i = JOptionPane.showOptionDialog(rootPane, 
+                        "Esta seguro que desea eliminar al proveedor marcado?",
+                        "Eliminar Proveedor",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE,
+                        null,
+                        opciones, 0);
+        return i;
+    }
+    
+    public void eliminarProveedor(int fila){
+        modeloTabla.removeRow(fila);
+    }
+    
+    public int getFilaTabla(){
+        return tblProveedores.getSelectedRow();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
