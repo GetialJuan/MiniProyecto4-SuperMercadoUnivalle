@@ -393,7 +393,12 @@ public class SuperMercadoController {
                 }else{
                     try{
                         Integer.parseInt(precio);
-                        ventanaNuevoProveedor.aNadirTablaProductos(nombre, precio);
+                        if(ventanaNuevoProveedor.verificarRepetido(nombre,precio)){
+                            JOptionPane.showMessageDialog
+                            (ventanaNuevoProveedor, "Ya existe un producto con ese precio y nombre");
+                        }else{
+                            ventanaNuevoProveedor.aNadirTablaProductos(nombre, precio);
+                        }
                     }catch(NumberFormatException ne){
                         JOptionPane.showMessageDialog
                             (ventanaNuevoProveedor, "Introduzca un número en precio");

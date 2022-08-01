@@ -320,6 +320,29 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
     public void eliminarProducto(int fila){
         modeloTabla.removeRow(fila);
     }
+    
+    public boolean verificarRepetido(String nombre, String precio){
+        boolean repetido = false;
+        boolean n = false;
+        boolean p = false;
+        int filas = modeloTabla.getRowCount();
+        for(int i = 0; i < filas; i++){
+            if(nombre.equals(modeloTabla.getValueAt(i, 0))){
+                n = true;
+            }
+            if(precio.equals(modeloTabla.getValueAt(i, 1))){
+                p = true;
+            }
+            if(n && p){
+                repetido = true;
+                return repetido;
+            }else{
+                n = false;
+                p = false;
+            }
+        }
+        return repetido;
+    }    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
