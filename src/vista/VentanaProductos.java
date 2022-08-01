@@ -4,7 +4,10 @@
  */
 package vista;
 
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import modelo.Producto;
 
 /**
  *
@@ -62,22 +65,12 @@ public class VentanaProductos extends javax.swing.JFrame {
 
         btnNuevoProducto.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnNuevoProducto.setText("Nuevo Producto");
-        btnNuevoProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoProductoActionPerformed(evt);
-            }
-        });
 
         btnEliminarProducto.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnEliminarProducto.setText("Eliminar Producto");
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jButton1.setText("Regresar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -134,16 +127,6 @@ public class VentanaProductos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        VentanaInicio ventanaInicio = new VentanaInicio();
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void btnNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoProductoActionPerformed
-        VentanaNuevoProducto ventanaNuevoProducto = new VentanaNuevoProducto();
-        this.dispose();
-    }//GEN-LAST:event_btnNuevoProductoActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -177,6 +160,26 @@ public class VentanaProductos extends javax.swing.JFrame {
                 new VentanaProductos().setVisible(true);
             }
         });
+    }
+    
+    public void agregarListenersBtns(ActionListener aL){
+        btnEliminarProducto.addActionListener(aL);
+        btnNuevoProducto.addActionListener(aL);
+        jButton1.addActionListener(aL);
+    }
+    
+    public void setTablaProductos(ArrayList<Producto> productos){
+        for(Producto p : productos){
+            Object[] producto = {p.getNombre(), p.getPrecio(), p.getCantidad()};
+            modeloTabla.addRow(producto);
+        }
+    }
+    
+    public void limpiarTablaProductos(){
+        int filas = tablaProductos.getRowCount();
+        for(int i = filas -1; i >= 0; i--){
+            modeloTabla.removeRow(i);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -148,9 +148,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Nuevo Producto"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevoProductoActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnEliminarProducto">
           <Properties>
@@ -167,9 +164,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Regresar"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

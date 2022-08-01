@@ -13,6 +13,7 @@ import modelo.FacturaVenta;
 import modelo.SuperMercado;
 import vista.VentanaInicio;
 import vista.VentanaNuevoCliente;
+import vista.VentanaProductos;
 import vista.VentanaValidacionCliente;
 import vista.VentanaVenta;
 
@@ -30,6 +31,8 @@ public class SuperMercadoController {
     VentanaValidacionCliente ventanaValidacionCliente;
     VentanaVenta ventanaVenta;
     VentanaNuevoCliente ventanaNuevoCliente;
+    
+    VentanaProductos ventanaProductos;
 
     public SuperMercadoController() {
         
@@ -56,7 +59,16 @@ public class SuperMercadoController {
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("productos")){
-                System.out.println("btn porducto");
+                if(ventanaProductos != null){
+                    ventanaProductos.show();
+                }
+                else{
+                    ventanaProductos = new VentanaProductos();
+                    ventanaProductos.
+                            agregarListenersBtns(new ManejadorDeEventosProductos());
+                }
+                ventanaProductos.setTablaProductos(superMercado.
+                            getProductos());
             }
             else if(e.getActionCommand().equalsIgnoreCase("proveedor")){
                 System.out.println("btn proveedor");
@@ -232,6 +244,20 @@ public class SuperMercadoController {
                 ventanaVenta.setTotal(0);
                 ventanaVenta.limpiarTablaCarrito();
                 ventanaVenta.dispose();
+                ventanaInicio.show();
+            }
+        }
+        
+    }
+    
+    ///////////////////////////////VentanaProductos///////////////////////////
+    class ManejadorDeEventosProductos implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getActionCommand().equalsIgnoreCase("regresar")){
+                ventanaProductos.limpiarTablaProductos();
+                ventanaProductos.dispose();
                 ventanaInicio.show();
             }
         }
