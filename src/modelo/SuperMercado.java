@@ -51,6 +51,10 @@ public class SuperMercado {
         return clientes;
     }
     
+    public ArrayList<Proveedor> getProveedores(){
+        return proveedores;
+    }
+    
     public int getClienteSeleccionado(){
         return clienteSeleccionado;
     }
@@ -118,5 +122,9 @@ public class SuperMercado {
     
     public void agregarVenta(FacturaVenta fv){
         ventas.add(fv);
+    }
+    
+    public void agregarProveedor(Proveedor proveedor){
+        proveedores.add(proveedor);
     }
 }

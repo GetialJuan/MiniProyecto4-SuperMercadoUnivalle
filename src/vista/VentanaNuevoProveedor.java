@@ -5,6 +5,8 @@
 package vista;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -292,6 +294,18 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
         return txtPrecio.getText();
     }
     
+    public String getNombre(){
+        return txtNombre.getText();
+    }
+    
+    public String getTelefono(){
+        return txtTelefono.getText();
+    }
+    
+    public String getCategoria(){
+        return (String)cbCategoria.getSelectedItem();
+    }
+    
     public void limpiarCampos(){
         txtNombre.setText("");
         txtTelefono.setText("");
@@ -342,7 +356,30 @@ public class VentanaNuevoProveedor extends javax.swing.JFrame {
             }
         }
         return repetido;
-    }    
+    }
+
+    public boolean tablaVacia(){
+        int filas = modeloTabla.getRowCount();
+        if(filas != 0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
+    public ArrayList<HashMap<String,String>> getProductosTabla(){
+        ArrayList<HashMap<String,String>> productos = new ArrayList<>();
+        String categoria = (String)cbCategoria.getSelectedItem();
+        int filas = modeloTabla.getRowCount();
+        for(int i = 0; i < filas; i++){
+            HashMap <String,String> auxMap = new HashMap();
+            auxMap.put("nombre", (String)modeloTabla.getValueAt(i, 0));
+            auxMap.put("precio", (String)modeloTabla.getValueAt(i, 1));
+            auxMap.put("categoria", categoria);
+            productos.add(auxMap);
+        }
+        return productos;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;

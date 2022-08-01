@@ -7,10 +7,12 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import modelo.Cliente;
 import modelo.FacturaVenta;
 import modelo.Producto;
+import modelo.Proveedor;
 import modelo.SuperMercado;
 import vista.VentanaInicio;
 import vista.VentanaNuevoCliente;
@@ -50,7 +52,7 @@ public class SuperMercadoController {
         ventanaInicio.agregarListenersBtns(new ManejadorDeEventosMenu());
     }
     
-    //ventanaIncio
+    //ventanaInicio
     class ManejadorDeEventosMenu implements ActionListener {
 
         @Override
@@ -79,17 +81,18 @@ public class SuperMercadoController {
                             getProductos());
             }
             else if(e.getActionCommand().equalsIgnoreCase("proveedores")){
-                try {
+                if(ventanaProveedores != null) {
                     ventanaProveedores.show();
-                    ventanaInicio.dispose();
                 }
-                catch (NullPointerException npe){
-                    ventanaInicio.dispose();
+                else{
                     ventanaProveedores = new VentanaProveedores();
                     ventanaProveedores.
                             agregarListenersBtns(new ManejadorDeEventosProveedores());
                 }
+                ventanaProveedores.setTablaProveedores(superMercado.
+                        getProveedores());
             }
+            ventanaInicio.dispose();
         }
         
     }
@@ -416,12 +419,48 @@ public class SuperMercadoController {
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("Agregar")){
-                System.out.println("Btn Agregar");
-                ventanaNuevoProveedor.limpiarCampos();
+                String nombre = ventanaNuevoProveedor.getNombre();
+                String telefono = ventanaNuevoProveedor.getTelefono();
+                String categoria = ventanaNuevoProveedor.getCategoria();
+                if(nombre.equals("")){
+                    JOptionPane.showMessageDialog
+                            (ventanaNuevoProveedor, "Digite un nombre al proveedor");
+                }
+                else if(telefono.equals("")){
+                    JOptionPane.showMessageDialog
+                            (ventanaNuevoProveedor, "Digite un teléfono al proveedor");
+                }
+                else if(categoria.equals("")){
+                    JOptionPane.showMessageDialog
+                            (ventanaNuevoProveedor, "Seleccione una categoría para el proveedor");
+                }
+                else if(ventanaNuevoProveedor.tablaVacia()){
+                    JOptionPane.showMessageDialog
+                            (ventanaNuevoProveedor, "Introduzca al menos un producto");
+                }else{
+                    try{
+                        Long.parseLong(telefono);
+                        ArrayList<HashMap<String,String>> productos = 
+                                ventanaNuevoProveedor.getProductosTabla();
+                        Proveedor proveedor = new Proveedor(nombre,telefono,categoria,productos);
+                        superMercado.agregarProveedor(proveedor);
+                        JOptionPane.showMessageDialog(ventanaNuevoProveedor, "Se ha añadido el nuevo proveedor");
+                        ventanaNuevoProveedor.dispose();
+                        ventanaProveedores.setTablaProveedores(superMercado.
+                            getProveedores());
+                        ventanaNuevoProveedor.limpiarCampos();
+                        ventanaProveedores.show();
+                    }catch(NumberFormatException ne){
+                        JOptionPane.showMessageDialog
+                            (ventanaNuevoProveedor, "Introduzca un número en Teléfono");
+                    }
+                }
             }
             else if(e.getActionCommand().equalsIgnoreCase("Cancelar")){
                 ventanaNuevoProveedor.dispose();
                 ventanaNuevoProveedor.limpiarCampos();
+                ventanaProveedores.setTablaProveedores(superMercado.
+                        getProveedores());
                 ventanaProveedores.show();
             }
             

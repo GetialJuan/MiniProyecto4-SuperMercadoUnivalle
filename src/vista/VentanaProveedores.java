@@ -5,7 +5,9 @@
 package vista;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import modelo.Proveedor;
 
 /**
  *
@@ -41,7 +43,7 @@ public class VentanaProveedores extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaProveedores = new javax.swing.JTable();
+        tblProveedores = new javax.swing.JTable();
         btnComprarProducto = new javax.swing.JButton();
         btnNuevoProveedor = new javax.swing.JButton();
         btnEliminarProveedor = new javax.swing.JButton();
@@ -53,9 +55,9 @@ public class VentanaProveedores extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Proveedores");
 
-        tablaProveedores.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        tablaProveedores.setModel(modeloTabla);
-        jScrollPane1.setViewportView(tablaProveedores);
+        tblProveedores.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        tblProveedores.setModel(modeloTabla);
+        jScrollPane1.setViewportView(tblProveedores);
 
         btnComprarProducto.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnComprarProducto.setText("Comprar Producto");
@@ -164,6 +166,21 @@ public class VentanaProveedores extends javax.swing.JFrame {
         btnNuevoProveedor.addActionListener(aL);
         btnRegresar.addActionListener(aL);
     }
+    
+    public void limpiarTablaProveedores(){
+        int filas = tblProveedores.getRowCount();
+        for(int i = filas -1; i >= 0; i--){
+            modeloTabla.removeRow(i);
+        }
+    }
+    
+    public void setTablaProveedores(ArrayList <Proveedor> proveedores){
+        limpiarTablaProveedores();
+        for(Proveedor p : proveedores){
+            Object[] fila = {p.getNombre(), p.getTelefono(), p.getCategoria()};
+            modeloTabla.addRow(fila);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnComprarProducto;
@@ -173,6 +190,6 @@ public class VentanaProveedores extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tablaProveedores;
+    private javax.swing.JTable tblProveedores;
     // End of variables declaration//GEN-END:variables
 }
