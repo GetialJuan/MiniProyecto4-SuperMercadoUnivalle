@@ -50,7 +50,11 @@ public class VentanaVenta extends javax.swing.JFrame {
         btnAgregarAVenta = new javax.swing.JButton();
         btnEliminarItem = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable(){
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
         btnFinalizar = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();

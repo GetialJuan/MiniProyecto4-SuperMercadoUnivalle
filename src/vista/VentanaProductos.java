@@ -45,7 +45,11 @@ public class VentanaProductos extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         cbCategoria = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaProductos = new javax.swing.JTable();
+        tablaProductos = new javax.swing.JTable(){
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
         btnNuevoProducto = new javax.swing.JButton();
         btnEliminarProducto = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
