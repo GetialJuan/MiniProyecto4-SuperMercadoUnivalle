@@ -822,6 +822,7 @@ public class SuperMercadoController {
                     }
                 }
                 ventanaCompra.setTablaCarrito(superMercado.getCarritoSuper());
+                ventanaCompra.setLblTotal(Integer.toString(superMercado.totalCarritoSuper()));
             }
             else if(e.getActionCommand().equalsIgnoreCase("Cancelar Compra")){
                 if(ventanaCompra.mensajeCancelarCompra() == 0){
@@ -833,7 +834,16 @@ public class SuperMercadoController {
                 
             }
             else if(e.getActionCommand().equalsIgnoreCase("Eliminar item seleccionado")){
-                System.out.println("Btn Eliminar");
+                int fila = ventanaCompra.getFilaTabla();
+                if(fila != -1){
+                    if(ventanaCompra.mensajeEliminarProducto() == 0){
+                        superMercado.eliminarProductoCarrito(fila);
+                        ventanaCompra.setTablaCarrito(superMercado.getCarritoSuper());
+                        ventanaCompra.setLblTotal(Integer.toString(superMercado.totalCarritoSuper()));
+                    }
+                }else{
+                    ventanaCompra.mensajesEmergentes("Eliminar");
+                }
             }
             else if(e.getActionCommand().equalsIgnoreCase("Finalizar")){
                 System.out.println("Btn Finalizar");

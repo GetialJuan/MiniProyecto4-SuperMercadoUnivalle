@@ -271,6 +271,10 @@ public class VentanaCompra extends javax.swing.JFrame {
         return (String)cboxProductos.getSelectedItem();
     }
     
+    public void setLblTotal(String total){
+        lblTotal.setText(total);
+    }
+    
     public void mostrarProveedor(String nombre, String categoria, ArrayList<String> productos){
         txtNombre.setText(nombre);
         txtCategoria.setText(categoria);
@@ -314,6 +318,24 @@ public class VentanaCompra extends javax.swing.JFrame {
                         null,
                         opciones, 0);
         return i;
+    }
+    
+    public int mensajeEliminarProducto(){
+        String[] opciones = {"Si","No"};
+        int i = JOptionPane.showOptionDialog(rootPane, 
+                        "Esta seguro que desea eliminar el producto marcado?",
+                        "Eliminar Proveedor",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE,
+                        null,
+                        opciones, 0);
+        return i;
+    }
+    
+    public void mensajesEmergentes(String identificador){
+        if(identificador.equalsIgnoreCase("Eliminar")){
+            JOptionPane.showMessageDialog(rootPane, "Seleccione un producto para eliminar");
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

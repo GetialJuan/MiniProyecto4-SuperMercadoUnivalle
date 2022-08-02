@@ -225,4 +225,20 @@ public class SuperMercado {
             carritoSuper.remove(i);
         }
     }
+    
+    public void eliminarProductoCarrito(int indice){
+        carritoSuper.remove(indice);
+    }
+    
+    public int totalCarritoSuper(){
+        int total = 0;
+        int cantidad = 0;
+        int precio = 0;
+        for(HashMap<String,String> mapCarrito : carritoSuper){
+            cantidad = Integer.parseInt(mapCarrito.get("Cantidad"));
+            precio = Integer.parseInt(mapCarrito.get("Precio"));
+            total += (precio * cantidad);
+        }
+        return total;
+    } 
 }
