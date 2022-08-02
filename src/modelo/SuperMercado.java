@@ -54,6 +54,11 @@ public class SuperMercado {
     public int getClienteSeleccionado(){
         return clienteSeleccionado;
     }
+
+    public ArrayList<FacturaVenta> getVentas() {
+        return ventas;
+    }
+    
     
     public void setCopias(){
         ///falta

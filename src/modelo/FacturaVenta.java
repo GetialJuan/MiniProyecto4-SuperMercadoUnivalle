@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class FacturaVenta {
     private String nombreCliente;
     private String iDCliente;
-    private ArrayList<HashMap<String,String>> carrito;
+    private final ArrayList<HashMap<String,String>> carrito;
     private int totalVenta;
 
     public FacturaVenta(String nombreCliente, String iDCliente, 

@@ -118,6 +118,8 @@ public class VentanaInicio extends javax.swing.JFrame {
         btnClientes.addActionListener(aL);
         btnProductos.addActionListener(aL);
         btnProveedores.addActionListener(aL);
+        menuRegistroCompras.addActionListener(aL);
+        menuRegistroVentas.addActionListener(aL);
     }
     
     /**

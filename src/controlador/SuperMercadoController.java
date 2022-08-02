@@ -7,6 +7,7 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import modelo.Cliente;
 import modelo.FacturaVenta;
@@ -18,6 +19,7 @@ import vista.VentanaNuevoProducto;
 import vista.VentanaNuevoProveedor;
 import vista.VentanaProductos;
 import vista.VentanaProveedores;
+import vista.VentanaRegistro;
 import vista.VentanaValidacionCliente;
 import vista.VentanaVenta;
 
@@ -41,6 +43,8 @@ public class SuperMercadoController {
     
     VentanaProveedores ventanaProveedores;
     VentanaNuevoProveedor ventanaNuevoProveedor;
+    
+    VentanaRegistro ventanaRegistroVentas;
 
     public SuperMercadoController() {
         
@@ -90,6 +94,25 @@ public class SuperMercadoController {
                             agregarListenersBtns(new ManejadorDeEventosProveedores());
                 }
             }
+            else if(e.getActionCommand().equalsIgnoreCase("ventas")){
+                if(ventanaRegistroVentas != null){
+                    ventanaRegistroVentas.show();
+                }
+                else{
+                    ventanaRegistroVentas = new VentanaRegistro();
+                    ventanaRegistroVentas.
+                            agregarListenersBnts(
+                                    new ManejadorDeEventosRegistroVenta());
+                }
+                if(!superMercado.getVentas().isEmpty()){
+                    ventanaRegistroVentas.cambiarRegistro(superMercado.
+                            getVentas().get(0));
+                }
+                ventanaInicio.dispose();
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("compras")){
+                System.out.println("btn compras");
+            }
         }
         
     }
@@ -107,8 +130,6 @@ public class SuperMercadoController {
                             "No se encontro el cliente");
                 }
                 else{
-                    //se guarda una copia del estado actual de los datos
-                    superMercado.setCopias();
                 
                     //se abre ventanVenta
                     if(ventanaVenta != null){
@@ -147,6 +168,7 @@ public class SuperMercadoController {
     class ManejadorDeEventosNuevoCliente implements ActionListener {
 
         @Override
+        @SuppressWarnings("deprecation")
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("agregar")){
                 
@@ -185,6 +207,7 @@ public class SuperMercadoController {
     class ManejadorDeEventosVenta implements ActionListener {
 
         @Override
+        @SuppressWarnings("deprecation")
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("agregar a venta")){
                 int indiceProducto = ventanaVenta.getProductoSeleccionado();
@@ -257,11 +280,23 @@ public class SuperMercadoController {
                 Cliente cliente = superMercado.getClientes().
                         get(superMercado.getClienteSeleccionado());
                 
+                ArrayList<HashMap<String,String>> carrito = cliente.getCarrito();
+                ArrayList<HashMap<String,String>> carritoCopia = new ArrayList<>();
+                //se copia el carrito
+                for(HashMap<String,String> p : carrito){
+                    @SuppressWarnings("unchecked")
+                    HashMap<String,String> pN = (HashMap<String,String>)p.clone();
+                    carritoCopia.add(pN);
+                }
+                
                 //se agrega la venta
                 superMercado.agregarVenta(new FacturaVenta(
                         cliente.getNombre(), cliente.getiD(), 
-                        cliente.getCarrito(), 
+                        carritoCopia, 
                         superMercado.getTotalCarritoCliente()));
+                
+                //se vacia el crrito de lcliente
+                cliente.limpiarCarrito();
                 
                 //Se cierrra la ventana
                 ventanaVenta.setTotal(0);
@@ -277,6 +312,7 @@ public class SuperMercadoController {
     class ManejadorDeEventosProductos implements ActionListener {
 
         @Override
+        @SuppressWarnings("deprecation")
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("regresar")){
                 ventanaProductos.limpiarTablaProductos();
@@ -317,6 +353,7 @@ public class SuperMercadoController {
     class ManejadorDeEventosNuevoProducto implements ActionListener {
 
         @Override
+        @SuppressWarnings("deprecation")
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("agregar")){
                 //se añade el producto nuevo
@@ -338,10 +375,45 @@ public class SuperMercadoController {
         
     }
     
+    ////////////////////////////////VentanaRegistro(Venta)/////////////////
+    class ManejadorDeEventosRegistroVenta implements ActionListener {
+        int cualRegistro = 0;
+        @Override
+        @SuppressWarnings("deprecation")
+        public void actionPerformed(ActionEvent e) {
+            if(e.getActionCommand().equalsIgnoreCase("siguiente")){
+                cualRegistro++;
+                try{
+                    FacturaVenta fv = superMercado.getVentas().get(cualRegistro);
+                    ventanaRegistroVentas.cambiarRegistro(fv);
+                }catch(IndexOutOfBoundsException ai){
+                    cualRegistro--;
+                    JOptionPane.showMessageDialog(null, "No hay mas ventas");
+                }
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("anterior")){
+                cualRegistro--;
+                try{
+                    FacturaVenta fv = superMercado.getVentas().get(cualRegistro);
+                    ventanaRegistroVentas.cambiarRegistro(fv);
+                }catch(IndexOutOfBoundsException ai){
+                    cualRegistro++;
+                    JOptionPane.showMessageDialog(null, "No hay mas ventas");
+                }
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("regresar")){
+                ventanaRegistroVentas.dispose();
+                ventanaInicio.show();
+            }
+        }
+        
+    }
+    
     //ventanaProveedor
     class ManejadorDeEventosProveedores implements ActionListener{
 
         @Override
+        @SuppressWarnings("deprecation")
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("Comprar Producto")){
                 System.out.println("Btn ComprarProducto");
@@ -380,6 +452,7 @@ public class SuperMercadoController {
     class ManejadorDeEventosNuevoProveedor implements ActionListener{
 
         @Override
+        @SuppressWarnings("deprecation")
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("Agregar")){
                 System.out.println("Btn Agregar");

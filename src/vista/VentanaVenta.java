@@ -217,6 +217,7 @@ public class VentanaVenta extends javax.swing.JFrame {
     }
     
     public void setCboxProductos(ArrayList<Producto> productos){
+        limpiarComboBox();
         for(Producto p : productos){
             cboxProductos.addItem(p.getNombre());
         }
@@ -271,6 +272,10 @@ public class VentanaVenta extends javax.swing.JFrame {
     
     public void setTotal(int total){
         jLabel4.setText("Total: "+ total);
+    }
+    
+    private void limpiarComboBox(){
+        cboxProductos.removeAllItems();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
