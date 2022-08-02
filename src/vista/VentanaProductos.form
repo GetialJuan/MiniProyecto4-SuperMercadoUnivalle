@@ -105,9 +105,9 @@
               <StringArray count="13">
                 <StringItem index="0" value="Todo"/>
                 <StringItem index="1" value="Despensa"/>
-                <StringItem index="2" value="L&#xe1;cteos"/>
+                <StringItem index="2" value="Lacteos"/>
                 <StringItem index="3" value="Enlatados"/>
-                <StringItem index="4" value="C&#xe1;rnicos"/>
+                <StringItem index="4" value="Carnicos"/>
                 <StringItem index="5" value="Frutas y verduras"/>
                 <StringItem index="6" value="Delicatessen"/>
                 <StringItem index="7" value="Licores"/>
@@ -115,7 +115,7 @@
                 <StringItem index="9" value="Snacks"/>
                 <StringItem index="10" value="Limpieza"/>
                 <StringItem index="11" value="Cuidado Personal"/>
-                <StringItem index="12" value="Panader&#xed;a"/>
+                <StringItem index="12" value="Panaderia"/>
               </StringArray>
             </Property>
           </Properties>

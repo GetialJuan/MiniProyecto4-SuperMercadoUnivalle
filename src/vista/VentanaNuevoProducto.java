@@ -187,6 +187,10 @@ public class VentanaNuevoProducto extends javax.swing.JFrame {
     public String getTxtPresio(){
         return txtPrecio.getText();
     }
+    
+    public String getTxtCategoria(){
+        return (String)cbCategoria.getSelectedItem();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;

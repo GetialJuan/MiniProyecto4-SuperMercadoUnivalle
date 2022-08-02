@@ -84,7 +84,7 @@ public class VentanaVenta extends javax.swing.JFrame {
         btnFinalizar.setText("Finalizar");
 
         jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Despensa", "Lácteos", "Enlatados", "Cárnicos", "Frutas y verduras", "Delicatessen", "Licores", "Bebidas", "Snacks", "Limpieza", "Cuidado Personal", "Panadería" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Despensa", "Lacteos", "Enlatados", "Carnicos", "Frutas y verduras", "Delicatessen", "Licores", "Bebidas", "Snacks", "Limpieza", "Cuidado Personal", "Panaderia" }));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel3.setText("Producto");
@@ -214,12 +214,17 @@ public class VentanaVenta extends javax.swing.JFrame {
         btnEliminarItem.addActionListener(aL);
         btnFinalizar.addActionListener(aL);
         btnSeleccionar.addActionListener(aL);
+        jComboBox1.addActionListener(aL);
     }
     
     public void setCboxProductos(ArrayList<Producto> productos){
         limpiarComboBox();
+        String categoria = (String)jComboBox1.getSelectedItem();
         for(Producto p : productos){
-            cboxProductos.addItem(p.getNombre());
+            if(p.getCategoria().equalsIgnoreCase(categoria) || 
+                    categoria.equalsIgnoreCase("todos")){
+                cboxProductos.addItem(p.getNombre());
+            }
         }
     }
     

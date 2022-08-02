@@ -57,7 +57,7 @@ public class VentanaProductos extends javax.swing.JFrame {
         jLabel1.setText("Seleccionar Categoría");
 
         cbCategoria.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        cbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todo", "Despensa", "Lácteos", "Enlatados", "Cárnicos", "Frutas y verduras", "Delicatessen", "Licores", "Bebidas", "Snacks", "Limpieza", "Cuidado Personal", "Panadería" }));
+        cbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todo", "Despensa", "Lacteos", "Enlatados", "Carnicos", "Frutas y verduras", "Delicatessen", "Licores", "Bebidas", "Snacks", "Limpieza", "Cuidado Personal", "Panaderia" }));
 
         tablaProductos.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tablaProductos.setModel(modeloTabla);
@@ -166,12 +166,18 @@ public class VentanaProductos extends javax.swing.JFrame {
         btnEliminarProducto.addActionListener(aL);
         btnNuevoProducto.addActionListener(aL);
         jButton1.addActionListener(aL);
+        cbCategoria.addActionListener(aL);
     }
     
     public void setTablaProductos(ArrayList<Producto> productos){
+        String categoria = (String)cbCategoria.getSelectedItem();
         for(Producto p : productos){
-            Object[] producto = {p.getNombre(), p.getPrecio(), p.getCantidad()};
-            modeloTabla.addRow(producto);
+            if(p.getCategoria().equalsIgnoreCase(categoria) || 
+                    categoria.equalsIgnoreCase("todo")){
+                
+                Object[] producto = {p.getNombre(), p.getPrecio(), p.getCantidad()};
+                modeloTabla.addRow(producto);
+            }
         }
     }
     

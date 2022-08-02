@@ -424,6 +424,10 @@ public class SuperMercadoController {
                 ventanaVenta.dispose();
                 ventanaInicio.show();
             }
+            else if(e.getActionCommand().equalsIgnoreCase("comboBoxChanged")){
+                ventanaVenta.setCboxProductos(
+                superMercado.getProductos());
+            }
         }
         
     }
@@ -465,6 +469,11 @@ public class SuperMercadoController {
                 }
                 ventanaProductos.dispose();
             }
+            else if(e.getActionCommand().equalsIgnoreCase("comboBoxChanged")){
+                ventanaProductos.limpiarTablaProductos();
+                ventanaProductos.setTablaProductos(superMercado.
+                        getProductos());
+            }
         }
         
     }
@@ -479,7 +488,8 @@ public class SuperMercadoController {
                 //se añade el producto nuevo
                 superMercado.getProductos().add(new Producto(
                         ventanaNuevoProducto.getTxtNombre(), 0,
-                Integer.parseInt(ventanaNuevoProducto.getTxtPresio())));
+                Integer.parseInt(ventanaNuevoProducto.getTxtPresio()), 
+                        ventanaNuevoProducto.getTxtCategoria()));
                 
                 //se cierra y abre ventanas
                 ventanaNuevoProducto.dispose();
@@ -759,6 +769,7 @@ public class SuperMercadoController {
                         ArrayList<HashMap<String,String>> productos = new ArrayList<>();
                         int filas = modeloTbl.getRowCount();
                         for(int i = 0; i < filas; i++){
+                            @SuppressWarnings("unchecked")
                             HashMap <String,String> auxMap = new HashMap();
                             auxMap.put("nombre", (String)modeloTbl.getValueAt(i, 0));
                             auxMap.put("precio", (String)modeloTbl.getValueAt(i, 1));

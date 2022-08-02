@@ -30,10 +30,10 @@ public class SuperMercado {
         clienteSeleccionado = 0;
         
         //productos momentaneos para pruebas (Se debe borrar luego)
-        productos.add(new Producto("lechuga", 10, 1000));
-        productos.add(new Producto("leche", 5, 2000));
-        productos.add(new Producto("Doritos", 20, 1500));
-        productos.add(new Producto("Cebolla", 3, 500));
+        productos.add(new Producto("lechuga", 10, 1000, "lacteos"));
+        productos.add(new Producto("leche", 5, 2000, "carnes"));
+        productos.add(new Producto("Doritos", 20, 1500, "lacteos"));
+        productos.add(new Producto("Cebolla", 3, 500, "lacteos"));
         
         //clientes momentaneos para pruebas (Se debe borrar luego)
         clientes.add(new Cliente("juan", "123456"));

@@ -13,11 +13,13 @@ public class Producto {
     private String nombre;
     private int cantidad;
     private int precio;
+    private String categoria;
 
-    public Producto(String nombre, int cantidad, int precio) {
+    public Producto(String nombre, int cantidad, int precio, String categoria) {
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.precio = precio;
+        this.categoria = categoria;
     }
 
     public String getNombre() {
@@ -30,6 +32,10 @@ public class Producto {
 
     public int getPrecio() {
         return precio;
+    }
+    
+    public String getCategoria() {
+        return categoria;
     }
 
     public boolean reducirUnaUnidad(){
