@@ -240,5 +240,9 @@ public class SuperMercado {
             total += (precio * cantidad);
         }
         return total;
-    } 
+    }
+    
+    public void aNadirProducto(Producto producto){
+        productos.add(producto);
+    }
 }

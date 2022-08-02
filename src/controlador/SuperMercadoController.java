@@ -572,6 +572,7 @@ public class SuperMercadoController {
                         }    
                     }
                     ventanaCompra.mostrarProveedor(nombre, categoria, productos);
+                    ventanaCompra.setLblTotal("0");
                     ventanaProveedores.dispose();
                 }else{
                     ventanaProveedores.mensajesEmergentes("Comprar");
@@ -857,7 +858,22 @@ public class SuperMercadoController {
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("Finalizar")){
-                System.out.println("Btn Finalizar");
+                if(ventanaCompra.mensajeRelizarCompra() == 0){
+                    ArrayList<HashMap<String,String>> carrito;
+                    carrito = superMercado.getCarritoSuper();
+                    for(HashMap<String,String> map : carrito){
+                        String nombre = map.get("Nombre");
+                        int cantidad = Integer.parseInt(map.get("Cantidad"));
+                        int precio = Integer.parseInt(map.get("Precio"));
+                        Producto p = new Producto(nombre,cantidad,precio);
+                        superMercado.aNadirProducto(p);
+                    }
+                    superMercado.limpiarCarritoSuper();
+                    ventanaCompra.limpiarTablaProductos();
+                    ventanaCompra.mensajesEmergentes("Comprar");
+                    ventanaCompra.dispose();
+                    ventanaProveedores.show();
+                }
             }
         }      
     }
