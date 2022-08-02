@@ -13,8 +13,9 @@ import modelo.Cliente;
 import modelo.FacturaVenta;
 import modelo.Producto;
 import modelo.SuperMercado;
+import vista.VentanaClientes;
 import vista.VentanaInicio;
-import vista.VentanaNuevoCliente;
+import vista.VentanaDatosCliente;
 import vista.VentanaNuevoProducto;
 import vista.VentanaNuevoProveedor;
 import vista.VentanaProductos;
@@ -34,9 +35,12 @@ public class SuperMercadoController {
     
     //ventanas
     VentanaInicio ventanaInicio;
+    
     VentanaValidacionCliente ventanaValidacionCliente;
+    VentanaClientes ventanaClientes;
     VentanaVenta ventanaVenta;
-    VentanaNuevoCliente ventanaNuevoCliente;
+    VentanaDatosCliente ventanaNuevoCliente;
+    VentanaDatosCliente ventanaModificarCliente;
     
     VentanaProductos ventanaProductos;
     VentanaNuevoProducto ventanaNuevoProducto;
@@ -61,16 +65,18 @@ public class SuperMercadoController {
         @SuppressWarnings("deprecation")
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("clientes")){
+                ventanaInicio.dispose();
                 try {
                     ventanaValidacionCliente.show();
                 }
                 catch (NullPointerException npe){
                     ventanaValidacionCliente = new VentanaValidacionCliente();
                     ventanaValidacionCliente.
-                            agregarListenersBtns(new ManejadorDeEventosCliente());
+                            agregarListenersBtns(new ManejadorDeEventosValidacionCliente());
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("productos")){
+                ventanaInicio.dispose();
                 if(ventanaProductos != null){
                     ventanaProductos.show();
                 }
@@ -118,7 +124,7 @@ public class SuperMercadoController {
     }
     
     //ventanaValidacionCliente
-    class ManejadorDeEventosCliente implements ActionListener {
+    class ManejadorDeEventosValidacionCliente implements ActionListener {
 
         @Override
         @SuppressWarnings("deprecation")
@@ -151,16 +157,123 @@ public class SuperMercadoController {
                     ventanaNuevoCliente.show();
                 }
                 else{
-                    ventanaNuevoCliente = new VentanaNuevoCliente();
+                    ventanaNuevoCliente = new VentanaDatosCliente();
                     ventanaNuevoCliente.
                             agregarListenersBtns(new ManejadorDeEventosNuevoCliente());
                 }
             }
+            else if(e.getActionCommand().equalsIgnoreCase("ver clientes")){
+                ventanaValidacionCliente.dispose();
+                if(ventanaClientes != null){
+                    ventanaClientes.show();
+                }
+                else{
+                    ventanaClientes = new VentanaClientes();
+                    ventanaClientes.agregarListenersBtns(
+                            new ManejadorDeEventosClientes());
+                }
+                ventanaClientes.limpiarTablaClientes();
+                ventanaClientes.setTablaClientes(
+                superMercado.getClientes());
+            }
             else if(e.getActionCommand().equalsIgnoreCase("regresar")){
                 ventanaValidacionCliente.dispose();
+                ventanaInicio.show();
             }
         }
         
+        
+    }
+    
+    //ventanaClientes
+    class ManejadorDeEventosClientes implements ActionListener {
+
+        @Override
+        @SuppressWarnings("deprecation")
+        public void actionPerformed(ActionEvent e) {
+            if(e.getActionCommand().equalsIgnoreCase("modificar cliente")){
+                int cliente = ventanaClientes.getFilaTablaClientes();
+                if(cliente != -1){
+                    Cliente clienteAModificar = superMercado.getClientes().
+                            get(cliente);
+                    if(ventanaModificarCliente != null){
+                        ventanaModificarCliente.show();
+                    }
+                    else{
+                        ventanaModificarCliente = new VentanaDatosCliente();
+                        ventanaModificarCliente.agregarListenersBtns(
+                                new ManejadorDeEventosModificarCliente());
+                    }
+                    ventanaModificarCliente.setDatosCliente(
+                            clienteAModificar.getNombre(),
+                            clienteAModificar.getiD());
+                    ventanaClientes.dispose();
+                    
+                }
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("eliminar cliente")){
+                int cliente = ventanaClientes.getFilaTablaClientes();
+                if(cliente != -1){
+                    superMercado.getClientes().remove(cliente);
+                    ventanaClientes.limpiarTablaClientes();
+                    ventanaClientes.setTablaClientes(
+                    superMercado.getClientes());
+                }
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("iniciar venta")){
+                int cliente = ventanaClientes.getFilaTablaClientes();
+                if(cliente != -1){
+                    superMercado.setClienteSeleccionado(cliente);
+                    ventanaClientes.dispose();
+                    //se abre la ventanaVenta
+                    if(ventanaVenta != null){
+                        ventanaVenta.show();
+                    }
+                    else{
+                        ventanaVenta = new VentanaVenta();
+                        ventanaVenta.
+                                agregarListenersBtns(new ManejadorDeEventosVenta());
+                    }
+                    //se establcen los producto en la ventanVenta
+                    ventanaVenta.setCboxProductos(superMercado.
+                            getProductos());
+                    
+                }
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("regresar")){
+                ventanaClientes.dispose();
+                ventanaValidacionCliente.show();
+            }
+        }
+        
+    }
+    
+    //ventanaModicarCliente
+    class ManejadorDeEventosModificarCliente implements ActionListener {
+
+        @Override
+        @SuppressWarnings("deprecation")
+        public void actionPerformed(ActionEvent e) {
+            if(e.getActionCommand().equalsIgnoreCase("aceptar")){
+                int clienteAModificar = ventanaClientes.getFilaTablaClientes();
+                
+                //se modifca el cliente
+                superMercado.getClientes().get(clienteAModificar).setNombre(
+                ventanaModificarCliente.getTxtNombre());
+                superMercado.getClientes().get(clienteAModificar).setiD(
+                ventanaModificarCliente.getTxtCedula());
+                
+                ventanaModificarCliente.dispose();
+                ventanaClientes.limpiarTablaClientes();
+                ventanaClientes.setTablaClientes(
+                superMercado.getClientes());
+                ventanaClientes.show();
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("cancelar")){
+                ventanaModificarCliente.dispose();
+                ventanaClientes.show();
+            }
+        }
         
     }
     
@@ -170,7 +283,7 @@ public class SuperMercadoController {
         @Override
         @SuppressWarnings("deprecation")
         public void actionPerformed(ActionEvent e) {
-            if(e.getActionCommand().equalsIgnoreCase("agregar")){
+            if(e.getActionCommand().equalsIgnoreCase("aceptar")){
                 
                 //se agrega al cliente
                 superMercado.
@@ -180,7 +293,7 @@ public class SuperMercadoController {
                 //se guarda una copia del estado actual de los datos
                 superMercado.setCopias();
                 
-                superMercado.setClienteSeleccionadoNuevo();
+                superMercado.setClienteSeleccionado(0);
                 
                 //se abre la ventanaVenta
                 if(ventanaVenta != null){

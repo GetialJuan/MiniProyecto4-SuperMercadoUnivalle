@@ -23,6 +23,14 @@ public class Cliente {
         carrito = new ArrayList<>();
     }
 
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setiD(String iD) {
+        this.iD = iD;
+    }
+
     public String getNombre() {
         return nombre;
     }

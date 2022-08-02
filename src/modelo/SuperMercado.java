@@ -88,8 +88,8 @@ public class SuperMercado {
         }
     }
     
-    public void setClienteSeleccionadoNuevo(){
-        clienteSeleccionado = 0;
+    public void setClienteSeleccionado(int n){
+        clienteSeleccionado = n;
     }
     
     public boolean buscarCliente(String iD){

@@ -10,12 +10,12 @@ import java.awt.event.ActionListener;
  *
  * @author Santiago
  */
-public class VentanaNuevoCliente extends javax.swing.JFrame {
+public class VentanaDatosCliente extends javax.swing.JFrame {
 
     /**
      * Creates new form VentanaNuevoCliente
      */
-    public VentanaNuevoCliente() {
+    public VentanaDatosCliente() {
         initComponents();
         setVisible(true);
         setLocationRelativeTo(null);
@@ -49,7 +49,7 @@ public class VentanaNuevoCliente extends javax.swing.JFrame {
         btnCancelar.setText("Cancelar");
 
         btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnAgregar.setText("Agregar");
+        btnAgregar.setText("Aceptar");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -138,20 +138,21 @@ public class VentanaNuevoCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaDatosCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaDatosCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaDatosCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaDatosCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaNuevoCliente().setVisible(true);
+                new VentanaDatosCliente().setVisible(true);
             }
         });
     }
@@ -167,6 +168,11 @@ public class VentanaNuevoCliente extends javax.swing.JFrame {
     
     public String getTxtNombre(){
         return txtNombre.getText();
+    }
+    
+    public void setDatosCliente(String nombre, String iD){
+        txtCedula.setText(iD);
+        txtNombre.setText(nombre);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
