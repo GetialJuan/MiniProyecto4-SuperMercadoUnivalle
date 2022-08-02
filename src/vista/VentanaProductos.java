@@ -57,7 +57,7 @@ public class VentanaProductos extends javax.swing.JFrame {
         jLabel1.setText("Seleccionar Categoría");
 
         cbCategoria.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        cbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Despensa", "Lácteos", "Enlatados", "Cárnicos", "Frutas y verduras", "Delicatessen", "Licores", "Bebidas", "Snacks", "Limpieza", "Cuidado Personal", "Panadería" }));
+        cbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todo", "Despensa", "Lácteos", "Enlatados", "Cárnicos", "Frutas y verduras", "Delicatessen", "Licores", "Bebidas", "Snacks", "Limpieza", "Cuidado Personal", "Panadería" }));
 
         tablaProductos.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tablaProductos.setModel(modeloTabla);

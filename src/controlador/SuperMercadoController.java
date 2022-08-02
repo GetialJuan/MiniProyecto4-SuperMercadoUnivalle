@@ -8,21 +8,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javax.swing.JOptionPane;
-import modelo.Cliente;
-import modelo.FacturaVenta;
-import modelo.Producto;
+import java.util.Map;
 import modelo.SuperMercado;
 import vista.VentanaClientes;
-import vista.VentanaInicio;
+import vista.VentanaCompra;
 import vista.VentanaDatosCliente;
+import vista.VentanaDatosProveedor;
+import vista.VentanaInicio;
 import vista.VentanaNuevoProducto;
-import vista.VentanaNuevoProveedor;
 import vista.VentanaProductos;
 import vista.VentanaProveedores;
 import vista.VentanaRegistro;
 import vista.VentanaValidacionCliente;
 import vista.VentanaVenta;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.Cliente;
+import modelo.FacturaVenta;
+import modelo.Producto;
+import modelo.Proveedor;
 
 /**
  *
@@ -46,9 +50,11 @@ public class SuperMercadoController {
     VentanaNuevoProducto ventanaNuevoProducto;
     
     VentanaProveedores ventanaProveedores;
-    VentanaNuevoProveedor ventanaNuevoProveedor;
     
     VentanaRegistro ventanaRegistroVentas;
+    
+    VentanaDatosProveedor ventanaDProveedor;
+    VentanaCompra ventanaCompra;
 
     public SuperMercadoController() {
         
@@ -58,7 +64,7 @@ public class SuperMercadoController {
         ventanaInicio.agregarListenersBtns(new ManejadorDeEventosMenu());
     }
     
-    //ventanaIncio
+    //ventanaInicio
     class ManejadorDeEventosMenu implements ActionListener {
 
         @Override
@@ -89,16 +95,16 @@ public class SuperMercadoController {
                             getProductos());
             }
             else if(e.getActionCommand().equalsIgnoreCase("proveedores")){
-                try {
+                if(ventanaProveedores != null) {
                     ventanaProveedores.show();
-                    ventanaInicio.dispose();
                 }
-                catch (NullPointerException npe){
-                    ventanaInicio.dispose();
+                else{
                     ventanaProveedores = new VentanaProveedores();
                     ventanaProveedores.
                             agregarListenersBtns(new ManejadorDeEventosProveedores());
                 }
+                ventanaProveedores.setTablaProveedores(superMercado.
+                        getProveedores());
             }
             else if(e.getActionCommand().equalsIgnoreCase("ventas")){
                 if(ventanaRegistroVentas != null){
@@ -119,6 +125,7 @@ public class SuperMercadoController {
             else if(e.getActionCommand().equalsIgnoreCase("compras")){
                 System.out.println("btn compras");
             }
+            ventanaInicio.dispose();
         }
         
     }
@@ -462,7 +469,7 @@ public class SuperMercadoController {
         
     }
     
-    //////////////////////////////VentanaNuevoProducto///////////////
+    //////////////////////////////VentanaDProducto///////////////
     class ManejadorDeEventosNuevoProducto implements ActionListener {
 
         @Override
@@ -523,28 +530,118 @@ public class SuperMercadoController {
     }
     
     //ventanaProveedor
+    ///////////////////////// Ventana Proveedor /////////////////////////////
     class ManejadorDeEventosProveedores implements ActionListener{
 
         @Override
         @SuppressWarnings("deprecation")
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("Comprar Producto")){
-                System.out.println("Btn ComprarProducto");
+                int fila = ventanaProveedores.getFilaTabla();
+                if(fila != -1){
+                    if(ventanaCompra != null){
+                        ventanaCompra.show();
+                    }
+                    else{
+                        ventanaCompra = new VentanaCompra();
+                        ventanaCompra.
+                                agregarListenersBtns(
+                                        new ManejadorDeEventosCompra());
+                    }
+                    Proveedor p = superMercado.getProveedor(fila);
+                    String nombre = p.getNombre();
+                    String categoria = p.getCategoria();
+                    ArrayList<String> productos = new ArrayList<>();
+                    for(HashMap<String,String> map : p.getProductos()){
+                        for(Map.Entry<String, String> entry : map.entrySet()){
+                            String nombreP = "";
+                            if(entry.getKey().equalsIgnoreCase("Nombre")){
+                                nombreP = entry.getValue();
+                                productos.add(nombreP);
+                            }
+                        }    
+                    }
+                    ventanaCompra.mostrarProveedor(nombre, categoria, productos);
+                    ventanaProveedores.dispose();
+                }else{
+                    ventanaProveedores.mensajesEmergentes("Comprar");
+                }
             }
             else if(e.getActionCommand().equalsIgnoreCase("Nuevo Proveedor")){
                 try {
-                    ventanaNuevoProveedor.show();
+                    ventanaDProveedor
+                            .setTitulo("Nuevo Proveedor");
+                    ventanaDProveedor
+                            .show();
                     ventanaProveedores.dispose();
                 }
                 catch (NullPointerException npe){
                     ventanaProveedores.dispose();
-                    ventanaNuevoProveedor = new VentanaNuevoProveedor();
-                    ventanaNuevoProveedor.
+                    ventanaDProveedor
+                            = new VentanaDatosProveedor();
+                    ventanaDProveedor
+                            .
                             agregarListenersBtns(new ManejadorDeEventosNuevoProveedor());
                 }
             }
+            else if(e.getActionCommand().equalsIgnoreCase("Modificar Proveedor")){
+                int fila = ventanaProveedores.getFilaTabla();
+                if(fila != -1){
+                    Proveedor p;
+                    ventanaProveedores.dispose();
+                     if(ventanaDProveedor
+                             != null){
+                        ventanaDProveedor
+                                .show();
+                    }
+                    else{
+                        ventanaDProveedor
+                                = new VentanaDatosProveedor();
+                        ventanaDProveedor
+                                .
+                            agregarListenersBtns(new ManejadorDeEventosNuevoProveedor());
+                    }
+                    p = superMercado.getProveedor(fila);
+                    ventanaDProveedor
+                            .limpiarCampos();
+                    ventanaDProveedor
+                            .setTxtNombre(p.getNombre());
+                    ventanaDProveedor
+                            .setTxtTelefono(p.getTelefono());
+                    ventanaDProveedor
+                            .setCbCategoria(p.getCategoria());
+                    for(HashMap<String,String> map : p.getProductos()){
+                        String nombre = "";
+                        String precio = "";
+                        for(Map.Entry<String, String> entry : map.entrySet()){
+                            if(entry.getKey().equalsIgnoreCase("Nombre")){
+                                nombre = entry.getValue();
+                            }
+                            else if(entry.getKey().equalsIgnoreCase("Precio")){
+                                precio = entry.getValue();
+                            }                                              
+                        }
+                        ventanaDProveedor
+                                .aNadirTablaProductos(nombre, precio);
+                    }
+                    ventanaDProveedor
+                            .setTitulo("Modificar Proveedor");
+                    ventanaDProveedor
+                            .show();
+                }else{
+                    ventanaProveedores.mensajesEmergentes("SelecModificar");
+                }
+            }
             else if(e.getActionCommand().equalsIgnoreCase("Eliminar Proveedor")){
-                System.out.println("Btn EliminarProveedor");
+                int fila = ventanaProveedores.getFilaTabla();
+                if(fila != -1){
+                    if(ventanaProveedores.mensajeEliminarProveedor() == 0){
+                        superMercado.eliminarProveedor(fila);
+                        ventanaProveedores.setTablaProveedores(superMercado.getProveedores());
+                    }
+                }else{
+                    ventanaProveedores.mensajesEmergentes("SelecEliminar");
+                }
             }
             else if(e.getActionCommand().equalsIgnoreCase("Regresar")){
                 try {
@@ -562,19 +659,185 @@ public class SuperMercadoController {
         
     }
     
+    //////////////////////// ventanaDProveedor /////////////////////////
     class ManejadorDeEventosNuevoProveedor implements ActionListener{
 
         @Override
         @SuppressWarnings("deprecation")
         public void actionPerformed(ActionEvent e) {
-            if(e.getActionCommand().equalsIgnoreCase("Agregar")){
-                System.out.println("Btn Agregar");
+            if(e.getActionCommand().equalsIgnoreCase("Adicionar")){
+                String nombre = ventanaDProveedor
+                        .getTxtNombreProducto();
+                String precio = ventanaDProveedor
+                        .getTxtPrecio();
+                if(nombre.equals("")){
+                    ventanaDProveedor
+                            .mensajesEmergentes("NombreP");
+                }else if(precio.equals("")){
+                    ventanaDProveedor
+                            .mensajesEmergentes("Precio");
+                }else{
+                    try{
+                        Integer.parseInt(precio);
+                        DefaultTableModel modeloTbl = ventanaDProveedor
+                                .getModeloTabla();
+                        boolean repetido = false;
+                        boolean n = false;
+                        boolean p = false;
+                        int filas = modeloTbl.getRowCount();
+                        for(int i = 0; i < filas; i++){
+                            if(nombre.equals(modeloTbl.getValueAt(i, 0))){
+                                n = true;
+                            }
+                            if(precio.equals(modeloTbl.getValueAt(i, 1))){
+                                p = true;
+                            }
+                            if(n && p){
+                                repetido = true;
+                            }else{
+                                n = false;
+                                p = false;
+                            }
+                        }
+                        if(repetido){
+                            ventanaDProveedor
+                                    .mensajesEmergentes("Repetido");
+                        }else{
+                            ventanaDProveedor
+                                    .aNadirTablaProductos(nombre, precio);
+                            ventanaDProveedor
+                                    .limpiarCamposProducto();
+                        }
+                    }catch(NumberFormatException ne){
+                        ventanaDProveedor
+                                .mensajesEmergentes("NumPrecio");
+                    }
+                }
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("Eliminar")){
+                if(ventanaDProveedor
+                        .getFilaTabla() == -1){
+                    ventanaDProveedor
+                            .mensajesEmergentes("Fila"); 
+                }
+                else{
+                    int fila = ventanaDProveedor
+                            .getFilaTabla();
+                    ventanaDProveedor
+                            .eliminarProducto(fila);
+                }
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("Aceptar")){
+                int fila = ventanaProveedores.getFilaTabla();
+                String nombre = ventanaDProveedor
+                        .getTxtNombre();
+                String telefono = ventanaDProveedor
+                        .getTxtTelefono();
+                String categoria = ventanaDProveedor
+                        .getCbCategoria();
+                if(nombre.equals("")){
+                    ventanaDProveedor
+                            .mensajesEmergentes("Nombre"); 
+                }
+                else if(telefono.equals("")){
+                    ventanaDProveedor
+                            .mensajesEmergentes("Telefono"); 
+                }
+                else if(categoria.equals("")){
+                    ventanaDProveedor
+                            .mensajesEmergentes("Categoria"); 
+                }
+                else if(ventanaDProveedor
+                        .getModeloTabla().getRowCount() == 0){
+                    ventanaDProveedor
+                            .mensajesEmergentes("SinProducto"); 
+                }else{
+                    try{
+                        Long.parseLong(telefono);
+                        DefaultTableModel modeloTbl = ventanaDProveedor
+                                .getModeloTabla();
+                        ArrayList<HashMap<String,String>> productos = new ArrayList<>();
+                        int filas = modeloTbl.getRowCount();
+                        for(int i = 0; i < filas; i++){
+                            HashMap <String,String> auxMap = new HashMap();
+                            auxMap.put("nombre", (String)modeloTbl.getValueAt(i, 0));
+                            auxMap.put("precio", (String)modeloTbl.getValueAt(i, 1));
+                            auxMap.put("categoria", categoria);
+                            productos.add(auxMap);
+                        }
+                        Proveedor proveedor = new Proveedor(nombre,telefono,categoria,productos);
+                        if(ventanaDProveedor
+                                .getLblTitulo().equalsIgnoreCase("Nuevo Proveedor")){
+                            superMercado.agregarProveedor(proveedor);
+                            ventanaDProveedor
+                                    .mensajesEmergentes("Nuevo"); 
+                        }
+                        else if(ventanaDProveedor
+                                .getLblTitulo().equalsIgnoreCase("Modificar Proveedor")){
+                            superMercado.modificarProveedor(fila,proveedor);
+                            ventanaDProveedor
+                                    .mensajesEmergentes("Modificado"); 
+                        }                      
+                        ventanaDProveedor
+                                .dispose();
+                        ventanaProveedores.setTablaProveedores(superMercado.
+                            getProveedores());
+                        ventanaDProveedor
+                                .limpiarCampos();
+                        ventanaProveedores.show();
+                    }catch(NumberFormatException ne){
+                        ventanaDProveedor
+                                .mensajesEmergentes("NumTelefono"); 
+                    }
+                }
             }
             else if(e.getActionCommand().equalsIgnoreCase("Cancelar")){
-                ventanaNuevoProveedor.dispose();
+                ventanaDProveedor
+                        .dispose();
+                ventanaDProveedor
+                        .limpiarCampos();
+                ventanaDProveedor
+                        .limpiarTablaProductos();
+                ventanaProveedores.setTablaProveedores(superMercado.
+                        getProveedores());
                 ventanaProveedores.show();
             }
-        }
-        
+            
+        }   
+    }
+    
+    class ManejadorDeEventosCompra implements ActionListener{
+        @Override
+        @SuppressWarnings("deprecation")
+        public void actionPerformed(ActionEvent e) {
+            if(e.getActionCommand().equalsIgnoreCase("Agregar a Compra")){
+                int numP = ventanaProveedores.getFilaTabla();
+                String producto = ventanaCompra.getCboxProductos();
+                Proveedor p = superMercado.getProveedor(numP);
+                for(HashMap<String,String> map : p.getProductos()){
+                    if(map.get("Nombre").equals(producto)){
+                        HashMap<String,String> mapProducto;
+                        mapProducto = superMercado.generarMap(map.get("Nombre"), map.get("Precio"));
+                        superMercado.aNadirProductoCarrito(mapProducto);
+                    }
+                }
+                ventanaCompra.setTablaCarrito(superMercado.getCarritoSuper());
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("Cancelar Compra")){
+                if(ventanaCompra.mensajeCancelarCompra() == 0){
+                    ventanaCompra.dispose();
+                    superMercado.limpiarCarritoSuper();
+                    ventanaCompra.limpiarTablaProductos();
+                    ventanaProveedores.show();
+                }
+                
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("Eliminar item seleccionado")){
+                System.out.println("Btn Eliminar");
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("Finalizar")){
+                System.out.println("Btn Finalizar");
+            }
+        }      
     }
 }
