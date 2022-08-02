@@ -312,7 +312,7 @@ public class VentanaCompra extends javax.swing.JFrame {
         String[] opciones = {"Si","No"};
         int i = JOptionPane.showOptionDialog(rootPane, 
                         "Esta seguro que desea cancelar la compra?",
-                        "Eliminar Proveedor",
+                        "Cancelar Compra",
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.WARNING_MESSAGE,
                         null,
@@ -324,7 +324,19 @@ public class VentanaCompra extends javax.swing.JFrame {
         String[] opciones = {"Si","No"};
         int i = JOptionPane.showOptionDialog(rootPane, 
                         "Esta seguro que desea eliminar el producto marcado?",
-                        "Eliminar Proveedor",
+                        "Eliminar Producto",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.WARNING_MESSAGE,
+                        null,
+                        opciones, 0);
+        return i;
+    }
+    
+    public int mensajeRelizarCompra(){
+        String[] opciones = {"Si","No"};
+        int i = JOptionPane.showOptionDialog(rootPane, 
+                        "Esta seguro que desea realizar la compra?",
+                        "Comprar",
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.WARNING_MESSAGE,
                         null,
@@ -335,6 +347,9 @@ public class VentanaCompra extends javax.swing.JFrame {
     public void mensajesEmergentes(String identificador){
         if(identificador.equalsIgnoreCase("Eliminar")){
             JOptionPane.showMessageDialog(rootPane, "Seleccione un producto para eliminar");
+        }
+        if(identificador.equalsIgnoreCase("Comprar")){
+            JOptionPane.showMessageDialog(rootPane, "Se ha realizado la compra");
         }
     }
     
