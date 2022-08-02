@@ -271,6 +271,10 @@ public class VentanaCompra extends javax.swing.JFrame {
         return (String)cboxProductos.getSelectedItem();
     }
     
+    public String getTxtCategoria(){
+        return txtCategoria.getText();
+    }
+    
     public void setLblTotal(String total){
         lblTotal.setText(total);
     }

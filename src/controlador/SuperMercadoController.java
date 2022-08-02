@@ -861,11 +861,12 @@ public class SuperMercadoController {
                 if(ventanaCompra.mensajeRelizarCompra() == 0){
                     ArrayList<HashMap<String,String>> carrito;
                     carrito = superMercado.getCarritoSuper();
+                    String categoria = ventanaCompra.getTxtCategoria();
                     for(HashMap<String,String> map : carrito){
                         String nombre = map.get("Nombre");
                         int cantidad = Integer.parseInt(map.get("Cantidad"));
                         int precio = Integer.parseInt(map.get("Precio"));
-                        Producto p = new Producto(nombre,cantidad,precio, "MAuroLaPerra");
+                        Producto p = new Producto(nombre,cantidad,precio,categoria);
                         superMercado.aNadirProducto(p);
                     }
                     superMercado.limpiarCarritoSuper();
