@@ -865,7 +865,7 @@ public class SuperMercadoController {
                         String nombre = map.get("Nombre");
                         int cantidad = Integer.parseInt(map.get("Cantidad"));
                         int precio = Integer.parseInt(map.get("Precio"));
-                        Producto p = new Producto(nombre,cantidad,precio);
+                        Producto p = new Producto(nombre,cantidad,precio, "MAuroLaPerra");
                         superMercado.aNadirProducto(p);
                     }
                     superMercado.limpiarCarritoSuper();
