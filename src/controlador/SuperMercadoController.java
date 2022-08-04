@@ -879,4 +879,14 @@ public class SuperMercadoController {
             }
         }      
     }
+    
+    public void attachShutDownHook(){
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+              System.out.println("Esto lo ejecutamos cuando acabe el programa");
+              superMercado.guardarDatos();
+            }
+        } );
+    }
 }

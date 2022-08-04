@@ -4,6 +4,7 @@
  */
 package modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,7 +12,7 @@ import java.util.HashMap;
  *
  * @author Juan
  */
-public class Proveedor {
+public class Proveedor implements Serializable{
     private String nombre;
     private String telefono;
     private String categoria;
