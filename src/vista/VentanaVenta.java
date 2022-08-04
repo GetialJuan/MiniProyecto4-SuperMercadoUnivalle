@@ -236,6 +236,15 @@ public class VentanaVenta extends javax.swing.JFrame {
         return cboxProductos.getSelectedIndex();
     }
     
+    public String getProductoElegido(){
+        if(cboxProductos.getSelectedIndex() == -1){
+            return "";
+        }
+        else{
+            return (String)cboxProductos.getSelectedItem();
+        }
+    }
+    
     public void setTablaCarrito(ArrayList<HashMap<String,String>> carrito){
         for(HashMap<String,String> p : carrito){
             int cantidad = Integer.parseInt(p.get("cantidad"));
