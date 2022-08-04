@@ -59,7 +59,6 @@ public class SuperMercadoController {
     public SuperMercadoController() {
         
         superMercado = new SuperMercado();
-        
         ventanaInicio = new VentanaInicio();
         ventanaInicio.agregarListenersBtns(new ManejadorDeEventosMenu());
     }
@@ -828,9 +827,10 @@ public class SuperMercadoController {
                 String producto = ventanaCompra.getCboxProductos();
                 Proveedor p = superMercado.getProveedor(numP);
                 for(HashMap<String,String> map : p.getProductos()){
-                    if(map.get("Nombre").equals(producto)){
+                    System.out.println(map);
+                    if(map.get("nombre").equals(producto)){
                         HashMap<String,String> mapProducto;
-                        mapProducto = superMercado.generarMap(map.get("Nombre"), map.get("Precio"));
+                        mapProducto = superMercado.generarMap(map.get("nombre"), map.get("precio"));
                         superMercado.aNadirProductoCarrito(mapProducto);
                     }
                 }
