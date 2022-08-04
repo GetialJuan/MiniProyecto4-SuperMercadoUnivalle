@@ -297,9 +297,6 @@ public class SuperMercadoController {
                         agregarCliente(ventanaNuevoCliente.getTxtNombre(), 
                                 ventanaNuevoCliente.getTxtCedula());
                 
-                //se guarda una copia del estado actual de los datos
-                superMercado.setCopias();
-                
                 superMercado.setClienteSeleccionado(0);
                 
                 //se abre la ventanaVenta
@@ -330,12 +327,17 @@ public class SuperMercadoController {
         @SuppressWarnings("deprecation")
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("agregar a venta")){
-                int indiceProducto = ventanaVenta.getProductoSeleccionado();
-                if(indiceProducto == -1){
+                
+                //se obtiene el producto seleccionado
+                String nombreProducto = ventanaVenta.getProductoElegido();
+                
+                if(nombreProducto.equalsIgnoreCase("")){
                     JOptionPane.showMessageDialog(null, "Seleccione un producto");
                 }
                 else
                 {
+                    int indiceProducto = superMercado.
+                            getIndiceProducto(nombreProducto);
                     if(superMercado.getProductos().get(indiceProducto).
                             reducirUnaUnidad()){
                         //se agrega el producto al carrito del cliente
@@ -363,7 +365,6 @@ public class SuperMercadoController {
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("cancelar venta")){
-                superMercado.restablecerDatos();
                 ventanaVenta.dispose();
                 superMercado.cancelarVenta(ventanaVenta.getProductosInfo());
                 ventanaVenta.setTotal(0);

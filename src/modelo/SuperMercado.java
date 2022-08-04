@@ -108,15 +108,17 @@ public class SuperMercado {
     public ArrayList<FacturaVenta> getVentas() {
         return ventas;
     }
-    
-    
-    public void setCopias(){
-        ///falta
+   
+    public int getIndiceProducto(String cualProducto){
+        int indice = 0;
+        for(Producto p : productos){
+            if(p.getNombre().equalsIgnoreCase(cualProducto)){
+                break;
+            }
+            indice++;
+        }
+        return indice;
     }
-    
-    public void restablecerDatos() {
-        //falta
-    }    
         
     public void cancelarVenta(ArrayList< ArrayList<String>> productos){
         for(ArrayList<String> p : productos){
