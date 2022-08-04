@@ -4,9 +4,17 @@
  */
 package modelo;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,6 +29,8 @@ public class SuperMercado {
     private ArrayList<FacturaVenta> ventas;
     private int clienteSeleccionado;
     
+    
+    
     public SuperMercado(){
         clientes = new ArrayList<>();
         proveedores = new ArrayList<>();
@@ -28,26 +38,29 @@ public class SuperMercado {
         carritoSuper = new ArrayList<>();
         ventas = new ArrayList<>();
         clienteSeleccionado = 0;
-        
+
+        /*
         //productos momentaneos para pruebas (Se debe borrar luego)
         productos.add(new Producto("lechuga", 10, 1000, "lacteos"));
         productos.add(new Producto("leche", 5, 2000, "carnes"));
         productos.add(new Producto("Doritos", 20, 1500, "lacteos"));
         productos.add(new Producto("Cebolla", 3, 500, "lacteos"));
-        
+        */
         //clientes momentaneos para pruebas (Se debe borrar luego)
+        /*
         clientes.add(new Cliente("juan", "123456"));
         clientes.add(new Cliente("nauj", "654321"));
         clientes.add(new Cliente("anju", "111222"));
-        
+        */
         //proveedores momentaneos para pruebas (Se debe borrar luego)
+        /*
         ArrayList <HashMap<String,String>> productos = new ArrayList<>();
-        HashMap<String,String> auxMap = new HashMap(); 
+        HashMap<String,String> auxMap = new HashMap<>(); 
         auxMap.put("Nombre","Pollo");
         auxMap.put("Precio", "16000");
         auxMap.put("Categoria", "Cárnicos");
         productos.add(auxMap);
-        auxMap = new HashMap();
+        auxMap = new HashMap<>();
         auxMap.put("Nombre","Res");
         auxMap.put("Precio", "25000");
         auxMap.put("Categoria", "Cárnicos");
@@ -55,12 +68,12 @@ public class SuperMercado {
         proveedores.add(new Proveedor("Mauro", "123456", "Cárnicos",productos));
         
         productos = new ArrayList<>();
-        auxMap = new HashMap();
+        auxMap = new HashMap<>();
         auxMap.put("Nombre","Tomates");
         auxMap.put("Precio", "3000");
         auxMap.put("Categoria", "Frutas y Verduras");
         productos.add(auxMap);
-        auxMap = new HashMap();
+        auxMap = new HashMap<>();
         auxMap.put("Nombre","Papas");
         auxMap.put("Precio", "2000");
         auxMap.put("Categoria", "Frutas y Verduras");
@@ -68,17 +81,19 @@ public class SuperMercado {
         proveedores.add(new Proveedor("Juanito", "78910", "Frutas y verduras", productos));
         
         productos = new ArrayList<>();
-        auxMap = new HashMap();
+        auxMap = new HashMap<>();
         auxMap.put("Nombre","Ron");
         auxMap.put("Precio", "150000");
         auxMap.put("Categoria", "Licores");
         productos.add(auxMap);
-        auxMap = new HashMap();
+        auxMap = new HashMap<>();
         auxMap.put("Nombre","Vodka");
         auxMap.put("Precio", "60000");
         auxMap.put("Categoria", "Licores");
         productos.add(auxMap);
         proveedores.add(new Proveedor("Carlos", "11121314", "Licores", productos));
+        */
+        restaurarDatos();
     }
     
     public void agregarCliente(String nombre, String iD){
@@ -199,7 +214,7 @@ public class SuperMercado {
     }
     
     public HashMap<String,String> generarMap(String nombre, String precio){
-        HashMap<String,String> map = new HashMap();
+        HashMap<String,String> map = new HashMap<>();
         map.put("Nombre", nombre);
         map.put("Precio", precio);
         map.put("Cantidad", "1");
@@ -246,5 +261,98 @@ public class SuperMercado {
     
     public void aNadirProducto(Producto producto){
         productos.add(producto);
+    }
+    
+    private void guardar(String rutaArchivo, String objetoAGuardar){
+        File archivo = new File(rutaArchivo);
+        archivo.delete();
+        try {
+            archivo.createNewFile();
+        } catch (IOException ex) {
+            Logger.getLogger(SuperMercado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try (FileOutputStream fos = new FileOutputStream(archivo);
+            ObjectOutputStream oos = new ObjectOutputStream(fos); ){
+            
+            if(objetoAGuardar.equals("productos")){
+                for(Producto p : productos){
+                    oos.writeObject(p);
+                }
+            }
+            else if(objetoAGuardar.equals("clientes")){
+                for(Cliente c : clientes){
+                    oos.writeObject(c);
+                }
+            }
+            if(objetoAGuardar.equals("proveedores")){
+                for(Proveedor pr : proveedores){
+                    oos.writeObject(pr);
+                }
+            }
+            
+            fos.close();
+            oos.close();
+        } catch (FileNotFoundException ex ) {
+            System.out.println("no se encontro el archivo 1");
+        } catch (IOException ex){
+            System.out.println("no se encontro el archivo");
+        }
+    }
+    
+    private void restaurar(String rutaArchivo, String objetoARestaurar){
+        File archivo = new File(rutaArchivo);
+        try (FileInputStream fis = new FileInputStream(archivo);
+             ObjectInputStream ois = new ObjectInputStream(fis);) {
+
+            while(fis.available() > 0){
+                if(objetoARestaurar.equals("productos")){
+                    Producto p = (Producto)ois.readObject();
+                    this.productos.add(p);
+                }
+                else if(objetoARestaurar.equals("clientes")){
+                    Cliente c = (Cliente)ois.readObject();
+                    this.clientes.add(c);
+                }
+                if(objetoARestaurar.equals("proveedores")){
+                    Proveedor pr = (Proveedor)ois.readObject();
+                    this.proveedores.add(pr);
+                }
+            }
+            
+            fis.close();
+            if(ois != null){
+                ois.close();
+            }
+            
+        } catch (FileNotFoundException | ClassNotFoundException ex) {
+            System.out.println("No se encontro el archivo");
+        } catch (IOException ex){}
+    }
+    
+    private void restaurarDatos(){
+        String rutaAbsoluta = new File("").getAbsolutePath();
+        
+        restaurar(rutaAbsoluta.concat("\\src\\ArchivosPersistentes\\"
+                + "Productos.dat"), "productos");
+        
+        restaurar(rutaAbsoluta.concat("\\src\\ArchivosPersistentes\\"
+                + "Clientes.dat"), "clientes");
+        
+        restaurar(rutaAbsoluta.concat("\\src\\ArchivosPersistentes\\"
+                + "Proveedores.dat"), "proveedores");
+    }
+    
+    public void guardarDatos(){
+        String rutaAbsoluta = new File("").getAbsolutePath();
+        
+        guardar(rutaAbsoluta.concat("\\src\\ArchivosPersistentes\\"
+                + "Productos.dat"), "productos");
+        
+        guardar(rutaAbsoluta.concat("\\src\\ArchivosPersistentes\\"
+                + "Clientes.dat"), "clientes");
+        
+        guardar(rutaAbsoluta.concat("\\src\\ArchivosPersistentes\\"
+                + "Proveedores.dat"), "proveedores");
     }
 }
