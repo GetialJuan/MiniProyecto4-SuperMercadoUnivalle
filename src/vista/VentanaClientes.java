@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package vista;
 
 import java.awt.event.ActionListener;
@@ -11,8 +8,12 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
 
 /**
- *
- * @author Santiago
+ * MiniProyecto 4 - SuperMercado Univalle
+ * @author Juan Sebastian Getial Getial <202124644>
+ * @author Mauricio Muñoz Gutierrez <202123687>
+ * @author Santiago Torres Carvajal <>
+ * @profesor Luis Yovany Romo Portilla
+ * Clase VentanaClientes
  */
 public class VentanaClientes extends javax.swing.JFrame {
 

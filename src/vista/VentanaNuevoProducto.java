@@ -7,8 +7,12 @@ package vista;
 import java.awt.event.ActionListener;
 
 /**
- *
- * @author Santiago
+ * MiniProyecto 4 - SuperMercado Univalle
+ * @author Juan Sebastian Getial Getial <202124644>
+ * @author Mauricio Muñoz Gutierrez <202123687>
+ * @author Santiago Torres Carvajal <>
+ * @profesor Luis Yovany Romo Portilla
+ * Clase VentanaNuevoProducto
  */
 public class VentanaNuevoProducto extends javax.swing.JFrame {
 

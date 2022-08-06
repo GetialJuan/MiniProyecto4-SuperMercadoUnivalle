@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package controlador;
 
 import java.awt.event.ActionEvent;
@@ -29,8 +26,12 @@ import modelo.Producto;
 import modelo.Proveedor;
 
 /**
- *
- * @author Juan
+ * MiniProyecto 4 - SuperMercado Univalle
+ * @author Juan Sebastian Getial Getial <202124644>
+ * @author Mauricio Muñoz Gutierrez <202123687>
+ * @author Santiago Torres Carvajal <>
+ * @profesor Luis Yovany Romo Portilla
+ * Clase controladora
  */
 public class SuperMercadoController {
     
@@ -63,7 +64,7 @@ public class SuperMercadoController {
         ventanaInicio.agregarListenersBtns(new ManejadorDeEventosMenu());
     }
     
-    //ventanaInicio
+    /////////////////////////ventanaInicio////////////////////////////////////
     class ManejadorDeEventosMenu implements ActionListener {
 
         @Override
@@ -129,7 +130,7 @@ public class SuperMercadoController {
         
     }
     
-    //ventanaValidacionCliente
+    ////////////////////ventanaValidacionCliente//////////////////////////////
     class ManejadorDeEventosValidacionCliente implements ActionListener {
 
         @Override
@@ -191,7 +192,7 @@ public class SuperMercadoController {
         
     }
     
-    //ventanaClientes
+    //////////////////////ventanaClientes///////////////////////////////////
     class ManejadorDeEventosClientes implements ActionListener {
 
         @Override
@@ -254,7 +255,7 @@ public class SuperMercadoController {
         
     }
     
-    //ventanaModicarCliente
+    /////////////////////////ventanaModicarCliente////////////////////////////
     class ManejadorDeEventosModificarCliente implements ActionListener {
 
         @Override
@@ -283,7 +284,7 @@ public class SuperMercadoController {
         
     }
     
-    //ventanaNuevoCliente
+    ///////////////////////ventanaNuevoCliente///////////////////////////////
     class ManejadorDeEventosNuevoCliente implements ActionListener {
 
         @Override
@@ -319,7 +320,7 @@ public class SuperMercadoController {
         
     }
     
-    //ventanaVenta
+    ////////////////////////////////ventanaVenta//////////////////////////////
     class ManejadorDeEventosVenta implements ActionListener {
 
         @Override
@@ -478,7 +479,7 @@ public class SuperMercadoController {
         
     }
     
-    //////////////////////////////VentanaDProducto///////////////
+    //////////////////////////////VentanaNuevoProducto//////////////////////
     class ManejadorDeEventosNuevoProducto implements ActionListener {
 
         @Override
@@ -539,7 +540,6 @@ public class SuperMercadoController {
         
     }
     
-    //ventanaProveedor
     ///////////////////////// Ventana Proveedor /////////////////////////////
     class ManejadorDeEventosProveedores implements ActionListener{
 
@@ -818,6 +818,7 @@ public class SuperMercadoController {
         }   
     }
     
+    ////////////////////////////////VentanaCompra////////////////////
     class ManejadorDeEventosCompra implements ActionListener{
         @Override
         @SuppressWarnings("deprecation")
@@ -880,6 +881,7 @@ public class SuperMercadoController {
         }      
     }
     
+    ///Metodo que se ejecuta al finalizar el programa///////
     public void attachShutDownHook(){
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
