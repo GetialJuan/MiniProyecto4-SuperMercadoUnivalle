@@ -260,7 +260,24 @@ public class SuperMercado {
     }
     
     public void aNadirProducto(Producto producto){
-        productos.add(producto);
+        boolean nuevo = true;
+        int i = 0;
+        for(Producto p : productos){
+            if(producto.getNombre().equals(p.getNombre()) && 
+                    producto.getPrecio() == p.getPrecio()){
+                nuevo = false;
+                Producto nuevoP = p;
+                nuevoP.setCantidad(nuevoP.getCantidad() + producto.getCantidad());
+                productos.remove(i);
+                productos.add(i, nuevoP);
+                break;
+            }else{
+                i++;
+            }
+        }
+        if(nuevo){
+            productos.add(producto);
+        }
     }
     
     private void guardar(String rutaArchivo, String objetoAGuardar){

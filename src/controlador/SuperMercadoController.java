@@ -122,7 +122,7 @@ public class SuperMercadoController {
                 ventanaInicio.dispose();
             }
             else if(e.getActionCommand().equalsIgnoreCase("compras")){
-                System.out.println("btn compras");
+
             }
             ventanaInicio.dispose();
         }
@@ -818,6 +818,7 @@ public class SuperMercadoController {
         }   
     }
     
+    ////////////// Ventana Compra ///////////////////////////
     class ManejadorDeEventosCompra implements ActionListener{
         @Override
         @SuppressWarnings("deprecation")
@@ -827,7 +828,6 @@ public class SuperMercadoController {
                 String producto = ventanaCompra.getCboxProductos();
                 Proveedor p = superMercado.getProveedor(numP);
                 for(HashMap<String,String> map : p.getProductos()){
-                    System.out.println(map);
                     if(map.get("nombre").equals(producto)){
                         HashMap<String,String> mapProducto;
                         mapProducto = superMercado.generarMap(map.get("nombre"), map.get("precio"));
