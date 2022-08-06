@@ -2,6 +2,7 @@
 package vista;
 
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  * MiniProyecto 4 - SuperMercado Univalle
@@ -174,6 +175,23 @@ public class VentanaDatosCliente extends javax.swing.JFrame {
     public void setDatosCliente(String nombre, String iD){
         txtCedula.setText(iD);
         txtNombre.setText(nombre);
+    }
+    
+    public boolean advertencia(){
+        boolean estado = true;
+        if(txtNombre.getText().equals("") || txtCedula.getText().equals("")){
+            estado = false;
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos");
+        }
+        else{
+            try{
+                Integer.parseInt(txtCedula.getText());
+            }catch (NumberFormatException e){
+                estado = false;
+                JOptionPane.showMessageDialog(null, "Digite un valor valido");
+            }
+        }
+        return estado;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

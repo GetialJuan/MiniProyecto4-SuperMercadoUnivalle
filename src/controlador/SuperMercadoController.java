@@ -263,18 +263,19 @@ public class SuperMercadoController {
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("aceptar")){
                 int clienteAModificar = ventanaClientes.getFilaTablaClientes();
-                
-                //se modifca el cliente
-                superMercado.getClientes().get(clienteAModificar).setNombre(
-                ventanaModificarCliente.getTxtNombre());
-                superMercado.getClientes().get(clienteAModificar).setiD(
-                ventanaModificarCliente.getTxtCedula());
-                
-                ventanaModificarCliente.dispose();
-                ventanaClientes.limpiarTablaClientes();
-                ventanaClientes.setTablaClientes(
-                superMercado.getClientes());
-                ventanaClientes.show();
+                if(ventanaModificarCliente.advertencia()){
+                    //se modifca el cliente
+                    superMercado.getClientes().get(clienteAModificar).setNombre(
+                    ventanaModificarCliente.getTxtNombre());
+                    superMercado.getClientes().get(clienteAModificar).setiD(
+                    ventanaModificarCliente.getTxtCedula());
+
+                    ventanaModificarCliente.dispose();
+                    ventanaClientes.limpiarTablaClientes();
+                    ventanaClientes.setTablaClientes(
+                    superMercado.getClientes());
+                    ventanaClientes.show();
+                }
             }
             else if(e.getActionCommand().equalsIgnoreCase("cancelar")){
                 ventanaModificarCliente.dispose();
@@ -291,27 +292,28 @@ public class SuperMercadoController {
         @SuppressWarnings("deprecation")
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("aceptar")){
-                
-                //se agrega al cliente
-                superMercado.
-                        agregarCliente(ventanaNuevoCliente.getTxtNombre(), 
-                                ventanaNuevoCliente.getTxtCedula());
-                
-                superMercado.setClienteSeleccionado(0);
-                
-                //se abre la ventanaVenta
-                if(ventanaVenta != null){
-                    ventanaVenta.show();
+                if(ventanaNuevoCliente.advertencia()){
+                    //se agrega al cliente
+                    superMercado.
+                            agregarCliente(ventanaNuevoCliente.getTxtNombre(), 
+                                    ventanaNuevoCliente.getTxtCedula());
+
+                    superMercado.setClienteSeleccionado(0);
+
+                    //se abre la ventanaVenta
+                    if(ventanaVenta != null){
+                        ventanaVenta.show();
+                    }
+                    else{
+                        ventanaVenta = new VentanaVenta();
+                        ventanaVenta.
+                                agregarListenersBtns(new ManejadorDeEventosVenta());
+                    }
+                    //se establcen los producto en la ventanVenta
+                    ventanaVenta.setCboxProductos(superMercado.
+                            getProductos());
+                    ventanaValidacionCliente.dispose();
                 }
-                else{
-                    ventanaVenta = new VentanaVenta();
-                    ventanaVenta.
-                            agregarListenersBtns(new ManejadorDeEventosVenta());
-                }
-                //se establcen los producto en la ventanVenta
-                ventanaVenta.setCboxProductos(superMercado.
-                        getProductos());
-                ventanaValidacionCliente.dispose();
             }
             else if(e.getActionCommand().equalsIgnoreCase("cancelar")){
                 ventanaNuevoCliente.dispose();
@@ -331,11 +333,7 @@ public class SuperMercadoController {
                 //se obtiene el producto seleccionado
                 String nombreProducto = ventanaVenta.getProductoElegido();
                 
-                if(nombreProducto.equalsIgnoreCase("")){
-                    JOptionPane.showMessageDialog(null, "Seleccione un producto");
-                }
-                else
-                {
+                if(!nombreProducto.equalsIgnoreCase("")){
                     int indiceProducto = superMercado.
                             getIndiceProducto(nombreProducto);
                     if(superMercado.getProductos().get(indiceProducto).
@@ -358,10 +356,8 @@ public class SuperMercadoController {
                                 getTotalCarritoCliente());
                     }
                     else{
-                        JOptionPane.showMessageDialog(null, "Producto agotado");
+                        ventanaVenta.mensaje("Producto agotado");
                     }
-                    
-                    
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("cancelar venta")){
@@ -374,10 +370,7 @@ public class SuperMercadoController {
             }
             else if(e.getActionCommand().equalsIgnoreCase("eliminar item seleccionado")){
                 int itemSeleccionado = ventanaVenta.getFilaTblCarrito();
-                if(itemSeleccionado == -1){
-                    JOptionPane.showMessageDialog(null, "Seleccione un item");
-                }
-                else{
+                if(itemSeleccionado != -1){
                     int cliente = superMercado.getClienteSeleccionado();
                     ArrayList<String> producto = ventanaVenta.
                             getProductoInfo(itemSeleccionado);
@@ -396,34 +389,34 @@ public class SuperMercadoController {
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("finalizar")){
-                JOptionPane.showMessageDialog(null, "Se registro la venta");
-                
-                Cliente cliente = superMercado.getClientes().
+                if(ventanaVenta.advertencia()){
+                    Cliente cliente = superMercado.getClientes().
                         get(superMercado.getClienteSeleccionado());
-                
-                ArrayList<HashMap<String,String>> carrito = cliente.getCarrito();
-                ArrayList<HashMap<String,String>> carritoCopia = new ArrayList<>();
-                //se copia el carrito
-                for(HashMap<String,String> p : carrito){
-                    @SuppressWarnings("unchecked")
-                    HashMap<String,String> pN = (HashMap<String,String>)p.clone();
-                    carritoCopia.add(pN);
+
+                    ArrayList<HashMap<String,String>> carrito = cliente.getCarrito();
+                    ArrayList<HashMap<String,String>> carritoCopia = new ArrayList<>();
+                    //se copia el carrito
+                    for(HashMap<String,String> p : carrito){
+                        @SuppressWarnings("unchecked")
+                        HashMap<String,String> pN = (HashMap<String,String>)p.clone();
+                        carritoCopia.add(pN);
+                    }
+
+                    //se agrega la venta
+                    superMercado.agregarVenta(new FacturaVenta(
+                            cliente.getNombre(), cliente.getiD(), 
+                            carritoCopia, 
+                            superMercado.getTotalCarritoCliente()));
+
+                    //se vacia el crrito de lcliente
+                    cliente.limpiarCarrito();
+
+                    //Se cierrra la ventana
+                    ventanaVenta.setTotal(0);
+                    ventanaVenta.limpiarTablaCarrito();
+                    ventanaVenta.dispose();
+                    ventanaInicio.show();
                 }
-                
-                //se agrega la venta
-                superMercado.agregarVenta(new FacturaVenta(
-                        cliente.getNombre(), cliente.getiD(), 
-                        carritoCopia, 
-                        superMercado.getTotalCarritoCliente()));
-                
-                //se vacia el crrito de lcliente
-                cliente.limpiarCarrito();
-                
-                //Se cierrra la ventana
-                ventanaVenta.setTotal(0);
-                ventanaVenta.limpiarTablaCarrito();
-                ventanaVenta.dispose();
-                ventanaInicio.show();
             }
             else if(e.getActionCommand().equalsIgnoreCase("comboBoxChanged")){
                 ventanaVenta.setCboxProductos(
@@ -829,7 +822,7 @@ public class SuperMercadoController {
                 Proveedor p = superMercado.getProveedor(numP);
                 for(HashMap<String,String> map : p.getProductos()){
                     System.out.println(map);
-                    if(map.get("nombre").equals(producto)){
+                    if(map.get("nombre").equalsIgnoreCase(producto)){
                         HashMap<String,String> mapProducto;
                         mapProducto = superMercado.generarMap(map.get("nombre"), map.get("precio"));
                         superMercado.aNadirProductoCarrito(mapProducto);

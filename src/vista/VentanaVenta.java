@@ -4,6 +4,7 @@ package vista;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Producto;
 
@@ -25,6 +26,7 @@ public class VentanaVenta extends javax.swing.JFrame {
         initComponents();
         setVisible(true);
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
 
     public void cargarModeloTabla() {
@@ -238,6 +240,7 @@ public class VentanaVenta extends javax.swing.JFrame {
     
     public String getProductoElegido(){
         if(cboxProductos.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(null, "Seleccione un producto");
             return "";
         }
         else{
@@ -265,7 +268,11 @@ public class VentanaVenta extends javax.swing.JFrame {
     }
     
     public int getFilaTblCarrito(){
-        return jTable1.getSelectedRow();
+        int fila = jTable1.getSelectedRow();
+        if(fila == -1){
+            JOptionPane.showMessageDialog(null, "Seleccione un item");
+        }
+        return fila;
     }
     
     public ArrayList<String> getProductoInfo(int cualProducto){
@@ -294,6 +301,22 @@ public class VentanaVenta extends javax.swing.JFrame {
     
     private void limpiarComboBox(){
         cboxProductos.removeAllItems();
+    }
+    
+    public boolean advertencia(){
+        boolean estado = true;
+        if(jTable1.getRowCount() == 0){
+            estado = false;
+            JOptionPane.showMessageDialog(null, "Agregue al menos un item");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Se registro la venta");
+        }
+        return estado;
+    }
+    
+    public void mensaje(String mensaje){
+        JOptionPane.showMessageDialog(null, mensaje);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
