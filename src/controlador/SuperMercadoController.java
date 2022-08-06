@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package controlador;
 
 import java.awt.event.ActionEvent;
@@ -29,8 +26,12 @@ import modelo.Producto;
 import modelo.Proveedor;
 
 /**
- *
- * @author Juan
+ * MiniProyecto 4 - SuperMercado Univalle
+ * @author Juan Sebastian Getial Getial <202124644>
+ * @author Mauricio Muñoz Gutierrez <202123687>
+ * @author Santiago Torres Carvajal <>
+ * @profesor Luis Yovany Romo Portilla
+ * Clase controladora
  */
 public class SuperMercadoController {
     
@@ -63,7 +64,7 @@ public class SuperMercadoController {
         ventanaInicio.agregarListenersBtns(new ManejadorDeEventosMenu());
     }
     
-    //ventanaInicio
+    /////////////////////////ventanaInicio////////////////////////////////////
     class ManejadorDeEventosMenu implements ActionListener {
 
         @Override
@@ -129,7 +130,7 @@ public class SuperMercadoController {
         
     }
     
-    //ventanaValidacionCliente
+    ////////////////////ventanaValidacionCliente//////////////////////////////
     class ManejadorDeEventosValidacionCliente implements ActionListener {
 
         @Override
@@ -191,7 +192,7 @@ public class SuperMercadoController {
         
     }
     
-    //ventanaClientes
+    //////////////////////ventanaClientes///////////////////////////////////
     class ManejadorDeEventosClientes implements ActionListener {
 
         @Override
@@ -254,7 +255,7 @@ public class SuperMercadoController {
         
     }
     
-    //ventanaModicarCliente
+    /////////////////////////ventanaModicarCliente////////////////////////////
     class ManejadorDeEventosModificarCliente implements ActionListener {
 
         @Override
@@ -262,18 +263,19 @@ public class SuperMercadoController {
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("aceptar")){
                 int clienteAModificar = ventanaClientes.getFilaTablaClientes();
-                
-                //se modifca el cliente
-                superMercado.getClientes().get(clienteAModificar).setNombre(
-                ventanaModificarCliente.getTxtNombre());
-                superMercado.getClientes().get(clienteAModificar).setiD(
-                ventanaModificarCliente.getTxtCedula());
-                
-                ventanaModificarCliente.dispose();
-                ventanaClientes.limpiarTablaClientes();
-                ventanaClientes.setTablaClientes(
-                superMercado.getClientes());
-                ventanaClientes.show();
+                if(ventanaModificarCliente.advertencia()){
+                    //se modifca el cliente
+                    superMercado.getClientes().get(clienteAModificar).setNombre(
+                    ventanaModificarCliente.getTxtNombre());
+                    superMercado.getClientes().get(clienteAModificar).setiD(
+                    ventanaModificarCliente.getTxtCedula());
+
+                    ventanaModificarCliente.dispose();
+                    ventanaClientes.limpiarTablaClientes();
+                    ventanaClientes.setTablaClientes(
+                    superMercado.getClientes());
+                    ventanaClientes.show();
+                }
             }
             else if(e.getActionCommand().equalsIgnoreCase("cancelar")){
                 ventanaModificarCliente.dispose();
@@ -283,34 +285,35 @@ public class SuperMercadoController {
         
     }
     
-    //ventanaNuevoCliente
+    ///////////////////////ventanaNuevoCliente///////////////////////////////
     class ManejadorDeEventosNuevoCliente implements ActionListener {
 
         @Override
         @SuppressWarnings("deprecation")
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("aceptar")){
-                
-                //se agrega al cliente
-                superMercado.
-                        agregarCliente(ventanaNuevoCliente.getTxtNombre(), 
-                                ventanaNuevoCliente.getTxtCedula());
-                
-                superMercado.setClienteSeleccionado(0);
-                
-                //se abre la ventanaVenta
-                if(ventanaVenta != null){
-                    ventanaVenta.show();
+                if(ventanaNuevoCliente.advertencia()){
+                    //se agrega al cliente
+                    superMercado.
+                            agregarCliente(ventanaNuevoCliente.getTxtNombre(), 
+                                    ventanaNuevoCliente.getTxtCedula());
+
+                    superMercado.setClienteSeleccionado(0);
+
+                    //se abre la ventanaVenta
+                    if(ventanaVenta != null){
+                        ventanaVenta.show();
+                    }
+                    else{
+                        ventanaVenta = new VentanaVenta();
+                        ventanaVenta.
+                                agregarListenersBtns(new ManejadorDeEventosVenta());
+                    }
+                    //se establcen los producto en la ventanVenta
+                    ventanaVenta.setCboxProductos(superMercado.
+                            getProductos());
+                    ventanaValidacionCliente.dispose();
                 }
-                else{
-                    ventanaVenta = new VentanaVenta();
-                    ventanaVenta.
-                            agregarListenersBtns(new ManejadorDeEventosVenta());
-                }
-                //se establcen los producto en la ventanVenta
-                ventanaVenta.setCboxProductos(superMercado.
-                        getProductos());
-                ventanaValidacionCliente.dispose();
             }
             else if(e.getActionCommand().equalsIgnoreCase("cancelar")){
                 ventanaNuevoCliente.dispose();
@@ -319,7 +322,7 @@ public class SuperMercadoController {
         
     }
     
-    //ventanaVenta
+    ////////////////////////////////ventanaVenta//////////////////////////////
     class ManejadorDeEventosVenta implements ActionListener {
 
         @Override
@@ -330,11 +333,7 @@ public class SuperMercadoController {
                 //se obtiene el producto seleccionado
                 String nombreProducto = ventanaVenta.getProductoElegido();
                 
-                if(nombreProducto.equalsIgnoreCase("")){
-                    JOptionPane.showMessageDialog(null, "Seleccione un producto");
-                }
-                else
-                {
+                if(!nombreProducto.equalsIgnoreCase("")){
                     int indiceProducto = superMercado.
                             getIndiceProducto(nombreProducto);
                     if(superMercado.getProductos().get(indiceProducto).
@@ -357,10 +356,8 @@ public class SuperMercadoController {
                                 getTotalCarritoCliente());
                     }
                     else{
-                        JOptionPane.showMessageDialog(null, "Producto agotado");
+                        ventanaVenta.mensaje("Producto agotado");
                     }
-                    
-                    
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("cancelar venta")){
@@ -373,10 +370,7 @@ public class SuperMercadoController {
             }
             else if(e.getActionCommand().equalsIgnoreCase("eliminar item seleccionado")){
                 int itemSeleccionado = ventanaVenta.getFilaTblCarrito();
-                if(itemSeleccionado == -1){
-                    JOptionPane.showMessageDialog(null, "Seleccione un item");
-                }
-                else{
+                if(itemSeleccionado != -1){
                     int cliente = superMercado.getClienteSeleccionado();
                     ArrayList<String> producto = ventanaVenta.
                             getProductoInfo(itemSeleccionado);
@@ -395,34 +389,34 @@ public class SuperMercadoController {
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("finalizar")){
-                JOptionPane.showMessageDialog(null, "Se registro la venta");
-                
-                Cliente cliente = superMercado.getClientes().
+                if(ventanaVenta.advertencia()){
+                    Cliente cliente = superMercado.getClientes().
                         get(superMercado.getClienteSeleccionado());
-                
-                ArrayList<HashMap<String,String>> carrito = cliente.getCarrito();
-                ArrayList<HashMap<String,String>> carritoCopia = new ArrayList<>();
-                //se copia el carrito
-                for(HashMap<String,String> p : carrito){
-                    @SuppressWarnings("unchecked")
-                    HashMap<String,String> pN = (HashMap<String,String>)p.clone();
-                    carritoCopia.add(pN);
+
+                    ArrayList<HashMap<String,String>> carrito = cliente.getCarrito();
+                    ArrayList<HashMap<String,String>> carritoCopia = new ArrayList<>();
+                    //se copia el carrito
+                    for(HashMap<String,String> p : carrito){
+                        @SuppressWarnings("unchecked")
+                        HashMap<String,String> pN = (HashMap<String,String>)p.clone();
+                        carritoCopia.add(pN);
+                    }
+
+                    //se agrega la venta
+                    superMercado.agregarVenta(new FacturaVenta(
+                            cliente.getNombre(), cliente.getiD(), 
+                            carritoCopia, 
+                            superMercado.getTotalCarritoCliente()));
+
+                    //se vacia el crrito de lcliente
+                    cliente.limpiarCarrito();
+
+                    //Se cierrra la ventana
+                    ventanaVenta.setTotal(0);
+                    ventanaVenta.limpiarTablaCarrito();
+                    ventanaVenta.dispose();
+                    ventanaInicio.show();
                 }
-                
-                //se agrega la venta
-                superMercado.agregarVenta(new FacturaVenta(
-                        cliente.getNombre(), cliente.getiD(), 
-                        carritoCopia, 
-                        superMercado.getTotalCarritoCliente()));
-                
-                //se vacia el crrito de lcliente
-                cliente.limpiarCarrito();
-                
-                //Se cierrra la ventana
-                ventanaVenta.setTotal(0);
-                ventanaVenta.limpiarTablaCarrito();
-                ventanaVenta.dispose();
-                ventanaInicio.show();
             }
             else if(e.getActionCommand().equalsIgnoreCase("comboBoxChanged")){
                 ventanaVenta.setCboxProductos(
@@ -478,7 +472,7 @@ public class SuperMercadoController {
         
     }
     
-    //////////////////////////////VentanaDProducto///////////////
+    //////////////////////////////VentanaNuevoProducto//////////////////////
     class ManejadorDeEventosNuevoProducto implements ActionListener {
 
         @Override
@@ -539,7 +533,6 @@ public class SuperMercadoController {
         
     }
     
-    //ventanaProveedor
     ///////////////////////// Ventana Proveedor /////////////////////////////
     class ManejadorDeEventosProveedores implements ActionListener{
 
@@ -818,7 +811,7 @@ public class SuperMercadoController {
         }   
     }
     
-    ////////////// Ventana Compra ///////////////////////////
+    ////////////////////////////////VentanaCompra////////////////////
     class ManejadorDeEventosCompra implements ActionListener{
         @Override
         @SuppressWarnings("deprecation")
@@ -828,7 +821,8 @@ public class SuperMercadoController {
                 String producto = ventanaCompra.getCboxProductos();
                 Proveedor p = superMercado.getProveedor(numP);
                 for(HashMap<String,String> map : p.getProductos()){
-                    if(map.get("nombre").equals(producto)){
+                    System.out.println(map);
+                    if(map.get("nombre").equalsIgnoreCase(producto)){
                         HashMap<String,String> mapProducto;
                         mapProducto = superMercado.generarMap(map.get("nombre"), map.get("precio"));
                         superMercado.aNadirProductoCarrito(mapProducto);
@@ -880,6 +874,7 @@ public class SuperMercadoController {
         }      
     }
     
+    ///Metodo que se ejecuta al finalizar el programa///////
     public void attachShutDownHook(){
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override

@@ -1,19 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package vista;
 
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.HashMap;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author Santiago
+ * MiniProyecto 4 - SuperMercado Univalle
+ * @author Juan Sebastian Getial Getial <202124644>
+ * @author Mauricio Muñoz Gutierrez <202123687>
+ * @author Santiago Torres Carvajal <>
+ * @profesor Luis Yovany Romo Portilla
+ * Clase VentanaDatosProveedor
  */
 public class VentanaDatosProveedor extends javax.swing.JFrame {
     
