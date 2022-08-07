@@ -1,6 +1,7 @@
 
 package modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,7 +13,7 @@ import java.util.HashMap;
  * @profesor Luis Yovany Romo Portilla
  * Clase que representa a una factura de venta
  */
-public class Factura{
+public class Factura implements Serializable{
     private String nombre;
     private String id;
     private final ArrayList<HashMap<String,String>> carrito;

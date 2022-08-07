@@ -262,6 +262,16 @@ public class SuperMercado {
                     oos.writeObject(pr);
                 }
             }
+            if(objetoAGuardar.equals("compras")){
+                for(Factura compra : compras){
+                    oos.writeObject(compra);
+                }
+            }
+            if(objetoAGuardar.equals("ventas")){
+                for(Factura venta : ventas){
+                    oos.writeObject(venta);
+                }
+            }
             
             fos.close();
             oos.close();
@@ -290,6 +300,16 @@ public class SuperMercado {
                     Proveedor pr = (Proveedor)ois.readObject();
                     this.proveedores.add(pr);
                 }
+                if(objetoARestaurar.equals("ventas")){
+                    System.out.println("Obtuvo dato en venta");
+                    Factura venta = (Factura)ois.readObject();
+                    this.ventas.add(venta);
+                }
+                if(objetoARestaurar.equals("compras")){
+                    System.out.println("Obtuvo dato en compra");
+                    Factura compra = (Factura)ois.readObject();
+                    this.compras.add(compra);
+                }
             }
             
             fis.close();
@@ -313,6 +333,12 @@ public class SuperMercado {
         
         restaurar(rutaAbsoluta.concat("\\src\\ArchivosPersistentes\\"
                 + "Proveedores.dat"), "proveedores");
+        
+        restaurar(rutaAbsoluta.concat("\\src\\ArchivosPersistentes\\"
+                + "Ventas.dat"), "ventas");
+        
+        restaurar(rutaAbsoluta.concat("\\src\\ArchivosPersistentes\\"
+                + "Compras.dat"), "compras");
     }
     
     public void guardarDatos(){
@@ -326,5 +352,11 @@ public class SuperMercado {
         
         guardar(rutaAbsoluta.concat("\\src\\ArchivosPersistentes\\"
                 + "Proveedores.dat"), "proveedores");
+        
+        guardar(rutaAbsoluta.concat("\\src\\ArchivosPersistentes\\"
+                + "Ventas.dat"), "ventas");
+        
+        guardar(rutaAbsoluta.concat("\\src\\ArchivosPersistentes\\"
+                + "Compras.dat"), "compras");
     }
 }

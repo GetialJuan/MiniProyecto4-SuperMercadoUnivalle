@@ -68,6 +68,8 @@ public class SuperMercadoController {
         superMercado = new SuperMercado();
         ventanaInicio = new VentanaInicio();
         ventanaInicio.agregarListenersBtns(new ManejadorDeEventosMenu());
+        System.out.println(superMercado.getCompras());
+        System.out.println(superMercado.getVentas());
     }
     
     /////////////////////////ventanaInicio////////////////////////////////////
@@ -923,6 +925,8 @@ public class SuperMercadoController {
             @Override
             public void run() {
               System.out.println("Esto lo ejecutamos cuando acabe el programa");
+                System.out.println(registrosCompras);
+                System.out.println(registrosVentas);
               superMercado.guardarDatos();
             }
         } );
