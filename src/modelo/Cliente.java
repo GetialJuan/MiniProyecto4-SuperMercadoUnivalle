@@ -45,7 +45,7 @@ public class Cliente implements Serializable{
         return carrito;
     }
     
-    public void agregarProductoAlCarrito(String cualProducto, int presio){
+    public void agregarProductoAlCarrito(String cualProducto, int precio){
         HashMap<String,String> producto = new HashMap<>();
         int cantidad = 1;
         int indice = 0;
@@ -60,7 +60,7 @@ public class Cliente implements Serializable{
         }
         
         producto.put("nombre", cualProducto);
-        producto.put("presio", Integer.toString(presio));
+        producto.put("precio", Integer.toString(precio));
         producto.put("cantidad", Integer.toString(cantidad));
         
         if(encontrado){

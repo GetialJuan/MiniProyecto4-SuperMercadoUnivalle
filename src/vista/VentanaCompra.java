@@ -296,10 +296,10 @@ public class VentanaCompra extends javax.swing.JFrame {
     public void setTablaCarrito(ArrayList<HashMap<String,String>> carrito){
         limpiarTablaProductos();
         for(HashMap<String,String> p : carrito){
-            int cantidad = Integer.parseInt(p.get("Cantidad"));
-            int precio = Integer.parseInt(p.get("Precio"));
+            int cantidad = Integer.parseInt(p.get("cantidad"));
+            int precio = Integer.parseInt(p.get("precio"));
             int subTotal = cantidad * precio;
-            Object[] fila = {p.get("Nombre"), precio, 
+            Object[] fila = {p.get("nombre"), precio, 
                 cantidad, subTotal};
             
             modeloTabla.addRow(fila);

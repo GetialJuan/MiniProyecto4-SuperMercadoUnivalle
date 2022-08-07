@@ -12,34 +12,34 @@ import java.util.HashMap;
  * @profesor Luis Yovany Romo Portilla
  * Clase que representa a una factura de venta
  */
-public class FacturaVenta {
-    private String nombreCliente;
-    private String iDCliente;
+public class Factura{
+    private String nombre;
+    private String id;
     private final ArrayList<HashMap<String,String>> carrito;
-    private int totalVenta;
+    private int total;
 
-    public FacturaVenta(String nombreCliente, String iDCliente, 
-            ArrayList<HashMap<String, String>> carrito, int totalVenta) {
-        this.nombreCliente = nombreCliente;
-        this.iDCliente = iDCliente;
+    public Factura(String nombre, String id, 
+            ArrayList<HashMap<String, String>> carrito, int total) {
+        this.nombre = nombre;
+        this.id = id;
         this.carrito = carrito;
-        this.totalVenta = totalVenta;
+        this.total = total;
     }
 
-    public String getNombreCliente() {
-        return nombreCliente;
+    public String getNombre() {
+        return nombre;
     }
 
-    public String getiDCliente() {
-        return iDCliente;
+    public String getId() {
+        return id;
     }
 
     public ArrayList<HashMap<String, String>> getCarrito() {
         return carrito;
     }
 
-    public int getTotalVenta() {
-        return totalVenta;
+    public int getTotal() {
+        return total;
     }
     
 }

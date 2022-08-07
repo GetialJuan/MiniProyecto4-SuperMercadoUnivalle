@@ -21,7 +21,7 @@ import vista.VentanaVenta;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Cliente;
-import modelo.FacturaVenta;
+import modelo.Factura;
 import modelo.Producto;
 import modelo.Proveedor;
 
@@ -52,10 +52,16 @@ public class SuperMercadoController {
     
     VentanaProveedores ventanaProveedores;
     
-    VentanaRegistro ventanaRegistroVentas;
+    VentanaRegistro ventanaRegistro;
     
     VentanaDatosProveedor ventanaDProveedor;
     VentanaCompra ventanaCompra;
+    
+    //Registro (venta o compra)
+    ArrayList<Factura> registrosVentas = new ArrayList<>();
+    ArrayList<Factura> registrosCompras = new ArrayList<>();
+    int numRegistro = 0;
+    
 
     public SuperMercadoController() {
         
@@ -107,23 +113,40 @@ public class SuperMercadoController {
                         getProveedores());
             }
             else if(e.getActionCommand().equalsIgnoreCase("ventas")){
-                if(ventanaRegistroVentas != null){
-                    ventanaRegistroVentas.show();
+                if(ventanaRegistro != null){
+                    ventanaRegistro.show();
                 }
                 else{
-                    ventanaRegistroVentas = new VentanaRegistro();
-                    ventanaRegistroVentas.
+                    ventanaRegistro = new VentanaRegistro();
+                    ventanaRegistro.
                             agregarListenersBnts(
-                                    new ManejadorDeEventosRegistroVenta());
+                                    new ManejadorDeEventosRegistro());
                 }
+                ventanaRegistro.setLblTitulo("Registro de Ventas");
+                ventanaRegistro.setDatos("", "");
+                registrosVentas = superMercado.getVentas();
                 if(!superMercado.getVentas().isEmpty()){
-                    ventanaRegistroVentas.cambiarRegistro(superMercado.
-                            getVentas().get(0));
+                    ventanaRegistro.cambiarRegistro(superMercado.
+                            getVentas().get(numRegistro));
                 }
-                ventanaInicio.dispose();
             }
             else if(e.getActionCommand().equalsIgnoreCase("compras")){
-
+                if(ventanaRegistro != null){
+                    ventanaRegistro.show();
+                }
+                else{
+                    ventanaRegistro = new VentanaRegistro();                
+                    ventanaRegistro.
+                            agregarListenersBnts(
+                                    new ManejadorDeEventosRegistro());
+                }
+                ventanaRegistro.setLblTitulo("Registro de Compras");
+                ventanaRegistro.setDatos("", "");
+                registrosCompras = superMercado.getCompras();
+                if(!superMercado.getCompras().isEmpty()){                  
+                    ventanaRegistro.cambiarRegistro(superMercado.
+                            getCompras().get(numRegistro));
+                }
             }
             ventanaInicio.dispose();
         }
@@ -403,7 +426,7 @@ public class SuperMercadoController {
                     }
 
                     //se agrega la venta
-                    superMercado.agregarVenta(new FacturaVenta(
+                    superMercado.agregarVenta(new Factura(
                             cliente.getNombre(), cliente.getiD(), 
                             carritoCopia, 
                             superMercado.getTotalCarritoCliente()));
@@ -499,35 +522,46 @@ public class SuperMercadoController {
         
     }
     
-    ////////////////////////////////VentanaRegistro(Venta)/////////////////
-    class ManejadorDeEventosRegistroVenta implements ActionListener {
-        int cualRegistro = 0;
+    ////////////////////////////////VentanaRegistro/////////////////
+    class ManejadorDeEventosRegistro implements ActionListener {
         @Override
         @SuppressWarnings("deprecation")
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("siguiente")){
-                cualRegistro++;
+                numRegistro++;
                 try{
-                    FacturaVenta fv = superMercado.getVentas().get(cualRegistro);
-                    ventanaRegistroVentas.cambiarRegistro(fv);
+                    if(ventanaRegistro.getLblTitulo().equalsIgnoreCase("Registro de Ventas")){
+                        Factura factura = registrosVentas.get(numRegistro);
+                        ventanaRegistro.cambiarRegistro(factura);
+                    }else{
+                        Factura factura = registrosCompras.get(numRegistro);
+                        ventanaRegistro.cambiarRegistro(factura);
+                    }
                 }catch(IndexOutOfBoundsException ai){
-                    cualRegistro--;
-                    JOptionPane.showMessageDialog(null, "No hay mas ventas");
+                    numRegistro--;
+                    JOptionPane.showMessageDialog(null, "No hay mas registros");
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("anterior")){
-                cualRegistro--;
+                numRegistro--;
                 try{
-                    FacturaVenta fv = superMercado.getVentas().get(cualRegistro);
-                    ventanaRegistroVentas.cambiarRegistro(fv);
+                    if(ventanaRegistro.getLblTitulo().equalsIgnoreCase("Registro de Ventas")){
+                        Factura factura = registrosVentas.get(numRegistro);
+                        ventanaRegistro.cambiarRegistro(factura);
+                    }else{
+                        Factura factura = registrosCompras.get(numRegistro);
+                        ventanaRegistro.cambiarRegistro(factura);
+                    }
                 }catch(IndexOutOfBoundsException ai){
-                    cualRegistro++;
-                    JOptionPane.showMessageDialog(null, "No hay mas ventas");
+                    numRegistro++;
+                    JOptionPane.showMessageDialog(null, "No hay más registros");
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("regresar")){
-                ventanaRegistroVentas.dispose();
+                ventanaRegistro.dispose();
+                ventanaRegistro.setLblTotal("");
                 ventanaInicio.show();
+                numRegistro = 0;
             }
         }
         
@@ -535,7 +569,6 @@ public class SuperMercadoController {
     
     ///////////////////////// Ventana Proveedor /////////////////////////////
     class ManejadorDeEventosProveedores implements ActionListener{
-
         @Override
         @SuppressWarnings("deprecation")
         public void actionPerformed(ActionEvent e) {
@@ -814,14 +847,13 @@ public class SuperMercadoController {
     ////////////////////////////////VentanaCompra////////////////////
     class ManejadorDeEventosCompra implements ActionListener{
         @Override
-        @SuppressWarnings("deprecation")
+        @SuppressWarnings({"deprecation", "unchecked"})
         public void actionPerformed(ActionEvent e) {
             if(e.getActionCommand().equalsIgnoreCase("Agregar a Compra")){
                 int numP = ventanaProveedores.getFilaTabla();
                 String producto = ventanaCompra.getCboxProductos();
                 Proveedor p = superMercado.getProveedor(numP);
                 for(HashMap<String,String> map : p.getProductos()){
-                    System.out.println(map);
                     if(map.get("nombre").equalsIgnoreCase(producto)){
                         HashMap<String,String> mapProducto;
                         mapProducto = superMercado.generarMap(map.get("nombre"), map.get("precio"));
@@ -858,19 +890,30 @@ public class SuperMercadoController {
                     carrito = superMercado.getCarritoSuper();
                     String categoria = ventanaCompra.getTxtCategoria();
                     for(HashMap<String,String> map : carrito){
-                        String nombre = map.get("Nombre");
-                        int cantidad = Integer.parseInt(map.get("Cantidad"));
-                        int precio = Integer.parseInt(map.get("Precio"));
+                        String nombre = map.get("nombre");
+                        int cantidad = Integer.parseInt(map.get("cantidad"));
+                        int precio = Integer.parseInt(map.get("precio"));
                         Producto p = new Producto(nombre,cantidad,precio,categoria);
                         superMercado.aNadirProducto(p);
-                    }
-                    superMercado.limpiarCarritoSuper();
+                    }                    
+                    int numP = ventanaProveedores.getFilaTabla();                    
+                    Proveedor p = superMercado.getProveedor(numP);                    
+                    @SuppressWarnings("unchecked")
+                    ArrayList<HashMap<String,String>> carritoClone;
+                    carritoClone = (ArrayList<HashMap<String,String>>)
+                            superMercado.getCarritoSuper().clone();
                     ventanaCompra.limpiarTablaProductos();
                     ventanaCompra.mensajesEmergentes("Comprar");
+                    superMercado.agregarCompra(new Factura(
+                            p.getNombre(), p.getTelefono(), 
+                            carritoClone, 
+                            superMercado.totalCarritoSuper()));
                     ventanaCompra.dispose();
                     ventanaProveedores.show();
+                    superMercado.limpiarCarritoSuper();
                 }
             }
+            
         }      
     }
     

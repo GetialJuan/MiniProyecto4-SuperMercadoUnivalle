@@ -27,7 +27,8 @@ public class SuperMercado {
     private ArrayList<Proveedor> proveedores;
     private ArrayList<Producto> productos;
     private ArrayList<HashMap<String,String>> carritoSuper;
-    private ArrayList<FacturaVenta> ventas;
+    private ArrayList<Factura> ventas;
+    private ArrayList<Factura> compras;
     private int clienteSeleccionado;
     
     
@@ -38,62 +39,9 @@ public class SuperMercado {
         productos = new ArrayList<>();
         carritoSuper = new ArrayList<>();
         ventas = new ArrayList<>();
+        compras = new ArrayList<>();
         clienteSeleccionado = 0;
 
-        /*
-        //productos momentaneos para pruebas (Se debe borrar luego)
-        productos.add(new Producto("lechuga", 10, 1000, "lacteos"));
-        productos.add(new Producto("leche", 5, 2000, "carnes"));
-        productos.add(new Producto("Doritos", 20, 1500, "lacteos"));
-        productos.add(new Producto("Cebolla", 3, 500, "lacteos"));
-        */
-        //clientes momentaneos para pruebas (Se debe borrar luego)
-        /*
-        clientes.add(new Cliente("juan", "123456"));
-        clientes.add(new Cliente("nauj", "654321"));
-        clientes.add(new Cliente("anju", "111222"));
-        */
-        //proveedores momentaneos para pruebas (Se debe borrar luego)
-        /*
-        ArrayList <HashMap<String,String>> productos = new ArrayList<>();
-        HashMap<String,String> auxMap = new HashMap<>(); 
-        auxMap.put("Nombre","Pollo");
-        auxMap.put("Precio", "16000");
-        auxMap.put("Categoria", "Cárnicos");
-        productos.add(auxMap);
-        auxMap = new HashMap<>();
-        auxMap.put("Nombre","Res");
-        auxMap.put("Precio", "25000");
-        auxMap.put("Categoria", "Cárnicos");
-        productos.add(auxMap);
-        proveedores.add(new Proveedor("Mauro", "123456", "Cárnicos",productos));
-        
-        productos = new ArrayList<>();
-        auxMap = new HashMap<>();
-        auxMap.put("Nombre","Tomates");
-        auxMap.put("Precio", "3000");
-        auxMap.put("Categoria", "Frutas y Verduras");
-        productos.add(auxMap);
-        auxMap = new HashMap<>();
-        auxMap.put("Nombre","Papas");
-        auxMap.put("Precio", "2000");
-        auxMap.put("Categoria", "Frutas y Verduras");
-        productos.add(auxMap);
-        proveedores.add(new Proveedor("Juanito", "78910", "Frutas y verduras", productos));
-        
-        productos = new ArrayList<>();
-        auxMap = new HashMap<>();
-        auxMap.put("Nombre","Ron");
-        auxMap.put("Precio", "150000");
-        auxMap.put("Categoria", "Licores");
-        productos.add(auxMap);
-        auxMap = new HashMap<>();
-        auxMap.put("Nombre","Vodka");
-        auxMap.put("Precio", "60000");
-        auxMap.put("Categoria", "Licores");
-        productos.add(auxMap);
-        proveedores.add(new Proveedor("Carlos", "11121314", "Licores", productos));
-        */
         restaurarDatos();
     }
     
@@ -121,8 +69,12 @@ public class SuperMercado {
         return clienteSeleccionado;
     }
 
-    public ArrayList<FacturaVenta> getVentas() {
+    public ArrayList<Factura> getVentas() {
         return ventas;
+    }
+    
+    public ArrayList<Factura> getCompras(){
+        return compras;
     }
    
     public int getIndiceProducto(String cualProducto){
@@ -180,17 +132,21 @@ public class SuperMercado {
         ArrayList<HashMap<String,String>> carrito = 
                 clientes.get(clienteSeleccionado).getCarrito();
         for(HashMap<String,String> producto : carrito){
-            int presio = Integer.parseInt(producto.get("presio"));
+            int precio = Integer.parseInt(producto.get("precio"));
             int cantidad = Integer.parseInt(producto.get("cantidad"));
             
-            total += (presio * cantidad);
+            total += (precio * cantidad);
         }
         
         return total;
     }
     
-    public void agregarVenta(FacturaVenta fv){
-        ventas.add(fv);
+    public void agregarVenta(Factura factura){
+        ventas.add(factura);
+    }
+    
+    public void agregarCompra(Factura factura){
+        compras.add(factura);
     }
     
     public void agregarProveedor(Proveedor proveedor){
@@ -216,20 +172,20 @@ public class SuperMercado {
     
     public HashMap<String,String> generarMap(String nombre, String precio){
         HashMap<String,String> map = new HashMap<>();
-        map.put("Nombre", nombre);
-        map.put("Precio", precio);
-        map.put("Cantidad", "1");
+        map.put("nombre", nombre);
+        map.put("precio", precio);
+        map.put("cantidad", "1");
         return map;
     }
     
     public void aNadirProductoCarrito(HashMap<String,String> map){
         boolean nuevo = false;
         for(HashMap<String,String> mapCarrito : carritoSuper){
-            if(mapCarrito.get("Nombre").equals(map.get("Nombre"))){
+            if(mapCarrito.get("nombre").equals(map.get("nombre"))){
                 nuevo = true;
-                int cantidadActual = Integer.parseInt(mapCarrito.get("Cantidad"));
+                int cantidadActual = Integer.parseInt(mapCarrito.get("cantidad"));
                 int nuevaCantidad = cantidadActual + 1;
-                mapCarrito.put("Cantidad", Integer.toString(nuevaCantidad));
+                mapCarrito.put("cantidad", Integer.toString(nuevaCantidad));
                 break;
             }
         }
@@ -239,9 +195,7 @@ public class SuperMercado {
     }
     
     public void limpiarCarritoSuper(){
-        for(int i = 0; i < carritoSuper.size(); i = 0){
-            carritoSuper.remove(i);
-        }
+        carritoSuper.clear();
     }
     
     public void eliminarProductoCarrito(int indice){
@@ -253,8 +207,8 @@ public class SuperMercado {
         int cantidad = 0;
         int precio = 0;
         for(HashMap<String,String> mapCarrito : carritoSuper){
-            cantidad = Integer.parseInt(mapCarrito.get("Cantidad"));
-            precio = Integer.parseInt(mapCarrito.get("Precio"));
+            cantidad = Integer.parseInt(mapCarrito.get("cantidad"));
+            precio = Integer.parseInt(mapCarrito.get("precio"));
             total += (precio * cantidad);
         }
         return total;
