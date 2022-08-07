@@ -188,7 +188,7 @@ public class VentanaNuevoProducto extends javax.swing.JFrame {
         return txtNombre.getText();
     }
     
-    public String getTxtPresio(){
+    public String getTxtPrecio(){
         return txtPrecio.getText();
     }
     

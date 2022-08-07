@@ -507,7 +507,7 @@ public class SuperMercadoController {
                 //se añade el producto nuevo
                 superMercado.getProductos().add(new Producto(
                         ventanaNuevoProducto.getTxtNombre(), 0,
-                Integer.parseInt(ventanaNuevoProducto.getTxtPresio()), 
+                Integer.parseInt(ventanaNuevoProducto.getTxtPrecio()), 
                         ventanaNuevoProducto.getTxtCategoria()));
                 
                 //se cierra y abre ventanas
@@ -924,9 +924,6 @@ public class SuperMercadoController {
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {
-              System.out.println("Esto lo ejecutamos cuando acabe el programa");
-                System.out.println(registrosCompras);
-                System.out.println(registrosVentas);
               superMercado.guardarDatos();
             }
         } );

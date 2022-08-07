@@ -23,8 +23,7 @@ public class VentanaClientes extends javax.swing.JFrame {
         cargarModeloTabla();
         initComponents();
         setVisible(true);
-        setLocationRelativeTo(null);
-        
+        setLocationRelativeTo(null);        
     }
     
     public void cargarModeloTabla() {
@@ -41,8 +40,8 @@ public class VentanaClientes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        pnlPpal = new javax.swing.JPanel();
+        lblClientes = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaClientes = new javax.swing.JTable(){
             public boolean isCellEditable(int row, int column){
@@ -56,9 +55,9 @@ public class VentanaClientes extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Clientes");
+        lblClientes.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblClientes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblClientes.setText("Clientes");
 
         tablaClientes.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tablaClientes.setModel(modeloTabla);
@@ -76,19 +75,19 @@ public class VentanaClientes extends javax.swing.JFrame {
         btnIniciarVenta.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnIniciarVenta.setText("Iniciar Venta");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlPpalLayout = new javax.swing.GroupLayout(pnlPpal);
+        pnlPpal.setLayout(pnlPpalLayout);
+        pnlPpalLayout.setHorizontalGroup(
+            pnlPpalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pnlPpalLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(btnRegresar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(pnlPpalLayout.createSequentialGroup()
                 .addGap(0, 49, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(pnlPpalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlPpalLayout.createSequentialGroup()
                         .addComponent(btnIniciarVenta)
                         .addGap(18, 18, 18)
                         .addComponent(btnModificarCliente)
@@ -97,17 +96,17 @@ public class VentanaClientes extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnlPpalLayout.setVerticalGroup(
+            pnlPpalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPpalLayout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addComponent(jLabel1)
+                .addComponent(lblClientes)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlPpalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnEliminarCliente)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(pnlPpalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnModificarCliente)
                         .addComponent(btnIniciarVenta)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
@@ -119,11 +118,11 @@ public class VentanaClientes extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlPpal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlPpal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -201,9 +200,9 @@ public class VentanaClientes extends javax.swing.JFrame {
     private javax.swing.JButton btnIniciarVenta;
     private javax.swing.JButton btnModificarCliente;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblClientes;
+    private javax.swing.JPanel pnlPpal;
     private javax.swing.JTable tablaClientes;
     // End of variables declaration//GEN-END:variables
 }

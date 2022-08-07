@@ -112,11 +112,6 @@ public class VentanaCompra extends javax.swing.JFrame {
 
         txtNombre.setEditable(false);
         txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        txtNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -215,10 +210,6 @@ public class VentanaCompra extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
 
     /**
      * @param args the command line arguments
