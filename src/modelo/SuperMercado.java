@@ -170,26 +170,26 @@ public class SuperMercado {
         }
     }
     
-    public HashMap<String,String> generarMap(String nombre, String precio){
+    public HashMap<String,String> generarMap(String nombre, String precio, String cantidad){
         HashMap<String,String> map = new HashMap<>();
         map.put("nombre", nombre);
         map.put("precio", precio);
-        map.put("cantidad", "1");
+        map.put("cantidad", cantidad);
         return map;
     }
     
-    public void aNadirProductoCarrito(HashMap<String,String> map){
-        boolean nuevo = false;
+    public void aNadirProductoCarrito(HashMap<String,String> map, int cantidad){
+        boolean nuevo = true;
         for(HashMap<String,String> mapCarrito : carritoSuper){
             if(mapCarrito.get("nombre").equals(map.get("nombre"))){
-                nuevo = true;
+                nuevo = false;
                 int cantidadActual = Integer.parseInt(mapCarrito.get("cantidad"));
-                int nuevaCantidad = cantidadActual + 1;
+                int nuevaCantidad = cantidadActual + cantidad;
                 mapCarrito.put("cantidad", Integer.toString(nuevaCantidad));
                 break;
             }
         }
-        if(!nuevo){
+        if(nuevo){
             carritoSuper.add(map);
         }
     }
