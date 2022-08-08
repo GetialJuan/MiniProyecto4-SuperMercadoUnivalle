@@ -68,7 +68,7 @@ public class VentanaNuevoProducto extends javax.swing.JFrame {
         lblCategoria.setText("Categoria");
 
         btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnAgregar.setText("Agregar");
+        btnAgregar.setText("Aceptar");
 
         txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
@@ -194,6 +194,24 @@ public class VentanaNuevoProducto extends javax.swing.JFrame {
     
     public String getTxtCategoria(){
         return (String)cbCategoria.getSelectedItem();
+    }
+    
+    public void setTxtNombre(String nombre){
+        txtNombre.setText(nombre);
+    }
+    
+    public void setTxtPrecio(String precio){
+        txtPrecio.setText(precio);
+    }
+    
+    public void setTxtCategoria(String categoria){
+        int items = cbCategoria.getItemCount();
+        for(int i = 0; i < items; i++){
+            if(categoria.equalsIgnoreCase(cbCategoria.getItemAt(i))){
+                cbCategoria.setSelectedIndex(i);
+                break;
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
