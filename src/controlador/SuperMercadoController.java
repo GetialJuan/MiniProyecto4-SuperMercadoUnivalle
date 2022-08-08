@@ -12,7 +12,7 @@ import vista.VentanaCompra;
 import vista.VentanaDatosCliente;
 import vista.VentanaDatosProveedor;
 import vista.VentanaInicio;
-import vista.VentanaNuevoProducto;
+import vista.VentanaDatosProducto;
 import vista.VentanaProductos;
 import vista.VentanaProveedores;
 import vista.VentanaRegistro;
@@ -48,7 +48,8 @@ public class SuperMercadoController {
     VentanaDatosCliente ventanaModificarCliente;
     
     VentanaProductos ventanaProductos;
-    VentanaNuevoProducto ventanaNuevoProducto;
+    VentanaDatosProducto ventanaNuevoProducto;
+    VentanaDatosProducto ventanaModificarProducto;
     
     VentanaProveedores ventanaProveedores;
     
@@ -461,13 +462,15 @@ public class SuperMercadoController {
                 ventanaInicio.show();
             }
             else if(e.getActionCommand().equalsIgnoreCase("eliminar producto")){
-                int productoSeleccionado = ventanaProductos.
+                String productoSeleccionado = ventanaProductos.
                         getProductoSeleccionado();
-                if(productoSeleccionado == -1){
+                if("".equals(productoSeleccionado)){
                     ventanaProductos.mensajeSelecProducto();
                 }
                 else{
-                    superMercado.getProductos().remove(productoSeleccionado);
+                    int productoAEliminar = superMercado.
+                            getIndiceProducto(productoSeleccionado);
+                    superMercado.getProductos().remove(productoAEliminar);
                     ventanaProductos.limpiarTablaProductos();
                     ventanaProductos.setTablaProductos(superMercado.
                             getProductos());
@@ -478,12 +481,39 @@ public class SuperMercadoController {
                     ventanaNuevoProducto.show();
                 }
                 else{
-                    ventanaNuevoProducto = new VentanaNuevoProducto();
+                    ventanaNuevoProducto = new VentanaDatosProducto();
                     ventanaNuevoProducto.
                             agregarListenersBtns(
                                     new ManejadorDeEventosNuevoProducto());
                 }
                 ventanaProductos.dispose();
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("modificar producto")){
+                String productoSeleccionado = ventanaProductos.
+                        getProductoSeleccionado();
+                if("".equals(productoSeleccionado)){
+                    ventanaProductos.mensajeSelecProducto();
+                }
+                else{
+                    int productoAModificar = superMercado.
+                            getIndiceProducto(productoSeleccionado);
+                    if(ventanaModificarProducto != null){
+                        ventanaModificarProducto.show();
+                    }
+                    else{
+                        ventanaModificarProducto = new VentanaDatosProducto();
+                        ventanaModificarProducto.
+                                agregarListenersBtns(
+                                        new ManejadorDeEventosModificarProducto());
+                    }
+                    ventanaModificarProducto.setTxtNombre(
+                    superMercado.getProductos().get(productoAModificar).getNombre());
+                    ventanaModificarProducto.setTxtPrecio(
+                    superMercado.getProductos().get(productoAModificar).getPrecio()+"");
+                    ventanaModificarProducto.setTxtCategoria(
+                    superMercado.getProductos().get(productoAModificar).getCategoria());
+                    ventanaProductos.dispose();
+                }
             }
             else if(e.getActionCommand().equalsIgnoreCase("comboBoxChanged")){
                 ventanaProductos.limpiarTablaProductos();
@@ -494,29 +524,66 @@ public class SuperMercadoController {
         
     }
     
+    ////////////////////////////VentanaModificarProducto///////////////////////
+    class ManejadorDeEventosModificarProducto implements ActionListener {
+
+        @Override
+        @SuppressWarnings("deprecation")
+        public void actionPerformed(ActionEvent e) {
+            if(e.getActionCommand().equalsIgnoreCase("aceptar")){
+                if(ventanaModificarProducto.advertencia()){
+                    //se modifica el producto
+                    int producto = superMercado.getIndiceProducto(
+                    ventanaProductos.getProductoSeleccionado());
+
+                    superMercado.getProductos().set(producto,new Producto(
+                            ventanaModificarProducto.getTxtNombre(), 
+                            superMercado.getProductos().get(producto).getCantidad(),
+                    Integer.parseInt(ventanaModificarProducto.getTxtPrecio()), 
+                            ventanaModificarProducto.getTxtCategoria()));
+
+                    //se cierra y abre ventanas
+                    ventanaModificarProducto.dispose();
+                    ventanaProductos.limpiarTablaProductos();
+                    ventanaProductos.setTablaProductos(
+                    superMercado.getProductos());
+                    ventanaProductos.show();
+                }
+            }
+            else if(e.getActionCommand().equalsIgnoreCase("cancelar")){
+                ventanaModificarProducto.dispose();
+                ventanaProductos.show();
+            }
+        }
+        
+    } 
+    
     //////////////////////////////VentanaNuevoProducto//////////////////////
     class ManejadorDeEventosNuevoProducto implements ActionListener {
 
         @Override
         @SuppressWarnings("deprecation")
         public void actionPerformed(ActionEvent e) {
-            if(e.getActionCommand().equalsIgnoreCase("agregar")){
-                //se añade el producto nuevo
-                superMercado.getProductos().add(new Producto(
-                        ventanaNuevoProducto.getTxtNombre(), 0,
-                Integer.parseInt(ventanaNuevoProducto.getTxtPrecio()), 
-                        ventanaNuevoProducto.getTxtCategoria()));
-                
-                //se cierra y abre ventanas
-                ventanaNuevoProducto.dispose();
-                ventanaProductos.limpiarTablaProductos();
-                ventanaProductos.setTablaProductos(
-                superMercado.getProductos());
+            if(e.getActionCommand().equalsIgnoreCase("aceptar")){
+                if(ventanaNuevoProducto.advertencia()){
+                    //se añade el producto nuevo
+                    superMercado.getProductos().add(new Producto(
+                            ventanaNuevoProducto.getTxtNombre(), 0,
+                    Integer.parseInt(ventanaNuevoProducto.getTxtPrecio()), 
+                            ventanaNuevoProducto.getTxtCategoria()));
+
+                    //se cierra y abre ventanas
+                    ventanaNuevoProducto.dispose();
+                    ventanaProductos.limpiarTablaProductos();
+                    ventanaProductos.setTablaProductos(
+                    superMercado.getProductos());
+                    ventanaProductos.show();
+                }
             }
             else if(e.getActionCommand().equalsIgnoreCase("cancelar")){
                 ventanaNuevoProducto.dispose();
+                ventanaProductos.show();
             }
-            ventanaProductos.show();
         }
         
     }

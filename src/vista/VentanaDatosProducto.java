@@ -5,6 +5,7 @@
 package vista;
 
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  * MiniProyecto 4 - SuperMercado Univalle
@@ -14,12 +15,12 @@ import java.awt.event.ActionListener;
  * @profesor Luis Yovany Romo Portilla
  * Clase VentanaNuevoProducto
  */
-public class VentanaNuevoProducto extends javax.swing.JFrame {
+public class VentanaDatosProducto extends javax.swing.JFrame {
 
     /**
      * Creates new form VentanaNuevoProducto
      */
-    public VentanaNuevoProducto() {
+    public VentanaDatosProducto() {
         initComponents();
         setVisible(true);
         setLocationRelativeTo(null);
@@ -68,7 +69,7 @@ public class VentanaNuevoProducto extends javax.swing.JFrame {
         lblCategoria.setText("Categoria");
 
         btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnAgregar.setText("Agregar");
+        btnAgregar.setText("Aceptar");
 
         txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
@@ -161,20 +162,21 @@ public class VentanaNuevoProducto extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaDatosProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaDatosProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaDatosProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaDatosProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaNuevoProducto().setVisible(true);
+                new VentanaDatosProducto().setVisible(true);
             }
         });
     }
@@ -194,6 +196,41 @@ public class VentanaNuevoProducto extends javax.swing.JFrame {
     
     public String getTxtCategoria(){
         return (String)cbCategoria.getSelectedItem();
+    }
+    
+    public void setTxtNombre(String nombre){
+        txtNombre.setText(nombre);
+    }
+    
+    public void setTxtPrecio(String precio){
+        txtPrecio.setText(precio);
+    }
+    
+    public void setTxtCategoria(String categoria){
+        int items = cbCategoria.getItemCount();
+        for(int i = 0; i < items; i++){
+            if(categoria.equalsIgnoreCase(cbCategoria.getItemAt(i))){
+                cbCategoria.setSelectedIndex(i);
+                break;
+            }
+        }
+    }
+    
+    public boolean advertencia(){
+        boolean estado = true;
+        if(txtNombre.getText().equals("") || txtPrecio.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos");
+            estado = false;
+        }
+        else{
+            try{
+                Integer.parseInt(txtPrecio.getText());
+            }catch(NumberFormatException ne){
+                JOptionPane.showMessageDialog(null, "Digite un valor valido");
+                estado = false;
+            }
+        }
+        return estado;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
