@@ -15,12 +15,12 @@ import javax.swing.JOptionPane;
  * @profesor Luis Yovany Romo Portilla
  * Clase VentanaNuevoProducto
  */
-public class VentanaNuevoProducto extends javax.swing.JFrame {
+public class VentanaDatosProducto extends javax.swing.JFrame {
 
     /**
      * Creates new form VentanaNuevoProducto
      */
-    public VentanaNuevoProducto() {
+    public VentanaDatosProducto() {
         initComponents();
         setVisible(true);
         setLocationRelativeTo(null);
@@ -162,20 +162,21 @@ public class VentanaNuevoProducto extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaDatosProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaDatosProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaDatosProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaNuevoProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaDatosProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaNuevoProducto().setVisible(true);
+                new VentanaDatosProducto().setVisible(true);
             }
         });
     }

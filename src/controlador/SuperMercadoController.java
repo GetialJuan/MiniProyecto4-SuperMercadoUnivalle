@@ -12,7 +12,7 @@ import vista.VentanaCompra;
 import vista.VentanaDatosCliente;
 import vista.VentanaDatosProveedor;
 import vista.VentanaInicio;
-import vista.VentanaNuevoProducto;
+import vista.VentanaDatosProducto;
 import vista.VentanaProductos;
 import vista.VentanaProveedores;
 import vista.VentanaRegistro;
@@ -48,8 +48,8 @@ public class SuperMercadoController {
     VentanaDatosCliente ventanaModificarCliente;
     
     VentanaProductos ventanaProductos;
-    VentanaNuevoProducto ventanaNuevoProducto;
-    VentanaNuevoProducto ventanaModificarProducto;
+    VentanaDatosProducto ventanaNuevoProducto;
+    VentanaDatosProducto ventanaModificarProducto;
     
     VentanaProveedores ventanaProveedores;
     
@@ -481,7 +481,7 @@ public class SuperMercadoController {
                     ventanaNuevoProducto.show();
                 }
                 else{
-                    ventanaNuevoProducto = new VentanaNuevoProducto();
+                    ventanaNuevoProducto = new VentanaDatosProducto();
                     ventanaNuevoProducto.
                             agregarListenersBtns(
                                     new ManejadorDeEventosNuevoProducto());
@@ -501,7 +501,7 @@ public class SuperMercadoController {
                         ventanaModificarProducto.show();
                     }
                     else{
-                        ventanaModificarProducto = new VentanaNuevoProducto();
+                        ventanaModificarProducto = new VentanaDatosProducto();
                         ventanaModificarProducto.
                                 agregarListenersBtns(
                                         new ManejadorDeEventosModificarProducto());
