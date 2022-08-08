@@ -888,35 +888,37 @@ public class SuperMercadoController {
             }
             else if(e.getActionCommand().equalsIgnoreCase("Finalizar")){
                 if(ventanaCompra.mensajeRelizarCompra() == 0){
-                    ArrayList<HashMap<String,String>> carrito;
-                    carrito = superMercado.getCarritoSuper();
-                    String categoria = ventanaCompra.getTxtCategoria();
-                    for(HashMap<String,String> map : carrito){
-                        String nombre = map.get("nombre");
-                        int cantidad = Integer.parseInt(map.get("cantidad"));
-                        int precio = Integer.parseInt(map.get("precio"));
-                        Producto p = new Producto(nombre,cantidad,precio,categoria);
-                        superMercado.aNadirProducto(p);
-                    }                    
-                    int numP = ventanaProveedores.getFilaTabla();                    
-                    Proveedor p = superMercado.getProveedor(numP);                    
-                    @SuppressWarnings("unchecked")
-                    ArrayList<HashMap<String,String>> carritoClone;
-                    carritoClone = (ArrayList<HashMap<String,String>>)
-                            superMercado.getCarritoSuper().clone();
-                    ventanaCompra.limpiarTablaProductos();
-                    ventanaCompra.mensajesEmergentes("Comprar");
-                    superMercado.agregarCompra(new Factura(
-                            p.getNombre(), p.getTelefono(), 
-                            carritoClone, 
-                            superMercado.totalCarritoSuper()));
-                    ventanaCompra.reiniciarSpnCantidad();
-                    ventanaCompra.dispose();
-                    ventanaProveedores.show();
-                    superMercado.limpiarCarritoSuper();
+                    if(ventanaCompra.advertencia()){
+                
+                        ArrayList<HashMap<String,String>> carrito;
+                        carrito = superMercado.getCarritoSuper();
+                        String categoria = ventanaCompra.getTxtCategoria();
+                        for(HashMap<String,String> map : carrito){
+                            String nombre = map.get("nombre");
+                            int cantidad = Integer.parseInt(map.get("cantidad"));
+                            int precio = Integer.parseInt(map.get("precio"));
+                            Producto p = new Producto(nombre,cantidad,precio,categoria);
+                            superMercado.aNadirProducto(p);
+                        }                    
+                        int numP = ventanaProveedores.getFilaTabla();                    
+                        Proveedor p = superMercado.getProveedor(numP);                    
+                        @SuppressWarnings("unchecked")
+                        ArrayList<HashMap<String,String>> carritoClone;
+                        carritoClone = (ArrayList<HashMap<String,String>>)
+                                superMercado.getCarritoSuper().clone();
+                        ventanaCompra.limpiarTablaProductos();
+                        ventanaCompra.mensajesEmergentes("Comprar");
+                        superMercado.agregarCompra(new Factura(
+                                p.getNombre(), p.getTelefono(), 
+                                carritoClone, 
+                                superMercado.totalCarritoSuper()));
+                        ventanaCompra.reiniciarSpnCantidad();
+                        ventanaCompra.dispose();
+                        ventanaProveedores.show();
+                        superMercado.limpiarCarritoSuper();
+                    }
                 }
-            }
-            
+            }            
         }      
     }
     

@@ -327,6 +327,18 @@ public class VentanaCompra extends javax.swing.JFrame {
         modeloSpinner.setValue(1);
     }
     
+    public boolean advertencia(){
+        boolean estado = true;
+        if(tblCarritoCompra.getRowCount() == 0){
+            estado = false;
+            JOptionPane.showMessageDialog(null, "Agregue al menos un item");
+        }
+        else{
+            mensajesEmergentes("Comprar");
+        }
+        return estado;
+    }
+    
     public int mensajeCancelarCompra(){
         String[] opciones = {"Si","No"};
         int i = JOptionPane.showOptionDialog(rootPane, 
