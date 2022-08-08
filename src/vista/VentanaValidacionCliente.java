@@ -36,9 +36,9 @@ public class VentanaValidacionCliente extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JButton();
         btnIniciarVenta = new javax.swing.JButton();
         btnNuevoCliente = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
         txtCedula = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        lblValidacion = new javax.swing.JLabel();
         btnVerClientes = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -56,14 +56,14 @@ public class VentanaValidacionCliente extends javax.swing.JFrame {
         btnNuevoCliente.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnNuevoCliente.setText("Nuevo Cliente");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel2.setText("N° de Identificación de Cliente Regular");
+        lblId.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblId.setText("N° de Identificación de Cliente Regular");
 
         txtCedula.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Validación de Cliente");
+        lblValidacion.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblValidacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblValidacion.setText("Validación de Cliente");
 
         btnVerClientes.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnVerClientes.setText("Ver Clientes");
@@ -72,7 +72,7 @@ public class VentanaValidacionCliente extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblValidacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(btnRegresar)
@@ -85,7 +85,7 @@ public class VentanaValidacionCliente extends javax.swing.JFrame {
                 .addGap(53, 53, 53)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtCedula)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                    .addComponent(lblId, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(88, 88, 88)
                         .addComponent(btnIniciarVenta)))
@@ -95,9 +95,9 @@ public class VentanaValidacionCliente extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(jLabel3)
+                .addComponent(lblValidacion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addComponent(lblId)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -176,9 +176,9 @@ public class VentanaValidacionCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnVerClientes;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblId;
+    private javax.swing.JLabel lblValidacion;
     private javax.swing.JTextField txtCedula;
     // End of variables declaration//GEN-END:variables
 }

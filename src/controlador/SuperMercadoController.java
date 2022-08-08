@@ -164,8 +164,7 @@ public class SuperMercadoController {
             if(e.getActionCommand().equalsIgnoreCase("iniciar venta")){
                 if(!superMercado.
                         buscarCliente(ventanaValidacionCliente.getTxtCedula())){
-                    JOptionPane.showMessageDialog(null, 
-                            "No se encontro el cliente");
+                    ventanaValidacionCliente.mensajeCliente();
                 }
                 else{
                 
@@ -466,8 +465,7 @@ public class SuperMercadoController {
                 int productoSeleccionado = ventanaProductos.
                         getProductoSeleccionado();
                 if(productoSeleccionado == -1){
-                    JOptionPane.showMessageDialog(null, "Seleccione un "
-                            + "producto");
+                    ventanaProductos.mensajeSelecProducto();
                 }
                 else{
                     superMercado.getProductos().remove(productoSeleccionado);
@@ -541,7 +539,7 @@ public class SuperMercadoController {
                     }
                 }catch(IndexOutOfBoundsException ai){
                     numRegistro--;
-                    JOptionPane.showMessageDialog(null, "No hay mas registros");
+                    ventanaRegistro.mensajeRegistros();
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("anterior")){
@@ -556,7 +554,7 @@ public class SuperMercadoController {
                     }
                 }catch(IndexOutOfBoundsException ai){
                     numRegistro++;
-                    JOptionPane.showMessageDialog(null, "No hay más registros");
+                    ventanaRegistro.mensajeRegistros();
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("regresar")){

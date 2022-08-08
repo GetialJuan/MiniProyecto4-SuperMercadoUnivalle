@@ -301,12 +301,10 @@ public class SuperMercado {
                     this.proveedores.add(pr);
                 }
                 if(objetoARestaurar.equals("ventas")){
-                    System.out.println("Obtuvo dato en venta");
                     Factura venta = (Factura)ois.readObject();
                     this.ventas.add(venta);
                 }
                 if(objetoARestaurar.equals("compras")){
-                    System.out.println("Obtuvo dato en compra");
                     Factura compra = (Factura)ois.readObject();
                     this.compras.add(compra);
                 }
