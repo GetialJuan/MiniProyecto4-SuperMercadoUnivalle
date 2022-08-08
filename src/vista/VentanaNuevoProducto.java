@@ -53,7 +53,7 @@ public class VentanaNuevoProducto extends javax.swing.JFrame {
 
         lblNuevoProducto.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblNuevoProducto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNuevoProducto.setText("Nuevo Producto");
+        lblNuevoProducto.setText("Datos Producto");
 
         lblNombre.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         lblNombre.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -78,7 +78,7 @@ public class VentanaNuevoProducto extends javax.swing.JFrame {
         btnCancelar.setText("Cancelar");
 
         cbCategoria.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        cbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Despensa", "Lácteos", "Enlatados", "Cárnicos", "Frutas y verduras", "Delicatessen", "Licores", "Bebidas", "Snacks", "Limpieza", "Cuidado Personal", "Panadería" }));
+        cbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Despensa", "Lacteos", "Enlatados", "Carnicos", "Frutas y verduras", "Delicatessen", "Licores", "Bebidas", "Snacks", "Limpieza", "Cuidado Personal", "Panaderia" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

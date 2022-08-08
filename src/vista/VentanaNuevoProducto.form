@@ -113,7 +113,7 @@
               <Font name="Segoe UI" size="24" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Nuevo Producto"/>
+            <Property name="text" type="java.lang.String" value="Datos Producto"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblNombre">
@@ -181,9 +181,9 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="12">
                 <StringItem index="0" value="Despensa"/>
-                <StringItem index="1" value="L&#xe1;cteos"/>
+                <StringItem index="1" value="Lacteos"/>
                 <StringItem index="2" value="Enlatados"/>
-                <StringItem index="3" value="C&#xe1;rnicos"/>
+                <StringItem index="3" value="Carnicos"/>
                 <StringItem index="4" value="Frutas y verduras"/>
                 <StringItem index="5" value="Delicatessen"/>
                 <StringItem index="6" value="Licores"/>
@@ -191,7 +191,7 @@
                 <StringItem index="8" value="Snacks"/>
                 <StringItem index="9" value="Limpieza"/>
                 <StringItem index="10" value="Cuidado Personal"/>
-                <StringItem index="11" value="Panader&#xed;a"/>
+                <StringItem index="11" value="Panaderia"/>
               </StringArray>
             </Property>
           </Properties>

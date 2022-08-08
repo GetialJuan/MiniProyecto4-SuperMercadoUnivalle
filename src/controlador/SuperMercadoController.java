@@ -322,7 +322,8 @@ public class SuperMercadoController {
                             agregarCliente(ventanaNuevoCliente.getTxtNombre(), 
                                     ventanaNuevoCliente.getTxtCedula());
 
-                    superMercado.setClienteSeleccionado(0);
+                    superMercado.setClienteSeleccionado(
+                    superMercado.getClientes().size()-1);
 
                     //se abre la ventanaVenta
                     if(ventanaVenta != null){
