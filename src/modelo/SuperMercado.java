@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * MiniProyecto 4 - SuperMercado Univalle
  * @author Juan Sebastian Getial Getial <202124644>
  * @author Mauricio Muñoz Gutierrez <202123687>
- * @author Santiago Torres Carvajal <>
+ * @author Santiago Torres Carvajal <2140010>
  * @profesor Luis Yovany Romo Portilla
  * Clase que representa el supermercado
  */
@@ -301,12 +301,10 @@ public class SuperMercado {
                     this.proveedores.add(pr);
                 }
                 if(objetoARestaurar.equals("ventas")){
-                    System.out.println("Obtuvo dato en venta");
                     Factura venta = (Factura)ois.readObject();
                     this.ventas.add(venta);
                 }
                 if(objetoARestaurar.equals("compras")){
-                    System.out.println("Obtuvo dato en compra");
                     Factura compra = (Factura)ois.readObject();
                     this.compras.add(compra);
                 }

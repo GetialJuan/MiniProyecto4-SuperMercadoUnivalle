@@ -12,7 +12,7 @@ import modelo.Producto;
  * MiniProyecto 4 - SuperMercado Univalle
  * @author Juan Sebastian Getial Getial <202124644>
  * @author Mauricio Muñoz Gutierrez <202123687>
- * @author Santiago Torres Carvajal <>
+ * @author Santiago Torres Carvajal <2140010>
  * @profesor Luis Yovany Romo Portilla
  * Clase VentanaVenta
  */
@@ -46,8 +46,8 @@ public class VentanaVenta extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblVenta = new javax.swing.JLabel();
+        lblCategoria = new javax.swing.JLabel();
         btnCancelarVenta = new javax.swing.JButton();
         btnAgregarAVenta = new javax.swing.JButton();
         btnEliminarItem = new javax.swing.JButton();
@@ -59,19 +59,19 @@ public class VentanaVenta extends javax.swing.JFrame {
         };
         btnFinalizar = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
+        lblProducto = new javax.swing.JLabel();
         cboxProductos = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
         btnSeleccionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Venta Actual");
+        lblVenta.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblVenta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblVenta.setText("Venta Actual");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel2.setText("Categoría");
+        lblCategoria.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblCategoria.setText("Categoría");
 
         btnCancelarVenta.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnCancelarVenta.setText("Cancelar Venta");
@@ -92,14 +92,14 @@ public class VentanaVenta extends javax.swing.JFrame {
         jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Despensa", "Lacteos", "Enlatados", "Carnicos", "Frutas y verduras", "Delicatessen", "Licores", "Bebidas", "Snacks", "Limpieza", "Cuidado Personal", "Panaderia" }));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel3.setText("Producto");
+        lblProducto.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblProducto.setText("Producto");
 
         cboxProductos.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel4.setText("Total: $XXXXXXXX");
+        lblTotal.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        lblTotal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblTotal.setText("Total: $XXXXXXXX");
 
         btnSeleccionar.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnSeleccionar.setText("Seleccionar");
@@ -108,7 +108,7 @@ public class VentanaVenta extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblVenta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -117,9 +117,9 @@ public class VentanaVenta extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnSeleccionar)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(cboxProductos, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -131,24 +131,24 @@ public class VentanaVenta extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnEliminarItem)
                         .addGap(33, 33, 33)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(lblTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(25, 25, 25))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(jLabel1)
+                .addComponent(lblVenta)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(lblCategoria)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSeleccionar)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
+                        .addComponent(lblProducto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cboxProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -157,7 +157,7 @@ public class VentanaVenta extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEliminarItem)
-                    .addComponent(jLabel4))
+                    .addComponent(lblTotal))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelarVenta)
@@ -296,7 +296,7 @@ public class VentanaVenta extends javax.swing.JFrame {
     }
     
     public void setTotal(int total){
-        jLabel4.setText("Total: "+ total);
+        lblTotal.setText("Total: "+ total);
     }
     
     private void limpiarComboBox(){
@@ -327,12 +327,12 @@ public class VentanaVenta extends javax.swing.JFrame {
     private javax.swing.JButton btnSeleccionar;
     private javax.swing.JComboBox<String> cboxProductos;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblCategoria;
+    private javax.swing.JLabel lblProducto;
+    private javax.swing.JLabel lblTotal;
+    private javax.swing.JLabel lblVenta;
     // End of variables declaration//GEN-END:variables
 }

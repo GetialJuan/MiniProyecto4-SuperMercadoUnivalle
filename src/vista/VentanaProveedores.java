@@ -11,7 +11,7 @@ import modelo.Proveedor;
  * MiniProyecto 4 - SuperMercado Univalle
  * @author Juan Sebastian Getial Getial <202124644>
  * @author Mauricio Muñoz Gutierrez <202123687>
- * @author Santiago Torres Carvajal <>
+ * @author Santiago Torres Carvajal <2140010>
  * @profesor Luis Yovany Romo Portilla
  * Clase VentanaProveedores
  */
@@ -43,7 +43,7 @@ public class VentanaProveedores extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblProveedores = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProveedores = new javax.swing.JTable(){
             public boolean isCellEditable(int row, int column) {
@@ -58,9 +58,9 @@ public class VentanaProveedores extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Proveedores");
+        lblProveedores.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblProveedores.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblProveedores.setText("Proveedores");
 
         tblProveedores.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         tblProveedores.setModel(modeloTabla);
@@ -85,7 +85,7 @@ public class VentanaProveedores extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblProveedores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(btnRegresar)
@@ -108,7 +108,7 @@ public class VentanaProveedores extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addComponent(jLabel1)
+                .addComponent(lblProveedores)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -237,9 +237,9 @@ public class VentanaProveedores extends javax.swing.JFrame {
     private javax.swing.JButton btnModificarProveedor;
     private javax.swing.JButton btnNuevoProveedor;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblProveedores;
     private javax.swing.JTable tblProveedores;
     // End of variables declaration//GEN-END:variables
 }

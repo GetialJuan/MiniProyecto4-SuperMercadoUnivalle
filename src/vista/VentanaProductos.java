@@ -3,6 +3,7 @@ package vista;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Producto;
 
@@ -10,7 +11,7 @@ import modelo.Producto;
  * MiniProyecto 4 - SuperMercado Univalle
  * @author Juan Sebastian Getial Getial <202124644>
  * @author Mauricio Muñoz Gutierrez <202123687>
- * @author Santiago Torres Carvajal <>
+ * @author Santiago Torres Carvajal <2140010>
  * @profesor Luis Yovany Romo Portilla
  * Clase VentanaProductos
  */
@@ -43,7 +44,7 @@ public class VentanaProductos extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblSCategoria = new javax.swing.JLabel();
         cbCategoria = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProductos = new javax.swing.JTable(){
@@ -58,8 +59,8 @@ public class VentanaProductos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Productos de UniMarket");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jLabel1.setText("Seleccionar Categoría");
+        lblSCategoria.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblSCategoria.setText("Seleccionar Categoría");
 
         cbCategoria.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         cbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todo", "Despensa", "Lacteos", "Enlatados", "Carnicos", "Frutas y verduras", "Delicatessen", "Licores", "Bebidas", "Snacks", "Limpieza", "Cuidado Personal", "Panaderia" }));
@@ -85,7 +86,7 @@ public class VentanaProductos extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblSCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -106,7 +107,7 @@ public class VentanaProductos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lblSCategoria)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
@@ -193,6 +194,11 @@ public class VentanaProductos extends javax.swing.JFrame {
         }
     }
     
+    public void mensajeSelecProducto(){
+        JOptionPane.showMessageDialog(null, "Seleccione un "
+                            + "producto");
+    }
+    
     public int getProductoSeleccionado(){
         return tablaProductos.getSelectedRow();
     }
@@ -202,9 +208,9 @@ public class VentanaProductos extends javax.swing.JFrame {
     private javax.swing.JButton btnNuevoProducto;
     private javax.swing.JComboBox<String> cbCategoria;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblSCategoria;
     private javax.swing.JTable tablaProductos;
     // End of variables declaration//GEN-END:variables
 }

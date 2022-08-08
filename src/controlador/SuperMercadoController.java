@@ -29,7 +29,7 @@ import modelo.Proveedor;
  * MiniProyecto 4 - SuperMercado Univalle
  * @author Juan Sebastian Getial Getial <202124644>
  * @author Mauricio Muñoz Gutierrez <202123687>
- * @author Santiago Torres Carvajal <>
+ * @author Santiago Torres Carvajal <2140010>
  * @profesor Luis Yovany Romo Portilla
  * Clase controladora
  */
@@ -164,8 +164,7 @@ public class SuperMercadoController {
             if(e.getActionCommand().equalsIgnoreCase("iniciar venta")){
                 if(!superMercado.
                         buscarCliente(ventanaValidacionCliente.getTxtCedula())){
-                    JOptionPane.showMessageDialog(null, 
-                            "No se encontro el cliente");
+                    ventanaValidacionCliente.mensajeNoEncontrado();
                 }
                 else{
                 
@@ -466,8 +465,7 @@ public class SuperMercadoController {
                 int productoSeleccionado = ventanaProductos.
                         getProductoSeleccionado();
                 if(productoSeleccionado == -1){
-                    JOptionPane.showMessageDialog(null, "Seleccione un "
-                            + "producto");
+                    ventanaProductos.mensajeSelecProducto();
                 }
                 else{
                     superMercado.getProductos().remove(productoSeleccionado);
@@ -507,7 +505,7 @@ public class SuperMercadoController {
                 //se añade el producto nuevo
                 superMercado.getProductos().add(new Producto(
                         ventanaNuevoProducto.getTxtNombre(), 0,
-                Integer.parseInt(ventanaNuevoProducto.getTxtPresio()), 
+                Integer.parseInt(ventanaNuevoProducto.getTxtPrecio()), 
                         ventanaNuevoProducto.getTxtCategoria()));
                 
                 //se cierra y abre ventanas
@@ -541,7 +539,7 @@ public class SuperMercadoController {
                     }
                 }catch(IndexOutOfBoundsException ai){
                     numRegistro--;
-                    JOptionPane.showMessageDialog(null, "No hay mas registros");
+                    ventanaRegistro.mensajeRegistros();
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("anterior")){
@@ -556,7 +554,7 @@ public class SuperMercadoController {
                     }
                 }catch(IndexOutOfBoundsException ai){
                     numRegistro++;
-                    JOptionPane.showMessageDialog(null, "No hay más registros");
+                    ventanaRegistro.mensajeRegistros();
                 }
             }
             else if(e.getActionCommand().equalsIgnoreCase("regresar")){
@@ -924,9 +922,6 @@ public class SuperMercadoController {
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {
-              System.out.println("Esto lo ejecutamos cuando acabe el programa");
-                System.out.println(registrosCompras);
-                System.out.println(registrosVentas);
               superMercado.guardarDatos();
             }
         } );
