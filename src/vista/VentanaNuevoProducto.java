@@ -5,6 +5,7 @@
 package vista;
 
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  * MiniProyecto 4 - SuperMercado Univalle
@@ -212,6 +213,23 @@ public class VentanaNuevoProducto extends javax.swing.JFrame {
                 break;
             }
         }
+    }
+    
+    public boolean advertencia(){
+        boolean estado = true;
+        if(txtNombre.getText().equals("") || txtPrecio.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos");
+            estado = false;
+        }
+        else{
+            try{
+                Integer.parseInt(txtPrecio.getText());
+            }catch(NumberFormatException ne){
+                JOptionPane.showMessageDialog(null, "Digite un valor valido");
+                estado = false;
+            }
+        }
+        return estado;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
