@@ -86,7 +86,7 @@ public class VentanaDatosProveedor extends javax.swing.JFrame {
         lblCategoria.setText("Categoría");
 
         cbCategoria.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Despensa", "Lácteos", "Enlatados", "Cárnicos", "Frutas y verduras", "Delicatessen", "Licores", "Bebidas", "Snacks", "Limpieza", "Cuidado Personal", "Panadería" }));
+        cbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Despensa", "Lacteos", "Enlatados", "Carnicos", "Frutas y verduras", "Delicatessen", "Licores", "Bebidas", "Snacks", "Limpieza", "Cuidado Personal", "Panaderia" }));
 
         lblInfoProveedor.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         lblInfoProveedor.setText("Información del proveedor.");
