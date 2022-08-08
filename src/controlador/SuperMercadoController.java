@@ -29,7 +29,7 @@ import modelo.Proveedor;
  * MiniProyecto 4 - SuperMercado Univalle
  * @author Juan Sebastian Getial Getial <202124644>
  * @author Mauricio Muñoz Gutierrez <202123687>
- * @author Santiago Torres Carvajal <>
+ * @author Santiago Torres Carvajal <2140010>
  * @profesor Luis Yovany Romo Portilla
  * Clase controladora
  */
@@ -164,7 +164,7 @@ public class SuperMercadoController {
             if(e.getActionCommand().equalsIgnoreCase("iniciar venta")){
                 if(!superMercado.
                         buscarCliente(ventanaValidacionCliente.getTxtCedula())){
-                    ventanaValidacionCliente.mensajeCliente();
+                    ventanaValidacionCliente.mensajeNoEncontrado();
                 }
                 else{
                 

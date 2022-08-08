@@ -3,6 +3,7 @@ package vista;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Producto;
 
@@ -10,7 +11,7 @@ import modelo.Producto;
  * MiniProyecto 4 - SuperMercado Univalle
  * @author Juan Sebastian Getial Getial <202124644>
  * @author Mauricio Muñoz Gutierrez <202123687>
- * @author Santiago Torres Carvajal <>
+ * @author Santiago Torres Carvajal <2140010>
  * @profesor Luis Yovany Romo Portilla
  * Clase VentanaProductos
  */
@@ -191,6 +192,11 @@ public class VentanaProductos extends javax.swing.JFrame {
         for(int i = filas -1; i >= 0; i--){
             modeloTabla.removeRow(i);
         }
+    }
+    
+    public void mensajeSelecProducto(){
+        JOptionPane.showMessageDialog(null, "Seleccione un "
+                            + "producto");
     }
     
     public int getProductoSeleccionado(){
