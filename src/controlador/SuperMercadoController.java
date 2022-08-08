@@ -68,8 +68,6 @@ public class SuperMercadoController {
         superMercado = new SuperMercado();
         ventanaInicio = new VentanaInicio();
         ventanaInicio.agregarListenersBtns(new ManejadorDeEventosMenu());
-        System.out.println(superMercado.getCompras());
-        System.out.println(superMercado.getVentas());
     }
     
     /////////////////////////ventanaInicio////////////////////////////////////
@@ -853,11 +851,13 @@ public class SuperMercadoController {
                 int numP = ventanaProveedores.getFilaTabla();
                 String producto = ventanaCompra.getCboxProductos();
                 Proveedor p = superMercado.getProveedor(numP);
+                int cantidad = ventanaCompra.getSpnCantidad();
                 for(HashMap<String,String> map : p.getProductos()){
                     if(map.get("nombre").equalsIgnoreCase(producto)){
                         HashMap<String,String> mapProducto;
-                        mapProducto = superMercado.generarMap(map.get("nombre"), map.get("precio"));
-                        superMercado.aNadirProductoCarrito(mapProducto);
+                        mapProducto = superMercado.generarMap(map.get("nombre"), 
+                                map.get("precio"), Integer.toString(cantidad));
+                        superMercado.aNadirProductoCarrito(mapProducto, cantidad);
                     }
                 }
                 ventanaCompra.setTablaCarrito(superMercado.getCarritoSuper());
@@ -868,6 +868,7 @@ public class SuperMercadoController {
                     ventanaCompra.dispose();
                     superMercado.limpiarCarritoSuper();
                     ventanaCompra.limpiarTablaProductos();
+                    ventanaCompra.reiniciarSpnCantidad();
                     ventanaProveedores.show();
                 }
                 
@@ -908,6 +909,7 @@ public class SuperMercadoController {
                             p.getNombre(), p.getTelefono(), 
                             carritoClone, 
                             superMercado.totalCarritoSuper()));
+                    ventanaCompra.reiniciarSpnCantidad();
                     ventanaCompra.dispose();
                     ventanaProveedores.show();
                     superMercado.limpiarCarritoSuper();
