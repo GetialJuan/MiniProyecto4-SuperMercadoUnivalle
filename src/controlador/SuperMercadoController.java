@@ -974,7 +974,6 @@ public class SuperMercadoController {
                         carritoClone = (ArrayList<HashMap<String,String>>)
                                 superMercado.getCarritoSuper().clone();
                         ventanaCompra.limpiarTablaProductos();
-                        ventanaCompra.mensajesEmergentes("Comprar");
                         superMercado.agregarCompra(new Factura(
                                 p.getNombre(), p.getTelefono(), 
                                 carritoClone, 

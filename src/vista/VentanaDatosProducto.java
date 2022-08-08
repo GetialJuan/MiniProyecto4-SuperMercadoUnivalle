@@ -79,7 +79,7 @@ public class VentanaDatosProducto extends javax.swing.JFrame {
         btnCancelar.setText("Cancelar");
 
         cbCategoria.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        cbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Despensa", "Lacteos", "Enlatados", "Carnicos", "Frutas y verduras", "Delicatessen", "Licores", "Bebidas", "Snacks", "Limpieza", "Cuidado Personal", "Panaderia" }));
+        cbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Despensa", "Lácteos", "Enlatados", "Cárnicos", "Frutas y verduras", "Delicatessen", "Licores", "Bebidas", "Snacks", "Limpieza", "Cuidado Personal", "Panadería" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
